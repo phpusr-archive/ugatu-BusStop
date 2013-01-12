@@ -30,7 +30,7 @@ class MyCanvas extends JComponent {
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
-        Image img1 = Toolkit.getDefaultToolkit().getImage("image1.gif");
+        Image img1 = Toolkit.getDefaultToolkit().getImage("src\\resources\\com\\phpusr\\busstop\\img\\bus\\pacan_bus.gif");
         g2.drawImage(img1, 10, 10, null);
         g2.finalize();
     }

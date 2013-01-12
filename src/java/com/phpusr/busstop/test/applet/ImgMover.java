@@ -5,6 +5,8 @@ package com.phpusr.busstop.test.applet; /**
  * Time: 12:42
  * To change this template use File | Settings | File Templates.
  */
+import com.phpusr.busstop.entity.Bus;
+
 import java.applet.Applet;
 import java.awt.*;
 import java.net.MalformedURLException;
@@ -17,18 +19,18 @@ public class ImgMover extends Applet implements Runnable {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 600;
 
-    String mesag ="Scrolling text is a simple animation.";
-    Font mfont = new Font("TimesRoman",Font.BOLD, 24);
     int xPos = -250;
 
     Image scrnBuf;
     Graphics scrnG;
+    Bus bus;
 
     Thread runner;
 
     public void init() {
         scrnBuf = createImage(WIDTH, HEIGHT);
         scrnG = scrnBuf.getGraphics();
+        bus = new Bus();
     }
 
     public void start() {
@@ -68,7 +70,7 @@ public class ImgMover extends Applet implements Runnable {
         try {
             URL url = new URL("file:/d:/Java/OOP/kursach/bus/");
             Image image = getImage(url, "pacan_bus.gif");
-            scrnG.drawImage(image, xPos, 35, this);
+            scrnG.drawImage(bus.getImage(), xPos, 35, this);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
