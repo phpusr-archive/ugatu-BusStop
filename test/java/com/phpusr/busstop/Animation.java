@@ -10,6 +10,9 @@ package com.phpusr.busstop;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Накладывает друг на друга картинки
+ */
 class Animation extends Frame {
     private Image[] img = new Image[10];
     private int count;

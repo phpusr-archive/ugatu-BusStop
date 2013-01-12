@@ -15,6 +15,9 @@ import java.awt.Toolkit;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+/**
+ * Вставляет изображение на форму
+ */
 class MyCanvas extends JComponent {
 
     public void paint(Graphics g) {
