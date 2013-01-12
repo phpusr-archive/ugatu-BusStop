@@ -1,4 +1,4 @@
-package com.phpusr.busstop;
+package com.phpusr.busstop.test.java;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,13 +7,9 @@ package com.phpusr.busstop;
  * Time: 13:12
  * To change this template use File | Settings | File Templates.
  */
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
 
-import javax.swing.JComponent;
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Вставляет изображение на форму

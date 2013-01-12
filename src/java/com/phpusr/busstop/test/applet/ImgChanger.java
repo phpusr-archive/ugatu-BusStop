@@ -1,4 +1,4 @@
-/**
+package com.phpusr.busstop.test.applet; /**
  * Created with IntelliJ IDEA.
  * User: phpusr
  * Date: 12.01.13
