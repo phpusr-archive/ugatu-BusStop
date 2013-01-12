@@ -1,5 +1,3 @@
-package com.phpusr.busstop;
-
 /**
  * Created with IntelliJ IDEA.
  * User: phpusr
@@ -7,14 +5,21 @@ package com.phpusr.busstop;
  * Time: 12:42
  * To change this template use File | Settings | File Templates.
  */
+import java.applet.Applet;
 import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-public class marque2 extends
-        java.applet.Applet implements Runnable {
+/**
+ * Апплет показывающий движующую строку
+ */
+public class ImgMover extends Applet implements Runnable {
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 600;
 
     String mesag ="Scrolling text is a simple animation.";
     Font mfont = new Font("TimesRoman",Font.BOLD, 24);
-    int Xposition = 200;
+    int xPos = -250;
 
     Image scrnBuf;
     Graphics scrnG;
@@ -22,7 +27,7 @@ public class marque2 extends
     Thread runner;
 
     public void init() {
-        scrnBuf = createImage(600,50);
+        scrnBuf = createImage(WIDTH, HEIGHT);
         scrnG = scrnBuf.getGraphics();
     }
 
@@ -56,16 +61,21 @@ public class marque2 extends
 
     public void paint(Graphics g) {
         scrnG.setColor(Color.white);
-        scrnG.fillRect(0, 0, 600, 100);
+        scrnG.fillRect(0, 0, WIDTH, HEIGHT);
         scrnG.setColor(Color.red);
         /*scrnG.setFont(mfont);
         scrnG.drawString(mesag, 35, 35);*/
+        try {
+            URL url = new URL("file:/d:/Java/OOP/kursach/bus/");
+            Image image = getImage(url, "pacan_bus.gif");
+            scrnG.drawImage(image, xPos, 35, this);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
-        scrnG.drawRect(Xposition, 35, 30, 30);
-
-        Xposition --;
-        if (Xposition < -400) {
-            Xposition = 200;
+        xPos += 3;
+        if (xPos > WIDTH) {
+            xPos = -250;
         }
         g.drawImage(scrnBuf, 0, 0, this);
     }
