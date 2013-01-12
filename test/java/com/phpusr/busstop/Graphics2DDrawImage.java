@@ -18,16 +18,6 @@ import javax.swing.JFrame;
 /**
  * Вставляет изображение на форму
  */
-class MyCanvas extends JComponent {
-
-    public void paint(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-
-        Image img1 = Toolkit.getDefaultToolkit().getImage("image1.gif");
-        g.drawImage(img1, 10, 10, null);
-        //g2.finalize();
-    }
-}
 
 class Graphics2DDrawImage {
     public static void main(String[] a) {
@@ -36,5 +26,16 @@ class Graphics2DDrawImage {
         window.setBounds(30, 30, 300, 300);
         window.getContentPane().add(new MyCanvas());
         window.setVisible(true);
+    }
+}
+
+class MyCanvas extends JComponent {
+
+    public void paint(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+
+        Image img1 = Toolkit.getDefaultToolkit().getImage("image1.gif");
+        g2.drawImage(img1, 10, 10, null);
+        g2.finalize();
     }
 }

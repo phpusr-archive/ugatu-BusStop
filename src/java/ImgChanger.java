@@ -13,7 +13,7 @@ import java.net.URL;
 /**
  * Апплет посл-но меняющий картинки
  */
-public class Animate extends javax.swing.JApplet
+public class ImgChanger extends javax.swing.JApplet
         implements Runnable {
 
     Image[] picture = new Image[4];

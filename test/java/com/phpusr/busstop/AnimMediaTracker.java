@@ -13,12 +13,12 @@ import java.awt.event.*;
 /**
  * Накладывает друг на друга картинки
  */
-class Animation extends Frame {
+class AnimMediaTracker extends Frame {
     private Image[] img = new Image[10];
     private int count;
 
     public static void main(String[] args) {
-        Animation anim_window = new Animation("Simple Animation");
+        AnimMediaTracker anim_window = new AnimMediaTracker("Simple Animation");
         anim_window.go();
         anim_window.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
@@ -27,7 +27,7 @@ class Animation extends Frame {
         });
     }
 
-    Animation (String s) {
+    AnimMediaTracker(String s) {
         super(s);
         MediaTracker tr=new MediaTracker(this);
         for (int k=0; k<4; k++) {
