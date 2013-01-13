@@ -58,16 +58,21 @@ class BusStopFrame extends JFrame {
         //Рисование автобуса
         scrnG.drawImage(bus.image, xPos, Y_POS, this)
 
-        xPos += 3
+        //Если автобус уехал за пределы
         if (xPos > WIDTH) {
             bus = busParkUtil.randomBus
             xPos = -1 * bus.width
         }
+        //Если автобус подъехал к остановке
         if (xPos >= (WIDTH/2-bus.width/2) && !stop) {
             stop = true
             Thread.sleep(STOP_MILIS)
         }
-        if (xPos < (WIDTH/2-bus.width/2)) stop = false
+        //Если автобус еще не доехал до остановки
+        if (xPos < (WIDTH/2-bus.width/2)) {
+            stop = false
+        }
+        xPos += 3
 
         g.drawImage(scrnBuf, 0, 0, this)
     }
