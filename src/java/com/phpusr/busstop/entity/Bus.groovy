@@ -19,6 +19,5 @@ class Bus {
     Bus() {
         URL url = Bus.class.getResource('../img/bus/pacan_bus.gif')
         image = Toolkit.getDefaultToolkit().getImage(url);
-        //image = Toolkit.getDefaultToolkit().getImage('d:/Java/OOP/kursach/img/bus/pacan_bus.gif')
     }
 }

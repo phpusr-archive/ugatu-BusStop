@@ -33,12 +33,12 @@ class AnimMediaTracker extends Frame {
         super(s);
         MediaTracker tr=new MediaTracker(this);
         for (int k=0; k<4; k++) {
-            img[k] = getToolkit().getImage("image"+(k+1)+".gif");
+            img[k] = getToolkit().getImage("src\\resources\\com\\phpusr\\busstop\\img\\test\\image"+(k+1)+".gif");
             tr.addImage(img[k],0);
-        } try {
-            tr.waitForAll();
         }
-        catch (InterruptedException e){}
+        try {
+            tr.waitForAll();
+        } catch (InterruptedException e){}
         setSize(400, 300);
         setVisible(true);
     }
