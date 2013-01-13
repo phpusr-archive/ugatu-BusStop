@@ -1,4 +1,7 @@
 package com.phpusr.busstop.run
+
+import com.phpusr.busstop.frame.BusStopFrame
+
 /**
  * Created with IntelliJ IDEA.
  * User: phpusr
@@ -8,7 +11,8 @@ package com.phpusr.busstop.run
  */
 class Run {
     public static void main(String[] args) {
-
+        BusStopFrame busStopFrame = new BusStopFrame('Bus Stop Simulation')
+        busStopFrame.go()
     }
 }
 
