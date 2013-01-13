@@ -1,6 +1,7 @@
 package com.phpusr.busstop.entity
 
-import java.awt.*
+import javax.imageio.ImageIO
+import java.awt.image.BufferedImage
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,10 +15,18 @@ import java.awt.*
  * Автобус
  */
 class Bus {
-    Image image
+    BufferedImage image
 
     Bus() {
         URL url = Bus.class.getResource('../img/bus/pacan_bus.gif')
-        image = Toolkit.getDefaultToolkit().getImage(url);
+        image = ImageIO.read(url)
+    }
+
+    int getWidth() {
+        image.width
+    }
+
+    int getHeight() {
+        image.height
     }
 }

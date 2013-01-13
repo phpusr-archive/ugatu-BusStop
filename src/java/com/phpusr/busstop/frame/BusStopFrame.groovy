@@ -14,14 +14,16 @@ import java.awt.image.BufferedImage
  * To change this template use File | Settings | File Templates.
  */
 class BusStopFrame extends JFrame {
-    private static final int WIDTH = 600
-    private static final int HEIGHT = 600
+    static final int WIDTH = 600
+    static final int HEIGHT = 600
 
-    private int xPos = -250
+    int xPos = -250
 
     Image scrnBuf
     Graphics scrnG
     Bus bus
+
+    boolean stop = false
 
     BusStopFrame(String s) {
         super(s)
@@ -41,16 +43,19 @@ class BusStopFrame extends JFrame {
         scrnG.setColor(Color.white)
         scrnG.fillRect(0, 0, WIDTH, HEIGHT)
         scrnG.setColor(Color.red)
-        try {
-            scrnG.drawImage(bus.getImage(), xPos, 35, this)
-        } catch (MalformedURLException e) {
-            e.printStackTrace()
-        }
+        scrnG.drawImage(bus.getImage(), xPos, 35, this)
 
         xPos += 3
         if (xPos > WIDTH) {
             xPos = -250
         }
+        if (xPos >= (WIDTH/2-bus.width/2) && !stop) {
+            stop = true
+            Thread.sleep(2000)
+        }
+        if (xPos < (WIDTH/2-bus.width/2)) stop = false
+
+
         g.drawImage(scrnBuf, 0, 0, this)
     }
 
@@ -65,8 +70,4 @@ class BusStopFrame extends JFrame {
         }
     }
 
-    @Override
-    void paintAll(Graphics g) {
-        paint(g)
-    }
 }
