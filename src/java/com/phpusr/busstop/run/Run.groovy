@@ -9,6 +9,10 @@ import com.phpusr.busstop.frame.BusStopFrame
  * Time: 15:04
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * Запускающий программу класс
+ */
 class Run {
     public static void main(String[] args) {
         BusStopFrame busStopFrame = new BusStopFrame('Bus Stop Simulation')

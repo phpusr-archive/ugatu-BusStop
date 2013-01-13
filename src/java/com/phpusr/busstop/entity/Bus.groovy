@@ -17,9 +17,13 @@ import java.awt.image.BufferedImage
 class Bus {
     BufferedImage image
 
-    Bus() {
-        URL url = Bus.class.getResource('../img/bus/pacan_bus.gif')
+    Bus(String path) {
+        URL url = Bus.class.getResource(path)
         image = ImageIO.read(url)
+    }
+
+    Bus() {
+        this('../img/bus/pacan_bus.gif')
     }
 
     int getWidth() {
