@@ -2,6 +2,7 @@ package com.phpusr.busstop.frame
 
 import com.phpusr.busstop.entity.Bus
 import com.phpusr.busstop.util.BusParkUtil
+import com.phpusr.busstop.util.DrawUtil
 
 import javax.swing.*
 import java.awt.*
@@ -21,12 +22,15 @@ import java.awt.image.BufferedImage
 class BusStopFrame extends JFrame {
     static final int WIDTH = 600
     static final int HEIGHT = 600
+    static final int Y_POS = 100
+    static final int STOP_MILIS = 1000
 
     int xPos
 
     Image scrnBuf
     Graphics scrnG
     BusParkUtil busParkUtil
+    DrawUtil drawUtil
     Bus bus
 
     boolean stop = false
@@ -43,15 +47,16 @@ class BusStopFrame extends JFrame {
         scrnBuf = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
         busParkUtil = new BusParkUtil()
+        drawUtil = new DrawUtil()
         bus = busParkUtil.randomBus
         xPos = -1 * bus.width
     }
 
     public void paint(Graphics g) {
-        scrnG.setColor(Color.white)
-        scrnG.fillRect(0, 0, WIDTH, HEIGHT)
-        scrnG.setColor(Color.red)
-        scrnG.drawImage(bus.image, xPos, 100, this)
+        //Рисование фона
+        drawUtil.drawBackground(scrnG, WIDTH, HEIGHT)
+        //Рисование автобуса
+        scrnG.drawImage(bus.image, xPos, Y_POS, this)
 
         xPos += 3
         if (xPos > WIDTH) {
@@ -60,10 +65,9 @@ class BusStopFrame extends JFrame {
         }
         if (xPos >= (WIDTH/2-bus.width/2) && !stop) {
             stop = true
-            Thread.sleep(1000)
+            Thread.sleep(STOP_MILIS)
         }
         if (xPos < (WIDTH/2-bus.width/2)) stop = false
-
 
         g.drawImage(scrnBuf, 0, 0, this)
     }
