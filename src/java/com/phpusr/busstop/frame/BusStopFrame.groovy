@@ -88,8 +88,9 @@ class BusStopFrame extends JFrame {
                 out = true
                 yPosPassenger = Y_POS + bus.height/2
 
-
+                if (BusStopConsts.busLog) println '-----------------------------------------------------------------------------------'
                 if (BusStopConsts.paintLog) println "$stopCount\t Кол-во выходящих пассажиров: ${passengerCountOut}/$bus.passengerCount,\t\t Кол-во входящих пассажиров: ${passengerCountIn}/$bus.freeSeat"
+                if (BusStopConsts.busLog) println '-----------------------------------------------------------------------------------'
                 if (BusStopConsts.statBusLog && stopCount % 10 == 0) busParkUtil.printStat()
             }
 

@@ -63,7 +63,7 @@ class Bus {
             passengerCount++
             passengerCountIn++
 
-            if (BusStopConsts.busLog) println this
+            if (BusStopConsts.busLog) println "\t$this"
             return true
         } else {
             if (BusStopConsts.busLog) println ">>В автобусе: $name-$route больше нет места!"
@@ -77,7 +77,7 @@ class Bus {
             passengerCount--
             passengerCountOut++
 
-            if (BusStopConsts.busLog) println this
+            if (BusStopConsts.busLog) println "\t$this"
             return true
         } else {
             if (BusStopConsts.busLog) println ">>В автобусе: $name-$route больше нет пассажиров!"

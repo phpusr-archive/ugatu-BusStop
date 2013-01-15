@@ -13,7 +13,7 @@ package com.phpusr.busstop.consts
  */
 class BusStopConsts {
     /** Вкл/Выкл логирование в Bus */
-    static final boolean busLog = false
+    static final boolean busLog = true
     /** Вкл/Выкл логирование в BusStopFrame.paint() */
     static final boolean paintLog = true
     /** Вкл/Выкл логирование Статистики Автобусов */
