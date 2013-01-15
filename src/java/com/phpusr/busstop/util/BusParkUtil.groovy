@@ -14,14 +14,15 @@ import com.phpusr.busstop.entity.Bus
  * Утилита для работы с Автобусами
  */
 class BusParkUtil {
+    static final String imgPath = '../img/bus'
     List<Bus> busList = []
 
     BusParkUtil() {
-        busList << new Bus('../img/bus/pacan_bus.gif')
-        busList << new Bus('../img/test/image1.gif')
-        busList << new Bus('../img/test/image2.gif')
-        busList << new Bus('../img/test/image3.gif')
-        busList << new Bus('../img/test/image4.gif')
+        busList << new Bus("$imgPath/Pacan.png")
+        busList << new Bus("$imgPath/Boxer.png")
+        busList << new Bus("$imgPath/Dirty.png")
+        busList << new Bus("$imgPath/Feniks.png")
+        busList << new Bus("$imgPath/Tn.png")
     }
 
     Bus getRandomBus() {

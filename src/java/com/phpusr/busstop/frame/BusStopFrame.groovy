@@ -25,7 +25,7 @@ class BusStopFrame extends JFrame {
     /** Высота окна */
     static final int HEIGHT = 600
     /** Y позиция для рисования движения */
-    static final int Y_POS = WIDTH / 2
+    static final int Y_POS = WIDTH / 3
     /** Кол-во увеличения пикселей для показа движения */
     static final int PIXEL_INC = 10
     /** Пауза между кадрами (мс) */
