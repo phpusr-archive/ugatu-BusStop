@@ -18,11 +18,11 @@ class BusParkUtil {
     List<Bus> busList = []
 
     BusParkUtil() {
-        busList << new Bus("$imgPath/Pacan.png")
-        busList << new Bus("$imgPath/Boxer.png")
-        busList << new Bus("$imgPath/Dirty.png")
-        busList << new Bus("$imgPath/Feniks.png")
-        busList << new Bus("$imgPath/Tn.png")
+        busList << new Bus('Pacan',     '57',   20, "$imgPath/Pacan.png")
+        busList << new Bus('Boxer',     '218',  10, "$imgPath/Boxer.png")
+        busList << new Bus('Dirty',     '54',   20, "$imgPath/Dirty.png")
+        busList << new Bus('Feniks',    '214',  10, "$imgPath/Feniks.png")
+        busList << new Bus('Tn',        '54',   20, "$imgPath/Tn.png")
     }
 
     Bus getRandomBus() {

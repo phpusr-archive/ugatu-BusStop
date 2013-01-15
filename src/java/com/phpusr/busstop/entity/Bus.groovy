@@ -15,15 +15,34 @@ import java.awt.image.BufferedImage
  * Автобус
  */
 class Bus {
+    /** Название */
+    String name
+    /** Маршрут */
+    String route
+    /** Кол-во мест */
+    int seatCount
+    /** Изображение автобуса */
     BufferedImage image
 
-    Bus(String path) {
-        URL url = Bus.class.getResource(path)
-        image = ImageIO.read(url)
+    /** Кол-во Пассажиров (внутри) */
+    int passengerCount
+    /** Кол-во зашедших и вышедших Пассажиров (для Статистики) */
+    int passengerCountIn, passengerCountOut
+
+    Bus(String name, String route, int seatCount, String pathToImage) {
+        this.name = name
+        this.route = route
+        this.seatCount = seatCount
+        setImage(pathToImage)
     }
 
     Bus() {
-        this('../img/bus/pacan_bus.gif')
+        this('Test', '777', 10, '../img/bus/Pacan.png')
+    }
+
+    void setImage(String path) {
+        URL url = Bus.class.getResource(path)
+        image = ImageIO.read(url)
     }
 
     int getWidth() {
@@ -32,5 +51,20 @@ class Bus {
 
     int getHeight() {
         image.height
+    }
+
+    void addPassenger() {
+        passengerCount++
+        passengerCountIn++
+    }
+
+    void delPassenger() {
+        passengerCount--
+        passengerCountOut--
+    }
+
+    @Override
+    String toString() {
+        return "Автобус: $name-$route, Пассажиров: $passengerCount/$seatCount, Всего зашло: $passengerCountIn, Всего вышло: $passengerCountOut"
     }
 }
