@@ -45,22 +45,36 @@ class Bus {
         image = ImageIO.read(url)
     }
 
+    /** Возвращает Длину изображения Автобуса */
     int getWidth() {
         image.width
     }
 
+    /** Возвращает Высоту изображения Автобуса */
     int getHeight() {
         image.height
     }
 
-    void addPassenger() {
-        passengerCount++
-        passengerCountIn++
+    /** Добавить пассажира в автобус */
+    boolean addPassenger() {
+        if (passengerCount < seatCount) {
+            passengerCount++
+            passengerCountIn++
+            return true
+        } else {
+            return false
+        }
     }
 
-    void delPassenger() {
-        passengerCount--
-        passengerCountOut--
+    /** Удалить пассажира из Автобуса */
+    boolean delPassenger() {
+        if (passengerCount > 0) {
+            passengerCountOut--
+            passengerCount--
+            return true
+        } else {
+            return false
+        }
     }
 
     @Override
