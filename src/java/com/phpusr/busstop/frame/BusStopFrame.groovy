@@ -20,23 +20,39 @@ import java.awt.image.BufferedImage
  * Форма для отображения симуляции Автобусной остановки
  */
 class BusStopFrame extends JFrame {
+    /** Ширина окна */
     static final int WIDTH = 600
+    /** Высота окна */
     static final int HEIGHT = 600
-    static final int Y_POS = 100
+    /** Y позиция для рисования движения */
+    static final int Y_POS = WIDTH / 2
+    /** Кол-во увеличения пикселей для показа движения */
     static final int PIXEL_INC = 10
+    /** Пауза между кадрами (мс) */
     static final int PAUSE_MILIS = 20
-    static final int MAX_PASSENGER = 10
+    /** Макс. кол-во Пассажиров для генерации */
+    static final int MAX_PASSENGER = 10 //TODO потом убрать
 
-    int xPos, yPosPassenger
+    /** Координаты рисования Пассажиров */
+    int xPosBus, yPosPassenger
+    /** Кол-во Пассажиров для Выхода и Входа */
     int passengerCountOut, passengerCountIn
 
+    /** Буфер для рисования кадра */
     Image scrnBuf
+    /** Холст для рисования от Буфера */
     Graphics scrnG
+    /** Утилита для работы с автобусами */
     BusParkUtil busParkUtil
+    /** Утилита для рисования объектов */
     DrawUtil drawUtil
+    /** Текущий Автобус */
     Bus bus
 
-    boolean stop = false, out = true
+    /** Стоит-ли Автобус на остановке */
+    boolean stop = false
+    /** Выходят или Заходят в автобус Пассажиры */
+    boolean out = true
 
     BusStopFrame(String s) {
         super(s)
@@ -52,18 +68,18 @@ class BusStopFrame extends JFrame {
         busParkUtil = new BusParkUtil()
         drawUtil = new DrawUtil()
         bus = busParkUtil.randomBus
-        xPos = -1 * bus.width
+        xPosBus = -1 * bus.width
     }
 
     public void paint(Graphics g) {
         //Рисование фона
         drawUtil.drawBackground(scrnG, WIDTH, HEIGHT)
         //Рисование автобуса
-        scrnG.drawImage(bus.image, xPos, Y_POS, this)
+        drawUtil.drawBus(scrnG, bus, xPosBus, Y_POS, this)
 
         //Если автобус подъехал к остановке
         int stopX = WIDTH / 2 - bus.width / 2
-        if (xPos >= stopX && xPos <= stopX+PIXEL_INC) {
+        if (xPosBus >= stopX && xPosBus <= stopX+PIXEL_INC) {
             if (!stop) { //Если зашли в это условие первый раз, то генерируем кол-во входящих пассажиров
                 passengerCountOut = Math.random() * MAX_PASSENGER //TODO макс будет зависеть от кол-во пассажиров в автобусе
                 passengerCountIn = Math.random() * MAX_PASSENGER //TODO макс будет зависеть от кол-во ост пассажиров в автобусе и макс вместиимости автобуса
@@ -72,10 +88,10 @@ class BusStopFrame extends JFrame {
                 yPosPassenger = Y_POS + bus.height/2
             }
 
-            if (out) {
+            if (out) { //Анимация выхода пассажиров
                 stop = true
                 if (passengerCountOut > 0) {
-                    scrnG.fillOval((int)WIDTH/2, yPosPassenger, 10, 10)
+                    drawUtil.drawPassenger(scrnG, (int)WIDTH/2, yPosPassenger)
                     yPosPassenger += PIXEL_INC
                     if (yPosPassenger > HEIGHT) {
                         passengerCountOut--
@@ -85,9 +101,9 @@ class BusStopFrame extends JFrame {
                     out = false
                     yPosPassenger = HEIGHT
                 }
-            } else {
+            } else { //Анимация входа пассажиров
                 if (passengerCountIn > 0) {
-                    scrnG.fillOval((int)WIDTH/2, yPosPassenger, 10, 10)
+                    drawUtil.drawPassenger(scrnG, (int)WIDTH/2, yPosPassenger)
                     yPosPassenger -= PIXEL_INC
                     if (yPosPassenger < Y_POS + bus.height/2) {
                         passengerCountIn--
@@ -98,17 +114,15 @@ class BusStopFrame extends JFrame {
                 }
             }
         }
-        //Если автобус еще не доехал до остановки
-        if (xPos < (WIDTH/2-bus.width/2)) {
-            stop = false
-        }
-        if (!stop) xPos += PIXEL_INC
+        //Если автобус не остановлен, то движение автобуса
+        if (!stop) xPosBus += PIXEL_INC
         //Если автобус уехал за пределы
-        if (xPos > WIDTH) {
+        if (xPosBus > WIDTH) {
             bus = busParkUtil.randomBus
-            xPos = -1 * bus.width
+            xPosBus = -1 * bus.width
         }
 
+        //Рисование на форме изображения из буфера
         g.drawImage(scrnBuf, 0, 0, this)
     }
 

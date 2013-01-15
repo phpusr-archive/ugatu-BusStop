@@ -1,6 +1,9 @@
 package com.phpusr.busstop.util
 
+import com.phpusr.busstop.entity.Bus
+
 import java.awt.*
+import java.awt.image.ImageObserver
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,4 +24,15 @@ class DrawUtil {
         g.fillRect(0, 0, width, height)
         g.setColor(Color.black)
     }
+
+    /** Рисует Автобус */
+    void drawBus(Graphics g, Bus bus, int x, int y, ImageObserver ioServer) {
+        g.drawImage(bus.image, x, y, ioServer)
+    }
+
+    /** Рисует Пассажира */
+    void drawPassenger(Graphics g, int x, int y) {
+        g.fillOval(x, y, 10, 10)
+    }
+
 }
