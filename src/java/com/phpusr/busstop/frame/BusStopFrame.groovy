@@ -27,8 +27,8 @@ class BusStopFrame extends JFrame {
     static final int PAUSE_MILIS = 20
     static final int MAX_PASSENGER = 10
 
-    int xPos, yPosPeople
-    int passengerCountIn
+    int xPos, yPosPassenger
+    int passengerCountOut, passengerCountIn
 
     Image scrnBuf
     Graphics scrnG
@@ -36,7 +36,7 @@ class BusStopFrame extends JFrame {
     DrawUtil drawUtil
     Bus bus
 
-    boolean stop = false
+    boolean stop = false, out = true
 
     BusStopFrame(String s) {
         super(s)
@@ -53,7 +53,6 @@ class BusStopFrame extends JFrame {
         drawUtil = new DrawUtil()
         bus = busParkUtil.randomBus
         xPos = -1 * bus.width
-        yPosPeople = HEIGHT
     }
 
     public void paint(Graphics g) {
@@ -66,19 +65,37 @@ class BusStopFrame extends JFrame {
         int stopX = WIDTH / 2 - bus.width / 2
         if (xPos >= stopX && xPos <= stopX+PIXEL_INC) {
             if (!stop) { //Если зашли в это условие первый раз, то генерируем кол-во входящих пассажиров
-                passengerCountIn = Math.random() * MAX_PASSENGER
-                println "passengerCountIn: ${passengerCountIn}"
+                passengerCountOut = Math.random() * MAX_PASSENGER //TODO макс будет зависеть от кол-во пассажиров в автобусе
+                passengerCountIn = Math.random() * MAX_PASSENGER //TODO макс будет зависеть от кол-во ост пассажиров в автобусе и макс вместиимости автобуса
+                println "passengerCountOut: ${passengerCountOut}, passengerCountIn: ${passengerCountIn}"
+                out = true
+                yPosPassenger = Y_POS + bus.height/2
             }
-            if (passengerCountIn > 0) {
+
+            if (out) {
                 stop = true
-                scrnG.fillOval((int)WIDTH/2, yPosPeople, 10, 10)
-                yPosPeople -= PIXEL_INC
-                if (yPosPeople < Y_POS + bus.height/2) {
-                    passengerCountIn--
-                    yPosPeople = HEIGHT
+                if (passengerCountOut > 0) {
+                    scrnG.fillOval((int)WIDTH/2, yPosPassenger, 10, 10)
+                    yPosPassenger += PIXEL_INC
+                    if (yPosPassenger > HEIGHT) {
+                        passengerCountOut--
+                        yPosPassenger = Y_POS + bus.height/2
+                    }
+                } else {
+                    out = false
+                    yPosPassenger = HEIGHT
                 }
             } else {
-                stop = false
+                if (passengerCountIn > 0) {
+                    scrnG.fillOval((int)WIDTH/2, yPosPassenger, 10, 10)
+                    yPosPassenger -= PIXEL_INC
+                    if (yPosPassenger < Y_POS + bus.height/2) {
+                        passengerCountIn--
+                        yPosPassenger = HEIGHT
+                    }
+                } else {
+                    stop = false
+                }
             }
         }
         //Если автобус еще не доехал до остановки
