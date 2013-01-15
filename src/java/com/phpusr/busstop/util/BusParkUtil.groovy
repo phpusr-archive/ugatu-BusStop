@@ -14,7 +14,9 @@ import com.phpusr.busstop.entity.Bus
  * Утилита для работы с Автобусами
  */
 class BusParkUtil {
+    /** Относительный путь к папке с ихображениями Автобусов */
     static final String imgPath = '../img/bus'
+    /** Список автобусов */
     List<Bus> busList = []
 
     BusParkUtil() {
@@ -25,9 +27,63 @@ class BusParkUtil {
         busList << new Bus('Tn',        '54',   20, "$imgPath/Tn.png")
     }
 
+    /** Возвращает рандомный автобус из списка */
     Bus getRandomBus() {
         int num = Math.random() * busList.size()
         return busList.get(num)
     }
 
+    /** Возвращает кол-во всех севших в Автобусы Пассажиров */
+    int getAllPassengerInCount() {
+        int count = 0
+        busList.each { bus ->
+            count += bus.passengerCountIn
+        }
+
+        return count
+    }
+
+    /** Возвращает кол-во всех вышедших из Автобусов Пассажиров */
+    int getAllPassengerOutCount() {
+        int count = 0
+        busList.each { bus ->
+            count += bus.passengerCountOut
+        }
+
+        return count
+    }
+
+    /** Возвращает Автобус, который Больше всех довез Пассажиров */
+    Bus getMaxBus() {
+        Bus mBus = busList.get(0)
+        busList.each { bus ->
+            if (bus.passengerCountOut > mBus.passengerCountOut) {
+                mBus = bus
+            }
+        }
+
+        return mBus
+    }
+
+    /** Возвращает Автобус, который Меньше всех довез Пассажиров */
+    Bus getMinBus() {
+        Bus mBus = busList.get(0)
+        busList.each { bus ->
+            if (bus.passengerCountOut < mBus.passengerCountOut) {
+                mBus = bus
+            }
+        }
+
+        return mBus
+    }
+
+    /** Вывод статистики по Автобусам */
+    void printStat() {
+        println '-----------------------------------------------------------------------'
+        println "Кол-во всех севших в автобусы пассажиров:       $allPassengerInCount"
+        println "Кол-во всех вышедших из автобусов пассажиров:   $allPassengerInCount"
+        println "Автобус довезший БОЛЬШЕ всех пассажиров:        $maxBus"
+        println "Автобус довезший МЕНЬШЕ всех пассажиров:        $minBus"
+        println '-----------------------------------------------------------------------'
+    }
 }

@@ -30,12 +30,14 @@ class BusStopFrame extends JFrame {
     /** Кол-во увеличения пикселей для показа движения */
     static final int PIXEL_INC = 10
     /** Пауза между кадрами (мс) */
-    static final int PAUSE_MILIS = 20
+    static final int PAUSE_MILIS = 2
 
     /** Координаты рисования Пассажиров */
     int xPosBus, yPosPassenger
     /** Кол-во Пассажиров для Выхода и Входа */
     int passengerCountOut, passengerCountIn
+    /** Кол-во остановок */
+    int stopCount
 
     /** Буфер для рисования кадра */
     Image scrnBuf
@@ -80,11 +82,15 @@ class BusStopFrame extends JFrame {
         int stopX = WIDTH / 2 - bus.width / 2
         if (xPosBus >= stopX && xPosBus <= stopX+PIXEL_INC) {
             if (!stop) { //Если зашли в это условие первый раз, то генерируем кол-во входящих пассажиров
+                stopCount++
                 passengerCountOut = Math.round(Math.random() * bus.passengerCount)
                 passengerCountIn = Math.round(Math.random() * bus.freeSeat)
-                if (BusStopConsts.paintLog) println "Кол-во выходящих пассажиров: ${passengerCountOut}/$bus.passengerCount, Кол-во входящих пассажиров: ${passengerCountIn}/$bus.freeSeat"
                 out = true
                 yPosPassenger = Y_POS + bus.height/2
+
+
+                if (BusStopConsts.paintLog) println "$stopCount\t Кол-во выходящих пассажиров: ${passengerCountOut}/$bus.passengerCount,\t\t Кол-во входящих пассажиров: ${passengerCountIn}/$bus.freeSeat"
+                if (BusStopConsts.statBusLog && stopCount % 10 == 0) busParkUtil.printStat()
             }
 
             if (out) { //Анимация выхода пассажиров
