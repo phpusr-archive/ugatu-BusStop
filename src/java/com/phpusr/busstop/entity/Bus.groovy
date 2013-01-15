@@ -1,5 +1,7 @@
 package com.phpusr.busstop.entity
 
+import com.phpusr.busstop.consts.BusStopConsts
+
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
 
@@ -60,8 +62,11 @@ class Bus {
         if (passengerCount < seatCount) {
             passengerCount++
             passengerCountIn++
+
+            if (BusStopConsts.busLog) println this
             return true
         } else {
+            if (BusStopConsts.busLog) println ">>В автобусе: $name-$route больше нет места!"
             return false
         }
     }
@@ -69,12 +74,20 @@ class Bus {
     /** Удалить пассажира из Автобуса */
     boolean delPassenger() {
         if (passengerCount > 0) {
-            passengerCountOut--
             passengerCount--
+            passengerCountOut++
+
+            if (BusStopConsts.busLog) println this
             return true
         } else {
+            if (BusStopConsts.busLog) println ">>В автобусе: $name-$route больше нет пассажиров!"
             return false
         }
+    }
+
+    /** Возвращает кол-во Свободных мест в Автобусе */
+    int getFreeSeat() {
+        return seatCount - passengerCount
     }
 
     @Override

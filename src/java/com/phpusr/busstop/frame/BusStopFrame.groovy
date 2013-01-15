@@ -1,5 +1,6 @@
 package com.phpusr.busstop.frame
 
+import com.phpusr.busstop.consts.BusStopConsts
 import com.phpusr.busstop.entity.Bus
 import com.phpusr.busstop.util.BusParkUtil
 import com.phpusr.busstop.util.DrawUtil
@@ -30,8 +31,6 @@ class BusStopFrame extends JFrame {
     static final int PIXEL_INC = 10
     /** Пауза между кадрами (мс) */
     static final int PAUSE_MILIS = 20
-    /** Макс. кол-во Пассажиров для генерации */
-    static final int MAX_PASSENGER = 10 //TODO потом убрать
 
     /** Координаты рисования Пассажиров */
     int xPosBus, yPosPassenger
@@ -81,9 +80,9 @@ class BusStopFrame extends JFrame {
         int stopX = WIDTH / 2 - bus.width / 2
         if (xPosBus >= stopX && xPosBus <= stopX+PIXEL_INC) {
             if (!stop) { //Если зашли в это условие первый раз, то генерируем кол-во входящих пассажиров
-                passengerCountOut = Math.random() * MAX_PASSENGER //TODO макс будет зависеть от кол-во пассажиров в автобусе
-                passengerCountIn = Math.random() * MAX_PASSENGER //TODO макс будет зависеть от кол-во ост пассажиров в автобусе и макс вместиимости автобуса
-                println "passengerCountOut: ${passengerCountOut}, passengerCountIn: ${passengerCountIn}"
+                passengerCountOut = Math.round(Math.random() * bus.passengerCount)
+                passengerCountIn = Math.round(Math.random() * bus.freeSeat)
+                if (BusStopConsts.paintLog) println "Кол-во выходящих пассажиров: ${passengerCountOut}/$bus.passengerCount, Кол-во входящих пассажиров: ${passengerCountIn}/$bus.freeSeat"
                 out = true
                 yPosPassenger = Y_POS + bus.height/2
             }
@@ -93,8 +92,9 @@ class BusStopFrame extends JFrame {
                 if (passengerCountOut > 0) {
                     drawUtil.drawPassenger(scrnG, (int)WIDTH/2, yPosPassenger)
                     yPosPassenger += PIXEL_INC
-                    if (yPosPassenger > HEIGHT) {
+                    if (yPosPassenger > HEIGHT) { //Пассажир вышел из Автобуса
                         passengerCountOut--
+                        bus.delPassenger()
                         yPosPassenger = Y_POS + bus.height/2
                     }
                 } else {
@@ -105,8 +105,9 @@ class BusStopFrame extends JFrame {
                 if (passengerCountIn > 0) {
                     drawUtil.drawPassenger(scrnG, (int)WIDTH/2, yPosPassenger)
                     yPosPassenger -= PIXEL_INC
-                    if (yPosPassenger < Y_POS + bus.height/2) {
+                    if (yPosPassenger < Y_POS + bus.height/2) { //Пассажир сел на Автобус
                         passengerCountIn--
+                        bus.addPassenger()
                         yPosPassenger = HEIGHT
                     }
                 } else {
