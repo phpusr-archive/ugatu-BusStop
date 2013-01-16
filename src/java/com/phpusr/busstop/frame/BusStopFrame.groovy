@@ -30,12 +30,12 @@ class BusStopFrame extends JFrame {
     /** Кол-во увеличения пикселей для показа движения */
     static final int PIXEL_INC = 10
     /** Пауза между кадрами (мс) */
-    static final int PAUSE_MILIS = 2
+    static final int PAUSE_MILIS = 20
 
     /** Координаты рисования Пассажиров */
     int xPosBus, yPosPassenger
     /** Кол-во Пассажиров для Выхода и Входа */
-    int passengerCountOut, passengerCountIn
+    int passengerCountOut, passengerCountOutConst, passengerCountIn, passengerCountInConst
     /** Кол-во остановок */
     int stopCount
 
@@ -87,7 +87,9 @@ class BusStopFrame extends JFrame {
             if (!stop) { //Если зашли в это условие первый раз, то генерируем кол-во входящих пассажиров
                 stopCount++
                 passengerCountOut = Math.round(Math.random() * bus.passengerCount)
+                passengerCountOutConst = passengerCountOut
                 passengerCountIn = Math.round(Math.random() * bus.freeSeat)
+                passengerCountInConst = passengerCountIn
                 out = true
                 yPosPassenger = Y_POS + bus.height/2
 
@@ -95,6 +97,8 @@ class BusStopFrame extends JFrame {
                 if (BusStopConsts.paintLog) println "$stopCount\t Кол-во выходящих пассажиров: ${passengerCountOut}/$bus.passengerCount,\t\t Кол-во входящих пассажиров: ${passengerCountIn}/$bus.freeSeat"
                 if (BusStopConsts.busLog) println '-----------------------------------------------------------------------------------'
                 if (BusStopConsts.statBusLog && stopCount % 10 == 0) busParkUtil.printStat()
+                controlFrame.setPassengerCountOut(passengerCountOutConst - passengerCountOut, passengerCountOutConst, bus.passengerCountOut)
+                controlFrame.setPassengerCountIn(passengerCountInConst - passengerCountIn, passengerCountInConst, bus.passengerCountIn)
             }
 
             if (out) { //Анимация выхода пассажиров
@@ -105,6 +109,7 @@ class BusStopFrame extends JFrame {
                     if (yPosPassenger > HEIGHT) { //Пассажир вышел из Автобуса
                         passengerCountOut--
                         bus.delPassenger()
+                        controlFrame.setPassengerCountOut(passengerCountOutConst - passengerCountOut, passengerCountOutConst, bus.passengerCountOut)
                         yPosPassenger = Y_POS + bus.height/2
                     }
                 } else {
@@ -118,6 +123,7 @@ class BusStopFrame extends JFrame {
                     if (yPosPassenger < Y_POS + bus.height/2) { //Пассажир сел на Автобус
                         passengerCountIn--
                         bus.addPassenger()
+                        controlFrame.setPassengerCountIn(passengerCountInConst - passengerCountIn, passengerCountInConst, bus.passengerCountIn)
                         yPosPassenger = HEIGHT
                     }
                 } else {

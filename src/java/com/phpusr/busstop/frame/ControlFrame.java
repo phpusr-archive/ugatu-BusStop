@@ -20,18 +20,36 @@ public class ControlFrame extends JFrame {
     private JButton btnExit;
     private JTable table1;
     private JLabel lblImg;
+    private JPanel pnlMiddle;
+    private JLabel lblPassengerOut;
+    private JLabel lblAllPassengerOut;
+    private JLabel lblAllPassengerIn;
+    private JLabel lblPassengerIn;
 
     public ControlFrame(String title) {
         super(title);
         setContentPane(contentPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 200);
+        setSize(1000, 600);
         setVisible(true);
         btnExit.setAction(new ExitAction(btnExit.getText()));
         lblImg.setText("");
     }
 
+    /** Установка изображения Автобуса */
     public void setLblImg(JLabel lblImg) {
         this.lblImg = lblImg;
+    }
+
+    /** Установка Вышедших Пассажиров */
+    void setPassengerCountOut(int cur, int from, int all) {
+        lblPassengerOut.setText(cur + "/" + from);
+        lblAllPassengerOut.setText(Integer.toString(all));
+    }
+
+    /** Установка Севших Пассажиров */
+    void setPassengerCountIn(int cur, int from, int all) {
+        lblPassengerIn.setText(cur + "/" + from);
+        lblAllPassengerIn.setText(Integer.toString(all));
     }
 }
