@@ -1,6 +1,7 @@
 package com.phpusr.busstop.run
 
 import com.phpusr.busstop.frame.BusStopFrame
+import com.phpusr.busstop.frame.ControlFrame
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,7 +16,8 @@ import com.phpusr.busstop.frame.BusStopFrame
  */
 class Run {
     public static void main(String[] args) {
-        BusStopFrame busStopFrame = new BusStopFrame('Bus Stop Simulation')
+        ControlFrame controlFrame = new ControlFrame('Bus Stop Simulation Control')
+        BusStopFrame busStopFrame = new BusStopFrame('Bus Stop Simulation', controlFrame)
         busStopFrame.go()
     }
 }

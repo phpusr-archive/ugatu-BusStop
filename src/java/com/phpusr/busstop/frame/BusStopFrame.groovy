@@ -49,14 +49,17 @@ class BusStopFrame extends JFrame {
     DrawUtil drawUtil
     /** Текущий Автобус */
     Bus bus
+    /**  */
+    ControlFrame controlFrame
 
     /** Стоит-ли Автобус на остановке */
     boolean stop = false
     /** Выходят или Заходят в автобус Пассажиры */
     boolean out = true
 
-    BusStopFrame(String s) {
+    BusStopFrame(String s, ControlFrame controlFrame) {
         super(s)
+        this.controlFrame = controlFrame
         init()
         setSize(WIDTH, HEIGHT)
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
@@ -127,6 +130,7 @@ class BusStopFrame extends JFrame {
         //Если автобус уехал за пределы
         if (xPosBus > WIDTH) {
             bus = busParkUtil.randomBus
+            controlFrame.lblImg.icon = new ImageIcon(bus.image)
             xPosBus = -1 * bus.width
         }
 
