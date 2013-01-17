@@ -53,11 +53,11 @@ class BusStopFrame extends JFrame {
     ControlFrame controlFrame
 
     /** Стоит-ли Автобус на остановке */
-    boolean stop = false
+    boolean stop
     /** Выходят или Заходят в автобус Пассажиры */
-    boolean out = true
+    boolean out
     /** Пауза */
-    boolean pause = false
+    boolean pause
 
     BusStopFrame(String s, ControlFrame controlFrame) {
         super(s)
@@ -69,13 +69,16 @@ class BusStopFrame extends JFrame {
     }
 
     /** Инициализация переменных для Рисования */
-    void init() {
+    private void init() {
         scrnBuf = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
         busParkUtil = new BusParkUtil(controlFrame.model)
         drawUtil = new DrawUtil()
         bus = busParkUtil.randomBus
         xPosBus = -1 * bus.width
+
+        stop = false
+        out = true
     }
 
     /** Функция Рисования */
@@ -177,6 +180,13 @@ class BusStopFrame extends JFrame {
     /** Пауза Рисования */
     void pause() {
         pause = true
+    }
+
+    /** Остановка Рисования */
+    void stop() {
+        pause()
+        init()
+        repaint()
     }
 
 }

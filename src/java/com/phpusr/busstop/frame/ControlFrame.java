@@ -87,7 +87,9 @@ public class ControlFrame extends JFrame {
         btnStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                btnStart.setText("Старт");
+                busStopFrame.stop();
+                start = true;
             }
         });
         //Выход
