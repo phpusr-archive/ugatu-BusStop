@@ -30,7 +30,7 @@ class BusStopFrame extends JFrame {
     /** Кол-во увеличения пикселей для показа движения */
     static final int PIXEL_INC = 10
     /** Пауза между кадрами (мс) */
-    static final int PAUSE_MILIS = 20
+    static final int PAUSE_MILIS = 2
 
     /** Координаты рисования Пассажиров */
     int xPosBus, yPosPassenger
@@ -49,7 +49,7 @@ class BusStopFrame extends JFrame {
     DrawUtil drawUtil
     /** Текущий Автобус */
     Bus bus
-    /**  */
+    /** Форма управления */
     ControlFrame controlFrame
 
     /** Стоит-ли Автобус на остановке */
@@ -69,7 +69,7 @@ class BusStopFrame extends JFrame {
     public void init() {
         scrnBuf = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
-        busParkUtil = new BusParkUtil()
+        busParkUtil = new BusParkUtil(controlFrame.model)
         drawUtil = new DrawUtil()
         bus = busParkUtil.randomBus
         xPosBus = -1 * bus.width
@@ -97,8 +97,7 @@ class BusStopFrame extends JFrame {
                 if (BusStopConsts.paintLog) println "$stopCount\t Кол-во выходящих пассажиров: ${passengerCountOut}/$bus.passengerCount,\t\t Кол-во входящих пассажиров: ${passengerCountIn}/$bus.freeSeat"
                 if (BusStopConsts.busLog) println '-----------------------------------------------------------------------------------'
                 if (BusStopConsts.statBusLog && stopCount % 10 == 0) busParkUtil.printStat()
-                controlFrame.setPassengerCountOut(passengerCountOutConst - passengerCountOut, passengerCountOutConst, bus.passengerCountOut)
-                controlFrame.setPassengerCountIn(passengerCountInConst - passengerCountIn, passengerCountInConst, bus.passengerCountIn)
+                updateBusInfo()
             }
 
             if (out) { //Анимация выхода пассажиров
@@ -109,8 +108,8 @@ class BusStopFrame extends JFrame {
                     if (yPosPassenger > HEIGHT) { //Пассажир вышел из Автобуса
                         passengerCountOut--
                         bus.delPassenger()
-                        controlFrame.setPassengerCountOut(passengerCountOutConst - passengerCountOut, passengerCountOutConst, bus.passengerCountOut)
                         yPosPassenger = Y_POS + bus.height/2
+                        updateBusInfo()
                     }
                 } else {
                     out = false
@@ -123,8 +122,8 @@ class BusStopFrame extends JFrame {
                     if (yPosPassenger < Y_POS + bus.height/2) { //Пассажир сел на Автобус
                         passengerCountIn--
                         bus.addPassenger()
-                        controlFrame.setPassengerCountIn(passengerCountInConst - passengerCountIn, passengerCountInConst, bus.passengerCountIn)
                         yPosPassenger = HEIGHT
+                        updateBusInfo()
                     }
                 } else {
                     stop = false
@@ -142,6 +141,13 @@ class BusStopFrame extends JFrame {
 
         //Рисование на форме изображения из буфера
         g.drawImage(scrnBuf, 0, 0, this)
+    }
+
+    /** Срабатывает при Изменении свойств в Автобусе */
+    private updateBusInfo() {
+        controlFrame.setPassengerCountOut(passengerCountOutConst - passengerCountOut, passengerCountOutConst, bus.passengerCountOut)
+        controlFrame.setPassengerCountIn(passengerCountInConst - passengerCountIn, passengerCountInConst, bus.passengerCountIn)
+        busParkUtil.updateTblStat(controlFrame.tblStat, controlFrame.model, bus)
     }
 
     public void update(Graphics g) { paint(g) }

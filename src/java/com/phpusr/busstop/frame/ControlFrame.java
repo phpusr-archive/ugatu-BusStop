@@ -3,6 +3,8 @@ package com.phpusr.busstop.frame;
 import com.phpusr.busstop.util.ExitAction;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,13 +20,14 @@ public class ControlFrame extends JFrame {
     private JButton стартButton;
     private JButton стопButton;
     private JButton btnExit;
-    private JTable table1;
+    private JTable tblStat;
     private JLabel lblImg;
     private JPanel pnlMiddle;
     private JLabel lblPassengerOut;
     private JLabel lblAllPassengerOut;
     private JLabel lblAllPassengerIn;
     private JLabel lblPassengerIn;
+    private BusTableModel model;
 
     public ControlFrame(String title) {
         super(title);
@@ -34,6 +37,28 @@ public class ControlFrame extends JFrame {
         setVisible(true);
         btnExit.setAction(new ExitAction(btnExit.getText()));
         lblImg.setText("");
+
+        initTable();
+    }
+
+    void initTable() {
+        model = new BusTableModel();
+        model.addColumn("Автобус");
+        model.addColumn("Пассажиров");
+        model.addColumn("Свободных мест");
+        model.addColumn("Всего вышло");
+        model.addColumn("Всего село");
+        tblStat.setModel(model);
+
+        //Установка для таблицы кастомного Рисовальщика ячеек
+        tblStat.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                c.setBackground(model.getRowColor(row));
+                return c;
+            }
+        });
     }
 
     /** Установка изображения Автобуса */
@@ -41,15 +66,23 @@ public class ControlFrame extends JFrame {
         this.lblImg = lblImg;
     }
 
-    /** Установка Вышедших Пассажиров */
+    /** Установка на форме Вышедших Пассажиров */
     void setPassengerCountOut(int cur, int from, int all) {
         lblPassengerOut.setText(cur + "/" + from);
         lblAllPassengerOut.setText(Integer.toString(all));
     }
 
-    /** Установка Севших Пассажиров */
+    /** Установка на форме Севших Пассажиров */
     void setPassengerCountIn(int cur, int from, int all) {
         lblPassengerIn.setText(cur + "/" + from);
         lblAllPassengerIn.setText(Integer.toString(all));
+    }
+
+    public BusTableModel getModel() {
+        return model;
+    }
+
+    public JTable getTblStat() {
+        return tblStat;
     }
 }

@@ -1,6 +1,9 @@
 package com.phpusr.busstop.util
 
 import com.phpusr.busstop.entity.Bus
+import com.phpusr.busstop.frame.BusTableModel
+
+import javax.swing.*
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,12 +22,18 @@ class BusParkUtil {
     /** Список автобусов */
     List<Bus> busList = []
 
-    BusParkUtil() {
-        busList << new Bus('Pacan',     '57',   20, "$imgPath/Pacan.png")
-        busList << new Bus('Boxer',     '218',  10, "$imgPath/Boxer.png")
-        busList << new Bus('Dirty',     '54',   20, "$imgPath/Dirty.png")
-        busList << new Bus('Feniks',    '214',  10, "$imgPath/Feniks.png")
-        busList << new Bus('Tn',        '54',   20, "$imgPath/Tn.png")
+    BusParkUtil(BusTableModel model) {
+        int i = 0
+        busList << new Bus(i++, 'Pacan',     '57',   20, "$imgPath/Pacan.png")
+        busList << new Bus(i++, 'Boxer',     '218',  10, "$imgPath/Boxer.png")
+        busList << new Bus(i++, 'Dirty',     '54',   20, "$imgPath/Dirty.png")
+        busList << new Bus(i++, 'Feniks',    '214',  10, "$imgPath/Feniks.png")
+        busList << new Bus(i++, 'Tn',        '54',   20, "$imgPath/Tn.png")
+
+        busList.each { bus ->
+            def list = [bus.name, bus.passengerCount, bus.freeSeat, bus.passengerCountOut, bus.passengerCountIn]
+            model.addRow(list.toArray())
+        }
     }
 
     /** Возвращает рандомный автобус из списка */
@@ -86,4 +95,18 @@ class BusParkUtil {
         println "Автобус довезший МЕНЬШЕ всех пассажиров:        $minBus"
         println '-------------------------------------------------------------------------------------------------------------------------'
     }
+
+    /** Обновлении информации в Таблице Статистики */
+    void updateTblStat(JTable table, BusTableModel model, Bus bus) {
+        int i = 0
+        table.setValueAt(bus.name, bus.number, i++)
+        table.setValueAt(bus.passengerCount, bus.number, i++)
+        table.setValueAt(bus.freeSeat, bus.number, i++)
+        table.setValueAt(bus.passengerCountOut, bus.number, i++)
+        table.setValueAt(bus.passengerCountIn, bus.number, i++)
+
+        model.maxRow = maxBus.number
+        model.minRow = minBus.number
+    }
+
 }

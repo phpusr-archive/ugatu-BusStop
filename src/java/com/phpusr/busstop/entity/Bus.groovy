@@ -17,6 +17,8 @@ import java.awt.image.BufferedImage
  * Автобус
  */
 class Bus {
+    /** Порядковый № */
+    int number
     /** Название */
     String name
     /** Маршрут */
@@ -31,7 +33,8 @@ class Bus {
     /** Кол-во зашедших и вышедших Пассажиров (для Статистики) */
     int passengerCountIn, passengerCountOut
 
-    Bus(String name, String route, int seatCount, String pathToImage) {
+    Bus(int number, String name, String route, int seatCount, String pathToImage) {
+        this.number = number
         this.name = name
         this.route = route
         this.seatCount = seatCount
@@ -39,7 +42,7 @@ class Bus {
     }
 
     Bus() {
-        this('Test', '777', 10, '../img/bus/Pacan.png')
+        this(1, 'Test', '777', 10, '../img/bus/Pacan.png')
     }
 
     void setImage(String path) {
