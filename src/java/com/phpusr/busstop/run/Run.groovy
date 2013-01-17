@@ -26,7 +26,8 @@ class Run {
         }
         ControlFrame controlFrame = new ControlFrame('Bus Stop Simulation Control')
         BusStopFrame busStopFrame = new BusStopFrame('Bus Stop Simulation', controlFrame)
-        busStopFrame.go()
+        controlFrame.busStopFrame = busStopFrame
+        //busStopFrame.start()
     }
 }
 

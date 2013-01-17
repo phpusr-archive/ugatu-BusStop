@@ -30,7 +30,7 @@ class BusStopFrame extends JFrame {
     /** Кол-во увеличения пикселей для показа движения */
     static final int PIXEL_INC = 10
     /** Пауза между кадрами (мс) */
-    static final int PAUSE_MILIS = 2
+    static final int PAUSE_MILIS = 20
 
     /** Координаты рисования Пассажиров */
     int xPosBus, yPosPassenger
@@ -56,6 +56,8 @@ class BusStopFrame extends JFrame {
     boolean stop = false
     /** Выходят или Заходят в автобус Пассажиры */
     boolean out = true
+    /** Пауза */
+    boolean pause = false
 
     BusStopFrame(String s, ControlFrame controlFrame) {
         super(s)
@@ -66,7 +68,8 @@ class BusStopFrame extends JFrame {
         setVisible(true)
     }
 
-    public void init() {
+    /** Инициализация переменных для Рисования */
+    void init() {
         scrnBuf = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
         busParkUtil = new BusParkUtil(controlFrame.model)
@@ -75,7 +78,8 @@ class BusStopFrame extends JFrame {
         xPosBus = -1 * bus.width
     }
 
-    public void paint(Graphics g) {
+    /** Функция Рисования */
+    void paint(Graphics g) {
         //Рисование фона
         drawUtil.drawBackground(scrnG, WIDTH, HEIGHT)
         //Рисование автобуса
@@ -150,15 +154,29 @@ class BusStopFrame extends JFrame {
         busParkUtil.updateTblStat(controlFrame.tblStat, controlFrame.model, bus)
     }
 
-    public void update(Graphics g) { paint(g) }
+    void update(Graphics g) { paint(g) }
 
-    public void go() {
-        while(true) {
-            repaint()
-            try {
-                Thread.sleep(PAUSE_MILIS)
-            } catch (InterruptedException e){}
-        }
+    /** Запуск Рисования в отдельном потоке */
+    void start() {
+        pause = false
+        new Thread (new Runnable() {
+            @Override
+            public void run() {
+                if (BusStopConsts.paintLog) println 'start'
+                while(!pause) {
+                    repaint()
+                    try {
+                        Thread.sleep(PAUSE_MILIS)
+                    } catch (InterruptedException e){}
+                }
+                if (BusStopConsts.paintLog) println 'end start'
+            }
+        }).start()
+    }
+
+    /** Пауза Рисования */
+    void pause() {
+        pause = true
     }
 
 }

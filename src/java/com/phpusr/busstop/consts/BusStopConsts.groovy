@@ -15,7 +15,7 @@ class BusStopConsts {
     /** Вкл/Выкл логирование в Bus */
     static final boolean busLog = 0
     /** Вкл/Выкл логирование в BusStopFrame.paint() */
-    static final boolean paintLog = 0
+    static final boolean paintLog = 1
     /** Вкл/Выкл логирование Статистики Автобусов */
     static final boolean statBusLog = 0
 }

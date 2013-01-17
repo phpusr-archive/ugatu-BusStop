@@ -5,6 +5,8 @@ import com.phpusr.busstop.util.ExitAction;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,8 +19,8 @@ public class ControlFrame extends JFrame {
     private JPanel contentPanel;
     private JPanel pnlTop;
     private JPanel pnlBottom;
-    private JButton стартButton;
-    private JButton стопButton;
+    private JButton btnStart;
+    private JButton btnStop;
     private JButton btnExit;
     private JTable tblStat;
     private JLabel lblImg;
@@ -28,6 +30,9 @@ public class ControlFrame extends JFrame {
     private JLabel lblAllPassengerIn;
     private JLabel lblPassengerIn;
     private BusTableModel model;
+
+    private BusStopFrame busStopFrame;
+    private boolean start = true;
 
     public ControlFrame(String title) {
         super(title);
@@ -39,6 +44,24 @@ public class ControlFrame extends JFrame {
         lblImg.setText("");
 
         initTable();
+        btnStart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (start) {
+                    btnStart.setText("Пауза");
+                    busStopFrame.start();
+                } else {
+                    btnStart.setText("Старт");
+                    busStopFrame.pause();
+                }
+                start = !start;
+            }
+        });
+        btnStop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
     }
 
     void initTable() {
@@ -76,6 +99,10 @@ public class ControlFrame extends JFrame {
     void setPassengerCountIn(int cur, int from, int all) {
         lblPassengerIn.setText(cur + "/" + from);
         lblAllPassengerIn.setText(Integer.toString(all));
+    }
+
+    public void setBusStopFrame(BusStopFrame busStopFrame) {
+        this.busStopFrame = busStopFrame;
     }
 
     public BusTableModel getModel() {
