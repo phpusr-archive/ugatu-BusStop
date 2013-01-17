@@ -21,6 +21,7 @@ public class ControlFrame extends JFrame {
     private JPanel pnlMiddle;
     private JPanel pnlBottom;
     private JButton btnStart;
+    private JButton btnSpeed;
     private JButton btnStop;
     private JButton btnExit;
     private JTable tblStat;
@@ -30,9 +31,11 @@ public class ControlFrame extends JFrame {
     private JLabel lblAllPassengerIn;
     private JLabel lblPassengerIn;
 
+    //TODO комменты
     private BusTableModel model;
     private BusStopFrame busStopFrame;
     private boolean start = true;
+    private int speed = 2;
 
     public ControlFrame(String title) {
         super(title);
@@ -74,10 +77,10 @@ public class ControlFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (start) {
-                    btnStart.setText("Пауза");
+                    btnStart.setText("Пауза"); //TODO вынести
                     busStopFrame.start();
                 } else {
-                    btnStart.setText("Старт");
+                    btnStart.setText("Старт"); //TODO вынести
                     busStopFrame.pause();
                 }
                 start = !start;
@@ -87,9 +90,21 @@ public class ControlFrame extends JFrame {
         btnStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnStart.setText("Старт");
+                btnStart.setText("Старт"); //TODO вынести
                 busStopFrame.stop();
                 start = true;
+            }
+        });
+        //Увеличение скорости в 2 раза (Запускает еще один поток, возможно это НЕ безопасно)
+        btnSpeed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                speed *= 2;
+                btnSpeed.setText("x" + speed); //TODO вынести
+                btnStart.setText("Старт"); //TODO вынести
+                busStopFrame.pause();
+                start = true;
+                //TODO если стоял на пазуе
             }
         });
         //Выход
