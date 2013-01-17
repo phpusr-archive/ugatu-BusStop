@@ -139,7 +139,7 @@ class BusStopFrame extends JFrame {
         //Если автобус уехал за пределы
         if (xPosBus > WIDTH) {
             bus = busParkUtil.randomBus
-            controlFrame.lblImg.icon = new ImageIcon(bus.image)
+            controlFrame.lblImgIcon = new ImageIcon(bus.image)
             xPosBus = -1 * bus.width
         }
 

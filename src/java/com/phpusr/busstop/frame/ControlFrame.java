@@ -18,19 +18,19 @@ import java.awt.event.ActionListener;
 public class ControlFrame extends JFrame {
     private JPanel contentPanel;
     private JPanel pnlTop;
+    private JPanel pnlMiddle;
     private JPanel pnlBottom;
     private JButton btnStart;
     private JButton btnStop;
     private JButton btnExit;
     private JTable tblStat;
     private JLabel lblImg;
-    private JPanel pnlMiddle;
     private JLabel lblPassengerOut;
     private JLabel lblAllPassengerOut;
     private JLabel lblAllPassengerIn;
     private JLabel lblPassengerIn;
-    private BusTableModel model;
 
+    private BusTableModel model;
     private BusStopFrame busStopFrame;
     private boolean start = true;
 
@@ -40,31 +40,14 @@ public class ControlFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
         setVisible(true);
-        btnExit.setAction(new ExitAction(btnExit.getText()));
         lblImg.setText("");
 
         initTable();
-        btnStart.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (start) {
-                    btnStart.setText("Пауза");
-                    busStopFrame.start();
-                } else {
-                    btnStart.setText("Старт");
-                    busStopFrame.pause();
-                }
-                start = !start;
-            }
-        });
-        btnStop.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
+        initListeners();
     }
 
-    void initTable() {
+    /** Инициализация таблицы */
+    private void initTable() {
         model = new BusTableModel();
         model.addColumn("Автобус");
         model.addColumn("Пассажиров");
@@ -84,19 +67,46 @@ public class ControlFrame extends JFrame {
         });
     }
 
+    /** Инициализация слушателей */
+    private void initListeners() {
+        //Старт / Пауза
+        btnStart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (start) {
+                    btnStart.setText("Пауза");
+                    busStopFrame.start();
+                } else {
+                    btnStart.setText("Старт");
+                    busStopFrame.pause();
+                }
+                start = !start;
+            }
+        });
+        //Стоп
+        btnStop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        //Выход
+        btnExit.setAction(new ExitAction(btnExit.getText()));
+    }
+
     /** Установка изображения Автобуса */
-    public void setLblImg(JLabel lblImg) {
-        this.lblImg = lblImg;
+    public void setLblImgIcon(Icon icon) {
+        this.lblImg.setIcon(icon);
     }
 
     /** Установка на форме Вышедших Пассажиров */
-    void setPassengerCountOut(int cur, int from, int all) {
+    public void setPassengerCountOut(int cur, int from, int all) {
         lblPassengerOut.setText(cur + "/" + from);
         lblAllPassengerOut.setText(Integer.toString(all));
     }
 
     /** Установка на форме Севших Пассажиров */
-    void setPassengerCountIn(int cur, int from, int all) {
+    public void setPassengerCountIn(int cur, int from, int all) {
         lblPassengerIn.setText(cur + "/" + from);
         lblAllPassengerIn.setText(Integer.toString(all));
     }
