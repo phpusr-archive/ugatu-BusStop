@@ -43,7 +43,7 @@ public class ImgMover extends Applet implements Runnable {
     public void stop() {
         if (runner != null);
         {
-            runner.stop();
+            //runner.stop(); //Чтобы не было предупреждения о Устаревшем методе
             runner = null;
 
         }
