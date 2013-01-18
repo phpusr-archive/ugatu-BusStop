@@ -49,8 +49,7 @@ class BusStopPanel extends JPanel {
     /** Пауза */
     boolean pause
 
-    BusStopPanel(ControlFrame controlFrame) {
-        this.controlFrame = controlFrame
+    BusStopPanel() {
         init()
         setSize(BusStopConsts.WIDTH, BusStopConsts.HEIGHT)
         setVisible(true)
@@ -130,7 +129,6 @@ class BusStopPanel extends JPanel {
         //Если автобус уехал за пределы
         if (xPosBus > BusStopConsts.WIDTH) {
             bus = busParkUtil.randomBus
-            controlFrame.lblImgIcon = new ImageIcon(bus.image)
             xPosBus = -1 * bus.width
         }
 

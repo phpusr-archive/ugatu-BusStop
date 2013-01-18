@@ -67,10 +67,11 @@ public class ControlFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
         setVisible(true);
-        lblImg.setText("");
 
         initTable();
         initListeners();
+        busStopPanel.setControlFrame(this);
+        busStopPanel.getBusParkUtil().initTblStat(model);
     }
 
     /** Инициализация таблицы */
@@ -120,6 +121,7 @@ public class ControlFrame extends JFrame {
                 btnStart.setText(BusStopConsts.BTN_START_NAME);
                 busStopPanel.stop();
                 showStart = true;
+                busStopPanel.getBusParkUtil().initTblStat(model);
             }
         });
         //Увеличение скорости в 2 раза (Запускает еще один поток, возможно это НЕ безопасно)
@@ -155,10 +157,6 @@ public class ControlFrame extends JFrame {
         lblAllPassengerIn.setText(Integer.toString(all));
     }
 
-    public void setBusStopPanel(BusStopPanel busStopPanel) {
-        this.busStopPanel = busStopPanel;
-    }
-
     public BusTableModel getModel() {
         return model;
     }
@@ -168,7 +166,7 @@ public class ControlFrame extends JFrame {
     }
 
     private void createUIComponents() {
-        pnlBus = new BusStopPanel(this);
+        pnlBus = new BusStopPanel();
         busStopPanel = (BusStopPanel) pnlBus;
     }
 }

@@ -93,8 +93,8 @@ class BusParkUtil {
 
     /** Загрузка начальных значений в таблицу */
     void initTblStat(BusTableModel model) {
-        for (int i=0; i<model.rowCount; i++) {
-            model.removeRow(i)
+        while (model.rowCount > 0) {
+            model.removeRow(0)
         }
         busList.each { bus ->
             def list = [bus.name, bus.passengerCount, bus.freeSeat, bus.passengerCountOut, bus.passengerCountIn]

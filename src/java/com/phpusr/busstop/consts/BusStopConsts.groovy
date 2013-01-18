@@ -33,9 +33,9 @@ class BusStopConsts {
     /** Ширина окна */
     static final int WIDTH = 600
     /** Высота окна */
-    static final int HEIGHT = 600
+    static final int HEIGHT = 500
     /** Y позиция для рисования движения */
-    static final int Y_POS = WIDTH / 3
+    static final int Y_POS = 100
     /** Кол-во увеличения пикселей для показа движения */
     static final int PIXEL_INC = 10
     /** Пауза между кадрами (мс) */
