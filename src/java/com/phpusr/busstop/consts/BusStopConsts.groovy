@@ -28,4 +28,17 @@ class BusStopConsts {
     /* Числовые константы */
     public static final int MIN_SPEED = 2
     public static final int MAX_SPEED = 32
+
+    /* BusStopFrame */
+    /** Ширина окна */
+    static final int WIDTH = 600
+    /** Высота окна */
+    static final int HEIGHT = 600
+    /** Y позиция для рисования движения */
+    static final int Y_POS = WIDTH / 3
+    /** Кол-во увеличения пикселей для показа движения */
+    static final int PIXEL_INC = 10
+    /** Пауза между кадрами (мс) */
+    static final int PAUSE_MILIS = 20
+
 }

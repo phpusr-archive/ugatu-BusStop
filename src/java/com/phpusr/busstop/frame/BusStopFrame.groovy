@@ -21,16 +21,6 @@ import java.awt.image.BufferedImage
  * Форма для отображения симуляции Автобусной остановки
  */
 class BusStopFrame extends JFrame {
-    /** Ширина окна */
-    static final int WIDTH = 600
-    /** Высота окна */
-    static final int HEIGHT = 600
-    /** Y позиция для рисования движения */
-    static final int Y_POS = WIDTH / 3
-    /** Кол-во увеличения пикселей для показа движения */
-    static final int PIXEL_INC = 10
-    /** Пауза между кадрами (мс) */
-    static final int PAUSE_MILIS = 20
 
     /** Координаты рисования Пассажиров */
     int xPosBus, yPosPassenger
@@ -63,14 +53,14 @@ class BusStopFrame extends JFrame {
         super(s)
         this.controlFrame = controlFrame
         init()
-        setSize(WIDTH, HEIGHT)
+        setSize(BusStopConsts.WIDTH, BusStopConsts.HEIGHT)
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
         setVisible(true)
     }
 
     /** Инициализация переменных для Рисования */
     private void init() {
-        scrnBuf = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
+        scrnBuf = new BufferedImage(BusStopConsts.WIDTH, BusStopConsts.HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
         busParkUtil = new BusParkUtil(controlFrame.model)
         drawUtil = new DrawUtil()
@@ -84,13 +74,13 @@ class BusStopFrame extends JFrame {
     /** Функция Рисования */
     void paint(Graphics g) {
         //Рисование фона
-        drawUtil.drawBackground(scrnG, WIDTH, HEIGHT)
+        drawUtil.drawBackground(scrnG, BusStopConsts.WIDTH, BusStopConsts.HEIGHT)
         //Рисование автобуса
-        drawUtil.drawBus(scrnG, bus, xPosBus, Y_POS, this)
+        drawUtil.drawBus(scrnG, bus, xPosBus, BusStopConsts.Y_POS, this)
 
         //Если автобус подъехал к остановке
-        int stopX = WIDTH / 2 - bus.width / 2
-        if (xPosBus >= stopX && xPosBus <= stopX+PIXEL_INC) {
+        int stopX = BusStopConsts.WIDTH / 2 - bus.width / 2
+        if (xPosBus >= stopX && xPosBus <= stopX+BusStopConsts.PIXEL_INC) {
             if (!stop) { //Если зашли в это условие первый раз, то генерируем кол-во входящих пассажиров
                 stopCount++
                 passengerCountOut = Math.round(Math.random() * bus.passengerCount)
@@ -98,7 +88,7 @@ class BusStopFrame extends JFrame {
                 passengerCountIn = Math.round(Math.random() * bus.freeSeat)
                 passengerCountInConst = passengerCountIn
                 out = true
-                yPosPassenger = Y_POS + bus.height/2
+                yPosPassenger = BusStopConsts.Y_POS + bus.height/2
 
                 if (BusStopConsts.busLog) println '-----------------------------------------------------------------------------------'
                 if (BusStopConsts.paintLog) println "$stopCount\t Кол-во выходящих пассажиров: ${passengerCountOut}/$bus.passengerCount,\t\t Кол-во входящих пассажиров: ${passengerCountIn}/$bus.freeSeat"
@@ -110,26 +100,26 @@ class BusStopFrame extends JFrame {
             if (out) { //Анимация выхода пассажиров
                 stop = true
                 if (passengerCountOut > 0) {
-                    drawUtil.drawPassenger(scrnG, (int)WIDTH/2, yPosPassenger)
-                    yPosPassenger += PIXEL_INC
-                    if (yPosPassenger > HEIGHT) { //Пассажир вышел из Автобуса
+                    drawUtil.drawPassenger(scrnG, (int)BusStopConsts.WIDTH/2, yPosPassenger)
+                    yPosPassenger += BusStopConsts.PIXEL_INC
+                    if (yPosPassenger > BusStopConsts.HEIGHT) { //Пассажир вышел из Автобуса
                         passengerCountOut--
                         bus.delPassenger()
-                        yPosPassenger = Y_POS + bus.height/2
+                        yPosPassenger = BusStopConsts.Y_POS + bus.height/2
                         updateBusInfo()
                     }
                 } else {
                     out = false
-                    yPosPassenger = HEIGHT
+                    yPosPassenger = BusStopConsts.HEIGHT
                 }
             } else { //Анимация входа пассажиров
                 if (passengerCountIn > 0) {
-                    drawUtil.drawPassenger(scrnG, (int)WIDTH/2, yPosPassenger)
-                    yPosPassenger -= PIXEL_INC
-                    if (yPosPassenger < Y_POS + bus.height/2) { //Пассажир сел на Автобус
+                    drawUtil.drawPassenger(scrnG, (int)BusStopConsts.WIDTH/2, yPosPassenger)
+                    yPosPassenger -= BusStopConsts.PIXEL_INC
+                    if (yPosPassenger < BusStopConsts.Y_POS + bus.height/2) { //Пассажир сел на Автобус
                         passengerCountIn--
                         bus.addPassenger()
-                        yPosPassenger = HEIGHT
+                        yPosPassenger = BusStopConsts.HEIGHT
                         updateBusInfo()
                     }
                 } else {
@@ -138,9 +128,9 @@ class BusStopFrame extends JFrame {
             }
         }
         //Если автобус не остановлен, то движение автобуса
-        if (!stop) xPosBus += PIXEL_INC
+        if (!stop) xPosBus += BusStopConsts.PIXEL_INC
         //Если автобус уехал за пределы
-        if (xPosBus > WIDTH) {
+        if (xPosBus > BusStopConsts.WIDTH) {
             bus = busParkUtil.randomBus
             controlFrame.lblImgIcon = new ImageIcon(bus.image)
             xPosBus = -1 * bus.width
@@ -169,7 +159,7 @@ class BusStopFrame extends JFrame {
                 while(!pause) {
                     repaint()
                     try {
-                        Thread.sleep(PAUSE_MILIS)
+                        Thread.sleep(BusStopConsts.PAUSE_MILIS)
                     } catch (InterruptedException e){}
                 }
                 if (BusStopConsts.paintLog) println 'end start'
