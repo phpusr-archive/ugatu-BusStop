@@ -23,10 +23,7 @@ class Run {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        ControlFrame controlFrame = new ControlFrame('Bus Stop Simulation Control')
-        //BusStopPanel busStopFrame = new BusStopPanel(controlFrame)
-        //controlFrame.busStopPanel = busStopFrame
-        //busStopPanel.start()
+        new ControlFrame('Bus Stop Simulation Control')
     }
 }
 
