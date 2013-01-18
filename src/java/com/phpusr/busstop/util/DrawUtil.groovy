@@ -20,9 +20,9 @@ class DrawUtil {
 
     /** Рисует задний фон */
     void drawBackground(Graphics g, int width, int height) {
-        g.setColor(Color.white)
+        g.setColor(Color.LIGHT_GRAY)
         g.fillRect(0, 0, width, height)
-        g.setColor(Color.black)
+        g.setColor(Color.BLACK)
     }
 
     /** Рисует Автобус */
