@@ -34,7 +34,7 @@ public class ControlFrame extends JFrame {
     //TODO комменты
     private BusTableModel model;
     private BusStopFrame busStopFrame;
-    private boolean start = true;
+    private boolean showStart = true;
     private int speed = 2;
 
     public ControlFrame(String title) {
@@ -76,14 +76,17 @@ public class ControlFrame extends JFrame {
         btnStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (start) {
-                    btnStart.setText("Пауза"); //TODO вынести
-                    busStopFrame.start();
-                } else {
+                showStart = !showStart;
+                if (showStart) {
+                    speed = 2;
+                    btnSpeed.setText("x" + speed); //TODO вынести
+                    btnSpeed.setEnabled(true);
                     btnStart.setText("Старт"); //TODO вынести
                     busStopFrame.pause();
+                } else {
+                    btnStart.setText("Пауза"); //TODO вынести
+                    busStopFrame.start();
                 }
-                start = !start;
             }
         });
         //Стоп
@@ -92,7 +95,7 @@ public class ControlFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 btnStart.setText("Старт"); //TODO вынести
                 busStopFrame.stop();
-                start = true;
+                showStart = true;
             }
         });
         //Увеличение скорости в 2 раза (Запускает еще один поток, возможно это НЕ безопасно)
@@ -101,10 +104,10 @@ public class ControlFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 speed *= 2;
                 btnSpeed.setText("x" + speed); //TODO вынести
-                btnStart.setText("Старт"); //TODO вынести
-                busStopFrame.pause();
-                start = true;
-                //TODO если стоял на пазуе
+                btnStart.setText("Пауза"); //TODO вынести
+                busStopFrame.start();
+                showStart = false;
+                if (speed >= 32) btnSpeed.setEnabled(false);
             }
         });
         //Выход
