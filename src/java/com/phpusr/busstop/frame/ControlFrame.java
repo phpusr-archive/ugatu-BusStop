@@ -15,26 +15,47 @@ import java.awt.event.ActionListener;
  * Time: 12:24
  * To change this template use File | Settings | File Templates.
  */
-public class ControlFrame extends JFrame {
-    private JPanel contentPanel;
-    private JPanel pnlTop;
-    private JPanel pnlMiddle;
-    private JPanel pnlBottom;
-    private JButton btnStart;
-    private JButton btnSpeed;
-    private JButton btnStop;
-    private JButton btnExit;
-    private JTable tblStat;
-    private JLabel lblImg;
-    private JLabel lblPassengerOut;
-    private JLabel lblAllPassengerOut;
-    private JLabel lblAllPassengerIn;
-    private JLabel lblPassengerIn;
 
-    //TODO комменты
+/**
+ * Форма для управления работой Эмулятора
+ */
+public class ControlFrame extends JFrame {
+    /** Главная панель */
+    private JPanel contentPanel;
+    /** Верхняя панель */
+    private JPanel pnlTop;
+    /** Средняя панель */
+    private JPanel pnlMiddle;
+    /** Нижняя панель */
+    private JPanel pnlBottom;
+    /** Кнопка Старт/Пауза */
+    private JButton btnStart;
+    /** Кнопка увеличения скорости */
+    private JButton btnSpeed;
+    /** Кнопка Стоп */
+    private JButton btnStop;
+    /** Кнопка Выход */
+    private JButton btnExit;
+    /** Таблица со Статистикой */
+    private JTable tblStat;
+    /** Лейбл для изображения Автобуса */
+    private JLabel lblImg;
+    /** Кол-во выходящих Пассажиров */
+    private JLabel lblPassengerOut;
+    /** Кол-во заходящих Пассажиров */
+    private JLabel lblPassengerIn;
+    /** Кол-во всего вышедших Пассажиров */
+    private JLabel lblAllPassengerOut;
+    /** Кол-во всего зашедших Пассажиров */
+    private JLabel lblAllPassengerIn;
+
+    /** Модель для таблицы Статистики */
     private BusTableModel model;
+    /** Форма для Автобусов */
     private BusStopFrame busStopFrame;
+    /** Показывать Старт или Пауза */
     private boolean showStart = true;
+    /** Скорость работы */
     private int speed = 2;
 
     public ControlFrame(String title) {
