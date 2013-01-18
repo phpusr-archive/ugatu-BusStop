@@ -22,18 +22,13 @@ class BusParkUtil {
     /** Список автобусов */
     List<Bus> busList = []
 
-    BusParkUtil(BusTableModel model) {
+    BusParkUtil() {
         int i = 0
         busList << new Bus(i++, 'Pacan',     '57',   20, "$imgPath/Pacan.png")
         busList << new Bus(i++, 'Boxer',     '218',  10, "$imgPath/Boxer.png")
         busList << new Bus(i++, 'Dirty',     '54',   20, "$imgPath/Dirty.png")
         busList << new Bus(i++, 'Feniks',    '214',  10, "$imgPath/Feniks.png")
         busList << new Bus(i++, 'Tn',        '54',   20, "$imgPath/Tn.png")
-
-        busList.each { bus ->
-            def list = [bus.name, bus.passengerCount, bus.freeSeat, bus.passengerCountOut, bus.passengerCountIn]
-            model.addRow(list.toArray())
-        }
     }
 
     /** Возвращает рандомный автобус из списка */
@@ -94,6 +89,17 @@ class BusParkUtil {
         println "Автобус довезший БОЛЬШЕ всех пассажиров:        $maxBus"
         println "Автобус довезший МЕНЬШЕ всех пассажиров:        $minBus"
         println '-------------------------------------------------------------------------------------------------------------------------'
+    }
+
+    /** Загрузка начальных значений в таблицу */
+    void initTblStat(BusTableModel model) {
+        for (int i=0; i<model.rowCount; i++) {
+            model.removeRow(i)
+        }
+        busList.each { bus ->
+            def list = [bus.name, bus.passengerCount, bus.freeSeat, bus.passengerCountOut, bus.passengerCountIn]
+            model.addRow(list.toArray())
+        }
     }
 
     /** Обновлении информации в Таблице Статистики */

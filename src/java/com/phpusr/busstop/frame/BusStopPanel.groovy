@@ -18,9 +18,9 @@ import java.awt.image.BufferedImage
  */
 
 /**
- * Форма для отображения симуляции Автобусной остановки
+ * Панель для отображения симуляции Автобусной остановки
  */
-class BusStopFrame extends JFrame {
+class BusStopPanel extends JPanel {
 
     /** Координаты рисования Пассажиров */
     int xPosBus, yPosPassenger
@@ -49,12 +49,10 @@ class BusStopFrame extends JFrame {
     /** Пауза */
     boolean pause
 
-    BusStopFrame(String s, ControlFrame controlFrame) {
-        super(s)
+    BusStopPanel(ControlFrame controlFrame) {
         this.controlFrame = controlFrame
         init()
         setSize(BusStopConsts.WIDTH, BusStopConsts.HEIGHT)
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
         setVisible(true)
     }
 
@@ -62,7 +60,7 @@ class BusStopFrame extends JFrame {
     private void init() {
         scrnBuf = new BufferedImage(BusStopConsts.WIDTH, BusStopConsts.HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
-        busParkUtil = new BusParkUtil(controlFrame.model)
+        busParkUtil = new BusParkUtil()
         drawUtil = new DrawUtil()
         bus = busParkUtil.randomBus
         xPosBus = -1 * bus.width

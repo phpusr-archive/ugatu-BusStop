@@ -15,7 +15,7 @@ class BusStopConsts {
     /* Логирование */
     /** Вкл/Выкл логирование в Bus */
     static final boolean busLog = 0
-    /** Вкл/Выкл логирование в BusStopFrame.paint() */
+    /** Вкл/Выкл логирование в BusStopPanel.paint() */
     static final boolean paintLog = 1
     /** Вкл/Выкл логирование Статистики Автобусов */
     static final boolean statBusLog = 0
@@ -29,7 +29,7 @@ class BusStopConsts {
     public static final int MIN_SPEED = 2
     public static final int MAX_SPEED = 32
 
-    /* BusStopFrame */
+    /* BusStopPanel */
     /** Ширина окна */
     static final int WIDTH = 600
     /** Высота окна */

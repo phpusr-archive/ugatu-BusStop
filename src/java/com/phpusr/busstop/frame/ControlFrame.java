@@ -49,11 +49,13 @@ public class ControlFrame extends JFrame {
     private JLabel lblAllPassengerOut;
     /** Кол-во всего зашедших Пассажиров */
     private JLabel lblAllPassengerIn;
+    /** TODO */
+    private JPanel pnlBus;
 
     /** Модель для таблицы Статистики */
     private BusTableModel model;
     /** Форма для Автобусов */
-    private BusStopFrame busStopFrame;
+    private BusStopPanel busStopPanel;
     /** Показывать Старт или Пауза */
     private boolean showStart = true;
     /** Скорость работы */
@@ -104,10 +106,10 @@ public class ControlFrame extends JFrame {
                     btnSpeed.setText(BusStopConsts.BTN_SPEED_NAME + speed);
                     btnSpeed.setEnabled(true);
                     btnStart.setText(BusStopConsts.BTN_START_NAME);
-                    busStopFrame.pause();
+                    busStopPanel.pause();
                 } else {
                     btnStart.setText(BusStopConsts.BTN_PAUSE_NAME);
-                    busStopFrame.start();
+                    busStopPanel.start();
                 }
             }
         });
@@ -116,7 +118,7 @@ public class ControlFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnStart.setText(BusStopConsts.BTN_START_NAME);
-                busStopFrame.stop();
+                busStopPanel.stop();
                 showStart = true;
             }
         });
@@ -128,7 +130,7 @@ public class ControlFrame extends JFrame {
                 btnSpeed.setText(BusStopConsts.BTN_SPEED_NAME + speed);
                 btnStart.setText(BusStopConsts.BTN_PAUSE_NAME);
                 if (speed >= BusStopConsts.MAX_SPEED) btnSpeed.setEnabled(false);
-                busStopFrame.start();
+                busStopPanel.start();
                 showStart = false;
             }
         });
@@ -153,8 +155,8 @@ public class ControlFrame extends JFrame {
         lblAllPassengerIn.setText(Integer.toString(all));
     }
 
-    public void setBusStopFrame(BusStopFrame busStopFrame) {
-        this.busStopFrame = busStopFrame;
+    public void setBusStopPanel(BusStopPanel busStopPanel) {
+        this.busStopPanel = busStopPanel;
     }
 
     public BusTableModel getModel() {
@@ -163,5 +165,10 @@ public class ControlFrame extends JFrame {
 
     public JTable getTblStat() {
         return tblStat;
+    }
+
+    private void createUIComponents() {
+        pnlBus = new BusStopPanel(this);
+        busStopPanel = (BusStopPanel) pnlBus;
     }
 }

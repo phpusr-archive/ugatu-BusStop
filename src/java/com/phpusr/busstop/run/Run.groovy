@@ -1,6 +1,5 @@
 package com.phpusr.busstop.run
 
-import com.phpusr.busstop.frame.BusStopFrame
 import com.phpusr.busstop.frame.ControlFrame
 
 import javax.swing.*
@@ -25,9 +24,9 @@ class Run {
             e1.printStackTrace();
         }
         ControlFrame controlFrame = new ControlFrame('Bus Stop Simulation Control')
-        BusStopFrame busStopFrame = new BusStopFrame('Bus Stop Simulation', controlFrame)
-        controlFrame.busStopFrame = busStopFrame
-        //busStopFrame.start()
+        //BusStopPanel busStopFrame = new BusStopPanel(controlFrame)
+        //controlFrame.busStopPanel = busStopFrame
+        //busStopPanel.start()
     }
 }
 
