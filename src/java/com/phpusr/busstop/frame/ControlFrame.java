@@ -1,5 +1,6 @@
 package com.phpusr.busstop.frame;
 
+import com.phpusr.busstop.consts.BusStopConsts;
 import com.phpusr.busstop.util.ExitAction;
 
 import javax.swing.*;
@@ -56,7 +57,7 @@ public class ControlFrame extends JFrame {
     /** Показывать Старт или Пауза */
     private boolean showStart = true;
     /** Скорость работы */
-    private int speed = 2;
+    private int speed = BusStopConsts.MIN_SPEED;
 
     public ControlFrame(String title) {
         super(title);
@@ -99,13 +100,13 @@ public class ControlFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 showStart = !showStart;
                 if (showStart) {
-                    speed = 2;
-                    btnSpeed.setText("x" + speed); //TODO вынести
+                    speed = BusStopConsts.MIN_SPEED;
+                    btnSpeed.setText(BusStopConsts.BTN_SPEED_NAME + speed);
                     btnSpeed.setEnabled(true);
-                    btnStart.setText("Старт"); //TODO вынести
+                    btnStart.setText(BusStopConsts.BTN_START_NAME);
                     busStopFrame.pause();
                 } else {
-                    btnStart.setText("Пауза"); //TODO вынести
+                    btnStart.setText(BusStopConsts.BTN_PAUSE_NAME);
                     busStopFrame.start();
                 }
             }
@@ -114,7 +115,7 @@ public class ControlFrame extends JFrame {
         btnStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnStart.setText("Старт"); //TODO вынести
+                btnStart.setText(BusStopConsts.BTN_START_NAME);
                 busStopFrame.stop();
                 showStart = true;
             }
@@ -124,11 +125,11 @@ public class ControlFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 speed *= 2;
-                btnSpeed.setText("x" + speed); //TODO вынести
-                btnStart.setText("Пауза"); //TODO вынести
+                btnSpeed.setText(BusStopConsts.BTN_SPEED_NAME + speed);
+                btnStart.setText(BusStopConsts.BTN_PAUSE_NAME);
+                if (speed >= BusStopConsts.MAX_SPEED) btnSpeed.setEnabled(false);
                 busStopFrame.start();
                 showStart = false;
-                if (speed >= 32) btnSpeed.setEnabled(false);
             }
         });
         //Выход
