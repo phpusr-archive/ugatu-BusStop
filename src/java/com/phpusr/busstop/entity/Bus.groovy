@@ -42,7 +42,7 @@ class Bus {
     }
 
     Bus() {
-        this(1, 'Test', '777', 10, '../img/bus/Pacan.png')
+        this(1, 'Test', '777', 10, "$BusStopConsts.BUS_IMG_PATH/Pacan.png")
     }
 
     void setImage(String path) {

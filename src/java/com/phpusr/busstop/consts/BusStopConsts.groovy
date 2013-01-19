@@ -43,4 +43,12 @@ class BusStopConsts {
     /** Пауза между кадрами (мс) */
     static final int PAUSE_MILIS = 20
 
+    /* Пути */
+    /** Относительный путь к папке с ихображениями */
+    static final String IMG_PATH = '../img'
+    /** Путь к папке с ихображениями Автобусов */
+    static final String BUS_IMG_PATH = "$IMG_PATH/bus"
+    /** Путь к папке с ихображениями Фонов */
+    static final String BG_IMG_PATH = "$IMG_PATH/bg"
+
 }

@@ -1,5 +1,6 @@
 package com.phpusr.busstop.util
 
+import com.phpusr.busstop.consts.BusStopConsts
 import com.phpusr.busstop.entity.Bus
 import com.phpusr.busstop.frame.BusTableModel
 
@@ -17,25 +18,25 @@ import javax.swing.*
  * Утилита для работы с Автобусами
  */
 class BusParkUtil {
-    /** Относительный путь к папке с ихображениями Автобусов */
-    static final String imgPath = '../img/bus'
+    /** Путь к папке с ихображениями Автобусов */
+    static final String BUS_IMG_PATH = BusStopConsts.BUS_IMG_PATH
     /** Список автобусов */
     List<Bus> busList = []
 
     BusParkUtil() {
         int i = 0
-        busList << new Bus(i++, 'Pacan',     '57',   20, "$imgPath/Pacan.png")
-        busList << new Bus(i++, 'Boxer',     '218',  10, "$imgPath/Boxer.png")
-        busList << new Bus(i++, 'Dirty',     '54',   20, "$imgPath/Dirty.png")
-        busList << new Bus(i++, 'Feniks',    '214',  10, "$imgPath/Feniks.png")
-        busList << new Bus(i++, 'Tn',        '54',   20, "$imgPath/Tn.png")
-        busList << new Bus(i++, 'Yellow',    '39',   15, "$imgPath/Yellow.png")
-        busList << new Bus(i++, 'White',     '101',  15, "$imgPath/White.png")
-        busList << new Bus(i++, 'Van',       '269',  10, "$imgPath/Van.png")
-        busList << new Bus(i++, 'Merc',      '266',  10, "$imgPath/Merc.png")
-        busList << new Bus(i++, 'TwoFloor',  '110',  40, "$imgPath/TwoFloor.png")
-        busList << new Bus(i++, 'Green',     '130',  20, "$imgPath/Green.png")
-        busList << new Bus(i++, 'GAZ',       '243',   15, "$imgPath/GAZ.png")
+        busList << new Bus(i++, 'Pacan',     '57',   20, "$BUS_IMG_PATH/Pacan.png")
+        busList << new Bus(i++, 'Boxer',     '218',  10, "$BUS_IMG_PATH/Boxer.png")
+        busList << new Bus(i++, 'Dirty',     '54',   20, "$BUS_IMG_PATH/Dirty.png")
+        busList << new Bus(i++, 'Feniks',    '214',  10, "$BUS_IMG_PATH/Feniks.png")
+        busList << new Bus(i++, 'Tn',        '54',   20, "$BUS_IMG_PATH/Tn.png")
+        busList << new Bus(i++, 'Yellow',    '39',   15, "$BUS_IMG_PATH/Yellow.png")
+        busList << new Bus(i++, 'White',     '101',  15, "$BUS_IMG_PATH/White.png")
+        busList << new Bus(i++, 'Van',       '269',  10, "$BUS_IMG_PATH/Van.png")
+        busList << new Bus(i++, 'Merc',      '266',  10, "$BUS_IMG_PATH/Merc.png")
+        busList << new Bus(i++, 'TwoFloor',  '110',  40, "$BUS_IMG_PATH/TwoFloor.png")
+        busList << new Bus(i++, 'Green',     '130',  20, "$BUS_IMG_PATH/Green.png")
+        busList << new Bus(i++, 'GAZ',       '243',   15, "$BUS_IMG_PATH/GAZ.png")
     }
 
     /** Возвращает рандомный автобус из списка */
