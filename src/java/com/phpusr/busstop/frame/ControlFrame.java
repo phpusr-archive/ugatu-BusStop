@@ -49,12 +49,16 @@ public class ControlFrame extends JFrame {
     private JLabel lblAllPassengerOut;
     /** Кол-во всего зашедших Пассажиров */
     private JLabel lblAllPassengerIn;
-    /** TODO */
+    /** Кол-во всего вышедших Пассажиров (все Автобусы) */
+    private JLabel lblAllBusPassengerOut;
+    /** Кол-во всего зашедших Пассажиров (все Автобусы) */
+    private JLabel lblAllBusPassengerIn;
+    /** Панель для Автобусов */
     private JPanel pnlBus;
 
     /** Модель для таблицы Статистики */
     private BusTableModel model;
-    /** Форма для Автобусов */
+    /** Кастомная Панель для Автобусов */
     private BusStopPanel busStopPanel;
     /** Показывать Старт или Пауза */
     private boolean showStart = true;
@@ -81,7 +85,7 @@ public class ControlFrame extends JFrame {
         model.addColumn("Пассажиров");
         model.addColumn("Свободных мест");
         model.addColumn("Всего вышло");
-        model.addColumn("Всего село");
+        model.addColumn("Всего зашло");
         tblStat.setModel(model);
 
         //Установка для таблицы кастомного Рисовальщика ячеек
@@ -146,15 +150,17 @@ public class ControlFrame extends JFrame {
     }
 
     /** Установка на форме Вышедших Пассажиров */
-    public void setPassengerCountOut(int cur, int from, int all) {
+    public void setPassengerCountOut(int cur, int from, int all, int allBus) {
         lblPassengerOut.setText(cur + "/" + from);
         lblAllPassengerOut.setText(Integer.toString(all));
+        lblAllBusPassengerOut.setText(Integer.toString(allBus));
     }
 
     /** Установка на форме Севших Пассажиров */
-    public void setPassengerCountIn(int cur, int from, int all) {
+    public void setPassengerCountIn(int cur, int from, int all, int allBus) {
         lblPassengerIn.setText(cur + "/" + from);
         lblAllPassengerIn.setText(Integer.toString(all));
+        lblAllBusPassengerIn.setText(Integer.toString(allBus));
     }
 
     public BusTableModel getModel() {

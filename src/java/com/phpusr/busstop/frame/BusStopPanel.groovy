@@ -138,8 +138,8 @@ class BusStopPanel extends JPanel {
 
     /** Срабатывает при Изменении свойств в Автобусе */
     private updateBusInfo() {
-        controlFrame.setPassengerCountOut(passengerCountOutConst - passengerCountOut, passengerCountOutConst, bus.passengerCountOut)
-        controlFrame.setPassengerCountIn(passengerCountInConst - passengerCountIn, passengerCountInConst, bus.passengerCountIn)
+        controlFrame.setPassengerCountOut(passengerCountOutConst - passengerCountOut, passengerCountOutConst, bus.passengerCountOut, busParkUtil.allPassengerOutCount)
+        controlFrame.setPassengerCountIn(passengerCountInConst - passengerCountIn, passengerCountInConst, bus.passengerCountIn, busParkUtil.allPassengerInCount)
         busParkUtil.updateTblStat(controlFrame.tblStat, controlFrame.model, bus)
     }
 
