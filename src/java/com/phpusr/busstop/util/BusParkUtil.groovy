@@ -29,6 +29,13 @@ class BusParkUtil {
         busList << new Bus(i++, 'Dirty',     '54',   20, "$imgPath/Dirty.png")
         busList << new Bus(i++, 'Feniks',    '214',  10, "$imgPath/Feniks.png")
         busList << new Bus(i++, 'Tn',        '54',   20, "$imgPath/Tn.png")
+        busList << new Bus(i++, 'Yellow',    '39',   15, "$imgPath/Yellow.png")
+        busList << new Bus(i++, 'White',     '101',  15, "$imgPath/White.png")
+        busList << new Bus(i++, 'Van',       '269',  10, "$imgPath/Van.png")
+        busList << new Bus(i++, 'Merc',      '266',  10, "$imgPath/Merc.png")
+        busList << new Bus(i++, 'TwoFloor',  '110',  40, "$imgPath/TwoFloor.png")
+        busList << new Bus(i++, 'Green',     '130',  20, "$imgPath/Green.png")
+        busList << new Bus(i++, 'GAZ',       '243',   15, "$imgPath/GAZ.png")
     }
 
     /** Возвращает рандомный автобус из списка */
