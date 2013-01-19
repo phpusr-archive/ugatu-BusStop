@@ -71,7 +71,7 @@ class BusStopPanel extends JPanel {
     /** Функция Рисования */
     void paint(Graphics g) {
         //Рисование фона
-        drawUtil.drawBackground(scrnG, BusStopConsts.WIDTH, BusStopConsts.HEIGHT)
+        drawUtil.drawBackground(scrnG, BusStopConsts.WIDTH, BusStopConsts.HEIGHT, this)
         //Рисование автобуса
         drawUtil.drawBus(scrnG, bus, xPosBus, BusStopConsts.Y_POS, this)
 

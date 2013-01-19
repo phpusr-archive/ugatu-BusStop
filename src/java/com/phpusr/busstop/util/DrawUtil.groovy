@@ -1,7 +1,9 @@
 package com.phpusr.busstop.util
 
+import com.phpusr.busstop.consts.BusStopConsts
 import com.phpusr.busstop.entity.Bus
 
+import javax.imageio.ImageIO
 import java.awt.*
 import java.awt.image.ImageObserver
 
@@ -19,10 +21,17 @@ import java.awt.image.ImageObserver
 class DrawUtil {
 
     /** Рисует задний фон */
-    void drawBackground(Graphics g, int width, int height) {
+    void drawBackground(Graphics g, int width, int height, ImageObserver ioServer) {
+        //Заливка
         g.setColor(Color.LIGHT_GRAY)
         g.fillRect(0, 0, width, height)
         g.setColor(Color.BLACK)
+
+        //Картинка
+        URL url = Bus.class.getResource("$BusStopConsts.BG_IMG_PATH/BG.png")
+        Image image = ImageIO.read(url)
+
+        g.drawImage(image, 0, 0, ioServer)
     }
 
     /** Рисует Автобус */
