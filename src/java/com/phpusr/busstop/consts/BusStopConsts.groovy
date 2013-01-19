@@ -28,10 +28,12 @@ class BusStopConsts {
     /* Числовые константы */
     public static final int MIN_SPEED = 2
     public static final int MAX_SPEED = 32
+    public static final int CF_WIDTH = 1200
+    public static final int CF_HEIGHT = 600
 
     /* BusStopPanel */
     /** Ширина окна */
-    static final int WIDTH = 600
+    static final int WIDTH = 700
     /** Высота окна */
     static final int HEIGHT = 500
     /** Y позиция для рисования движения */

@@ -65,7 +65,7 @@ public class ControlFrame extends JFrame {
         super(title);
         setContentPane(contentPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 600);
+        setSize(BusStopConsts.CF_WIDTH, BusStopConsts.CF_HEIGHT);
         setVisible(true);
 
         initTable();
