@@ -151,6 +151,7 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <icon value="com/phpusr/busstop/img/btn/start.png"/>
               <text value="Старт"/>
             </properties>
           </component>
@@ -159,15 +160,8 @@
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <icon value="com/phpusr/busstop/img/btn/stop.png"/>
               <text value="Стоп"/>
-            </properties>
-          </component>
-          <component id="13a7d" class="javax.swing.JButton" binding="btnExit">
-            <constraints>
-              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Выход"/>
             </properties>
           </component>
           <component id="cab8b" class="javax.swing.JButton" binding="btnSpeed">
@@ -175,7 +169,17 @@
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <icon value="com/phpusr/busstop/img/btn/x2.png"/>
               <text value="x2"/>
+            </properties>
+          </component>
+          <component id="4d6c6" class="javax.swing.JButton" binding="btnExit">
+            <constraints>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <icon value="com/phpusr/busstop/img/btn/quit.png"/>
+              <text value="Выход"/>
             </properties>
           </component>
         </children>

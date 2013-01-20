@@ -104,7 +104,6 @@ public class ControlFrame extends JFrame {
     private void initListeners() {
         //Старт / Пауза
         btnStart.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 showStart = !showStart;
                 if (showStart) {
@@ -121,7 +120,6 @@ public class ControlFrame extends JFrame {
         });
         //Стоп
         btnStop.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 btnStart.setText(BusStopConsts.BTN_START_NAME);
                 busStopPanel.stop();
@@ -131,7 +129,6 @@ public class ControlFrame extends JFrame {
         });
         //Увеличение скорости в 2 раза (Запускает еще один поток, возможно это НЕ безопасно)
         btnSpeed.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 speed *= 2;
                 btnSpeed.setText(BusStopConsts.BTN_SPEED_NAME + speed);
@@ -142,12 +139,11 @@ public class ControlFrame extends JFrame {
             }
         });
         //Выход
-        btnExit.setAction(new ExitAction(btnExit.getText()));
-    }
-
-    /** Установка изображения Автобуса */
-    public void setLblImgIcon(Icon icon) {
-        this.lblImg.setIcon(icon);
+        btnExit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
 
     /** Установка на форме Вышедших Пассажиров */
