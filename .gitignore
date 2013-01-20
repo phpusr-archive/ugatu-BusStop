@@ -1,3 +1,6 @@
 /.idea
 /.gradle
 /out
+
+/doc/release/*.docx
+/doc/release/*.jar
