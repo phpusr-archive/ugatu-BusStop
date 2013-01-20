@@ -28,9 +28,8 @@ class DrawUtil {
         g.setColor(Color.BLACK)
 
         //Картинка
-        URL url = Bus.class.getResource("$BusStopConsts.BG_IMG_PATH/BG.png")
+        URL url = DrawUtil.class.getResource("$BusStopConsts.BG_IMG_PATH/BG.png")
         Image image = ImageIO.read(url)
-
         g.drawImage(image, 0, 0, ioServer)
     }
 
