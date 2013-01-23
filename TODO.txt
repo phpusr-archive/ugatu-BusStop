@@ -1,4 +1,4 @@
 
 Сделать людей
 
-jar gredli
+jar gredli - дня 2-3 мучился, но то Груви не видит Ява, то наоборот, подробнее в "d:\Java\gradle\HelloWorld"
