@@ -1,11 +1,33 @@
 apply plugin:'groovy'
 
+configurations {
+    javac2
+}
+
 repositories {
     mavenCentral()
+    ivy {
+        artifactPattern "http://www.nurflugel.com/Home/repository/[organisation]/[module]/[revision]/[artifact]-[revision].[type]"
+        ivyPattern      "http://www.nurflugel.com/Home/repository/[organisation]/[module]/[revision]/[artifact]-[revision].ivy.xml"
+    }
 }
 
 dependencies {
-    groovy group: 'org.codehaus.groovy', name: 'groovy', version: '1.7.10'
+    groovy group: 'org.codehaus.groovy', name: 'groovy-all', version: '1.8.6'
+    def libraryVersions = [
+            forms_rt:       '11.0.3',
+            intellij:       '11.0.3',
+            javac2asm:      '3.3.1',
+            jdom:           '1.0'
+    ]
+
+    javac2 'com.intellij:javac2:'+                   libraryVersions.intellij,
+            'com.intellij:annotations:'+              libraryVersions.intellij,
+            'asm:asm-commons:'+                       libraryVersions.javac2asm,
+            'asm:asm-parent:'+                        libraryVersions.javac2asm,
+            'org.jdom:jdom:'+                         libraryVersions.jdom
+
+    runtime 'com.intellij:forms_rt:'+              libraryVersions.forms_rt
 }
 
 sourceSets {
@@ -18,6 +40,72 @@ sourceSets {
 
 jar {
     manifest {
-        attributes("Class-Path": 'groovy-all-1.8.6.jar', "Main-Class": 'com.phpusr.busstop.run.Run')
+        attributes("Class-Path": 'groovy-all-1.8.6.jar forms_rt.jar', "Main-Class": 'com.phpusr.busstop.run.Run')
+    }
+}
+
+task compileGroovy(overwrite: true) << {
+
+    def theDir = file("${project.buildDir.path}/classes/main")
+    //make any source dirs needed for the output
+    theDir.mkdirs()
+
+    def mainSrcDir = "${projectDir}/src"
+    def classpath = configurations.compile.asPath
+    def destDir = "${projectDir}/build/classes/main"
+    def includeAntRuntime = false
+
+    ant {
+        taskdef(name: 'groovyc',
+                classname: 'org.codehaus.groovy.ant.Groovyc',
+                classpath: configurations.groovy.asPath)
+
+        groovyc(srcdir: mainSrcDir,
+                classpath: classpath,
+                destdir: destDir,
+                includeAntRuntime: includeAntRuntime,
+        )
+    }
+
+}
+
+task compileJava (overwrite: true) << {
+
+    def theDir = file("${project.buildDir.path}/classes/main")
+    //make any source dirs needed for the output
+    theDir.mkdirs()
+
+    def mainSrcDir = "${projectDir}/src"
+    def destDir = "${projectDir}/build/classes/main"
+    def javaSoureCompatibility = sourceCompatibility
+    def javaTargetCompatibility = targetCompatibility
+    def optimize = "off"
+    def deprecation = "off"
+    def includeAntRuntime = false
+    def javaDeprecation = deprecation
+    def debugLevel = "lines,vars,source"
+    def debug = "on"
+    def classpath = configurations.compile.asPath
+
+    compileJavac2(mainSrcDir, classpath, destDir, debug, debugLevel, javaDeprecation, includeAntRuntime, optimize, javaSoureCompatibility, javaTargetCompatibility)
+}
+
+private void compileJavac2(mainSrcDir, classpath, destDir, debug, debugLevel, deprecation, includeAntRuntime, optimize, sourceCompatibility, targetCompatibility) {
+    ant {
+        taskdef(name: 'javac2',
+                classname: 'com.intellij.ant.Javac2',
+                classpath: configurations.javac2.asPath)
+
+        javac2(srcdir: mainSrcDir,
+                classpath: classpath,
+                destdir: destDir,
+                debug: debug,
+                debugLevel: debugLevel,
+                deprecation: deprecation,
+                includeAntRuntime: includeAntRuntime,
+                optimize: optimize,
+                source: sourceCompatibility,
+                target: targetCompatibility
+        )
     }
 }
