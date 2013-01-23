@@ -51,31 +51,6 @@ task compileGroovy(overwrite: true) << {
     theDir.mkdirs()
 
     def mainSrcDir = "${projectDir}/src"
-    def classpath = configurations.compile.asPath
-    def destDir = "${projectDir}/build/classes/main"
-    def includeAntRuntime = false
-
-    ant {
-        taskdef(name: 'groovyc',
-                classname: 'org.codehaus.groovy.ant.Groovyc',
-                classpath: configurations.groovy.asPath)
-
-        groovyc(srcdir: mainSrcDir,
-                classpath: classpath,
-                destdir: destDir,
-                includeAntRuntime: includeAntRuntime,
-        )
-    }
-
-}
-
-task compileJava (overwrite: true) << {
-
-    def theDir = file("${project.buildDir.path}/classes/main")
-    //make any source dirs needed for the output
-    theDir.mkdirs()
-
-    def mainSrcDir = "${projectDir}/src"
     def destDir = "${projectDir}/build/classes/main"
     def javaSoureCompatibility = sourceCompatibility
     def javaTargetCompatibility = targetCompatibility
@@ -88,6 +63,8 @@ task compileJava (overwrite: true) << {
     def classpath = configurations.compile.asPath
 
     compileJavac2(mainSrcDir, classpath, destDir, debug, debugLevel, javaDeprecation, includeAntRuntime, optimize, javaSoureCompatibility, javaTargetCompatibility)
+    compileGroovyc(mainSrcDir, classpath, destDir, includeAntRuntime)
+    //classpath += ';' + destDir
 }
 
 private void compileJavac2(mainSrcDir, classpath, destDir, debug, debugLevel, deprecation, includeAntRuntime, optimize, sourceCompatibility, targetCompatibility) {
@@ -106,6 +83,20 @@ private void compileJavac2(mainSrcDir, classpath, destDir, debug, debugLevel, de
                 optimize: optimize,
                 source: sourceCompatibility,
                 target: targetCompatibility
+        )
+    }
+}
+
+private void compileGroovyc(mainSrcDir, classpath, destDir, includeAntRuntime) {
+    ant {
+        taskdef(name: 'groovyc',
+                classname: 'org.codehaus.groovy.ant.Groovyc',
+                classpath: configurations.groovy.asPath)
+
+        groovyc(srcdir: mainSrcDir,
+                classpath: classpath,
+                destdir: destDir,
+                includeAntRuntime: includeAntRuntime,
         )
     }
 }
