@@ -1,6 +1,7 @@
 /.idea
 /.gradle
 /out
+/build
 
 /release/*.docx
 /release/*.jar
