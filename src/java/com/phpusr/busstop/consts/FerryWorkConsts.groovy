@@ -33,7 +33,7 @@ class FerryWorkConsts {
 
     /* FerryWorkPanel */
     /** Ширина окна */
-    static final int WIDTH = 700
+    static final int WIDTH = 1200
     /** Высота окна */
     static final int HEIGHT = 500
     /** Y позиция для рисования движения */
@@ -42,6 +42,10 @@ class FerryWorkConsts {
     static final int PIXEL_INC = 10
     /** Пауза между кадрами (мс) */
     static final int PAUSE_MILIS = 20
+    /** Ширина причала */
+    static final int BERTH_WIDTH = 100
+    /** Для аниации посадки Пассажиров */
+    static final int DELTA = 50
 
     /* Пути */
     /** Относительный путь к папке с ихображениями */

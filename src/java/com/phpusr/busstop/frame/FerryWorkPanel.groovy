@@ -64,7 +64,7 @@ class FerryWorkPanel extends JPanel {
         ferryUtil = new FerryUtil()
         drawUtil = new DrawUtil()
         ferry = ferryUtil.randomFerry
-        xPosFerry = 0
+        xPosFerry = FerryWorkConsts.BERTH_WIDTH
 
         stop = false
         out = true
@@ -87,10 +87,10 @@ class FerryWorkPanel extends JPanel {
             }
         }
         //Если Паром на Причалах
-        if (!pause && (xPosFerry <= 0 || xPosFerry >= FerryWorkConsts.WIDTH-ferry.width)) {
+        if (!pause && (xPosFerry <= FerryWorkConsts.BERTH_WIDTH || xPosFerry >= FerryWorkConsts.WIDTH-FerryWorkConsts.BERTH_WIDTH-ferry.width)) {
             if (!stop) { //Если зашли в это условие первый раз, то генерируем кол-во входящих пассажиров
                 revers = !revers
-                xPosPassenger = revers ? FerryWorkConsts.WIDTH-ferry.width/2 : ferry.width/2
+                xPosPassenger = getPassengerStartOutPos()
                 stopCount++
                 passengerCountOut = Math.round(Math.random() * ferry.passengerCount)
                 passengerCountOutConst = passengerCountOut
@@ -114,7 +114,7 @@ class FerryWorkPanel extends JPanel {
                     if (revers && xPosPassenger > FerryWorkConsts.WIDTH || !revers && xPosPassenger < 0) { //Пассажир вышел из Парома
                         passengerCountOut--
                         ferry.delPassenger()
-                        xPosPassenger = revers ? FerryWorkConsts.WIDTH-ferry.width/2 : ferry.width/2
+                        xPosPassenger = getPassengerStartOutPos()
                         updateFerryInfo()
                     }
                 } else {
@@ -125,7 +125,7 @@ class FerryWorkPanel extends JPanel {
                 if (passengerCountIn > 0) {
                     drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/3)
                     xPosPassenger = revers ? xPosPassenger - FerryWorkConsts.PIXEL_INC : xPosPassenger + FerryWorkConsts.PIXEL_INC
-                    if (revers && xPosPassenger < FerryWorkConsts.WIDTH-ferry.width/2 || !revers && xPosPassenger > ferry.width/2) { //Пассажир сел на Паром
+                    if (revers && xPosPassenger < FerryWorkConsts.WIDTH-ferry.width/2-FerryWorkConsts.DELTA || !revers && xPosPassenger > ferry.width/2+FerryWorkConsts.DELTA) { //Пассажир сел на Паром
                         passengerCountIn--
                         ferry.addPassenger()
                         xPosPassenger = revers ? FerryWorkConsts.WIDTH : 0
@@ -139,6 +139,13 @@ class FerryWorkPanel extends JPanel {
 
         //Рисование на форме изображения из буфера
         g.drawImage(scrnBuf, 0, 0, this)
+    }
+
+    /**
+     * Возвращает начальную позицию для выхода Пассажиров
+     */
+    int getPassengerStartOutPos() {
+        return revers ? FerryWorkConsts.WIDTH-ferry.width/2-FerryWorkConsts.DELTA : ferry.width/2+FerryWorkConsts.DELTA
     }
 
     /** Срабатывает при Изменении свойств в Парома */
