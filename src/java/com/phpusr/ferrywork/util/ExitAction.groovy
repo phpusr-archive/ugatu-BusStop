@@ -1,4 +1,4 @@
-package com.phpusr.busstop.util
+package com.phpusr.ferrywork.util
 
 import javax.swing.*
 import java.awt.*

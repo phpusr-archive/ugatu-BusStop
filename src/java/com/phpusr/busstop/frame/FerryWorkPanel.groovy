@@ -1,9 +1,9 @@
 package com.phpusr.busstop.frame
 
-import com.phpusr.busstop.util.DrawUtil
-import com.phpusr.busstop.util.FerryUtil
 import com.phpusr.ferrywork.consts.FerryWorkConsts
 import com.phpusr.ferrywork.entity.Ferry
+import com.phpusr.ferrywork.util.DrawUtil
+import com.phpusr.ferrywork.util.FerryUtil
 
 import javax.swing.*
 import java.awt.*
