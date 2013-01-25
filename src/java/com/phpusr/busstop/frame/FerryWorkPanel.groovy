@@ -37,8 +37,8 @@ class FerryWorkPanel extends JPanel {
     FerryUtil busParkUtil
     /** Утилита для рисования объектов */
     DrawUtil drawUtil
-    /** Текущий Автобус */
-    Ferry bus
+    /** Паром */
+    Ferry ferry
     /** Форма управления */
     ControlFrame controlFrame
 
@@ -63,7 +63,7 @@ class FerryWorkPanel extends JPanel {
         scrnG = scrnBuf.getGraphics()
         busParkUtil = new FerryUtil()
         drawUtil = new DrawUtil()
-        bus = busParkUtil.randomBus
+        ferry = busParkUtil.randomBus
         xPosBus = 0
 
         stop = false
@@ -76,7 +76,7 @@ class FerryWorkPanel extends JPanel {
         //Рисование фона
         drawUtil.drawBackground(scrnG, FerryWorkConsts.WIDTH, FerryWorkConsts.HEIGHT, this)
         //Рисование автобуса
-        drawUtil.drawBus(scrnG, bus, xPosBus, FerryWorkConsts.Y_POS, this)
+        drawUtil.drawBus(scrnG, ferry, xPosBus, FerryWorkConsts.Y_POS, this)
 
         //Если автобус не остановлен, то движение автобуса
         if (!stop) {
@@ -87,19 +87,19 @@ class FerryWorkPanel extends JPanel {
             }
         }
         //Если автобус уехал за пределы
-        if (xPosBus <= 0 || xPosBus >= FerryWorkConsts.WIDTH-bus.width) {
+        if (xPosBus <= 0 || xPosBus >= FerryWorkConsts.WIDTH-ferry.width) {
             if (!stop) { //Если зашли в это условие первый раз, то генерируем кол-во входящих пассажиров
                 revers = !revers
                 stopCount++
-                passengerCountOut = Math.round(Math.random() * bus.passengerCount)
+                passengerCountOut = Math.round(Math.random() * ferry.passengerCount)
                 passengerCountOutConst = passengerCountOut
-                passengerCountIn = Math.round(Math.random() * bus.freeSeat)
+                passengerCountIn = Math.round(Math.random() * ferry.freeSeat)
                 passengerCountInConst = passengerCountIn
                 out = true
-                yPosPassenger = FerryWorkConsts.Y_POS + bus.height/2
+                yPosPassenger = FerryWorkConsts.Y_POS + ferry.height/2
 
                 if (FerryWorkConsts.busLog) println '-----------------------------------------------------------------------------------'
-                if (FerryWorkConsts.paintLog) println "$stopCount\t Кол-во выходящих пассажиров: ${passengerCountOut}/$bus.passengerCount,\t\t Кол-во входящих пассажиров: ${passengerCountIn}/$bus.freeSeat"
+                if (FerryWorkConsts.paintLog) println "$stopCount\t Кол-во выходящих пассажиров: ${passengerCountOut}/$ferry.passengerCount,\t\t Кол-во входящих пассажиров: ${passengerCountIn}/$ferry.freeSeat"
                 if (FerryWorkConsts.busLog) println '-----------------------------------------------------------------------------------'
                 if (FerryWorkConsts.statBusLog && stopCount % 10 == 0) busParkUtil.printStat()
                 updateBusInfo()
@@ -112,8 +112,8 @@ class FerryWorkPanel extends JPanel {
                     yPosPassenger += FerryWorkConsts.PIXEL_INC
                     if (yPosPassenger > FerryWorkConsts.HEIGHT) { //Пассажир вышел из Автобуса
                         passengerCountOut--
-                        bus.delPassenger()
-                        yPosPassenger = FerryWorkConsts.Y_POS + bus.height/2
+                        ferry.delPassenger()
+                        yPosPassenger = FerryWorkConsts.Y_POS + ferry.height/2
                         updateBusInfo()
                     }
                 } else {
@@ -124,9 +124,9 @@ class FerryWorkPanel extends JPanel {
                 if (passengerCountIn > 0) {
                     drawUtil.drawPassenger(scrnG, (int)FerryWorkConsts.WIDTH/2, yPosPassenger)
                     yPosPassenger -= FerryWorkConsts.PIXEL_INC
-                    if (yPosPassenger < FerryWorkConsts.Y_POS + bus.height/2) { //Пассажир сел на Автобус
+                    if (yPosPassenger < FerryWorkConsts.Y_POS + ferry.height/2) { //Пассажир сел на Автобус
                         passengerCountIn--
-                        bus.addPassenger()
+                        ferry.addPassenger()
                         yPosPassenger = FerryWorkConsts.HEIGHT
                         updateBusInfo()
                     }
@@ -142,9 +142,9 @@ class FerryWorkPanel extends JPanel {
 
     /** Срабатывает при Изменении свойств в Автобусе */
     private updateBusInfo() {
-        controlFrame.setPassengerCountOut(passengerCountOutConst - passengerCountOut, passengerCountOutConst, bus.passengerCountOut, busParkUtil.allPassengerOutCount)
-        controlFrame.setPassengerCountIn(passengerCountInConst - passengerCountIn, passengerCountInConst, bus.passengerCountIn, busParkUtil.allPassengerInCount)
-        busParkUtil.updateTblStat(controlFrame.tblStat, controlFrame.model, bus)
+        controlFrame.setPassengerCountOut(passengerCountOutConst - passengerCountOut, passengerCountOutConst, ferry.passengerCountOut, busParkUtil.allPassengerOutCount)
+        controlFrame.setPassengerCountIn(passengerCountInConst - passengerCountIn, passengerCountInConst, ferry.passengerCountIn, busParkUtil.allPassengerInCount)
+        busParkUtil.updateTblStat(controlFrame.tblStat, controlFrame.model, ferry)
     }
 
     void update(Graphics g) { paint(g) }
