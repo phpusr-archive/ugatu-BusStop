@@ -48,6 +48,8 @@ class FerryWorkPanel extends JPanel {
     boolean out
     /** Пауза */
     boolean pause
+    /** Движение назад */
+    boolean revers
 
     FerryWorkPanel() {
         init()
@@ -62,10 +64,11 @@ class FerryWorkPanel extends JPanel {
         busParkUtil = new FerryUtil()
         drawUtil = new DrawUtil()
         bus = busParkUtil.randomBus
-        xPosBus = -1 * bus.width
+        xPosBus = 0
 
         stop = false
         out = true
+        revers = false
     }
 
     /** Функция Рисования */
@@ -75,10 +78,18 @@ class FerryWorkPanel extends JPanel {
         //Рисование автобуса
         drawUtil.drawBus(scrnG, bus, xPosBus, BusStopConsts.Y_POS, this)
 
-        //Если автобус подъехал к остановке
-        int stopX = BusStopConsts.WIDTH / 2 - bus.width / 2
-        if (xPosBus >= stopX && xPosBus <= stopX+BusStopConsts.PIXEL_INC) {
+        //Если автобус не остановлен, то движение автобуса
+        if (!stop) {
+            if (revers) {
+                xPosBus -= BusStopConsts.PIXEL_INC
+            } else {
+                xPosBus += BusStopConsts.PIXEL_INC
+            }
+        }
+        //Если автобус уехал за пределы
+        if (xPosBus <= 0 || xPosBus >= BusStopConsts.WIDTH-bus.width) {
             if (!stop) { //Если зашли в это условие первый раз, то генерируем кол-во входящих пассажиров
+                revers = !revers
                 stopCount++
                 passengerCountOut = Math.round(Math.random() * bus.passengerCount)
                 passengerCountOutConst = passengerCountOut
@@ -123,13 +134,6 @@ class FerryWorkPanel extends JPanel {
                     stop = false
                 }
             }
-        }
-        //Если автобус не остановлен, то движение автобуса
-        if (!stop) xPosBus += BusStopConsts.PIXEL_INC
-        //Если автобус уехал за пределы
-        if (xPosBus > BusStopConsts.WIDTH) {
-            bus = busParkUtil.randomBus
-            xPosBus = -1 * bus.width
         }
 
         //Рисование на форме изображения из буфера

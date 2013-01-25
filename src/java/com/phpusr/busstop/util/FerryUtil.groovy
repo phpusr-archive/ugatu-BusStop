@@ -26,17 +26,6 @@ class FerryUtil {
     FerryUtil() {
         int i = 0
         busList << new Ferry(i++, 'Pacan',     '57',   20, "$BUS_IMG_PATH/Pacan.png")
-        busList << new Ferry(i++, 'Boxer',     '218',  10, "$BUS_IMG_PATH/Boxer.png")
-        busList << new Ferry(i++, 'Dirty',     '54',   20, "$BUS_IMG_PATH/Dirty.png")
-        busList << new Ferry(i++, 'Feniks',    '214',  10, "$BUS_IMG_PATH/Feniks.png")
-        busList << new Ferry(i++, 'Tn',        '54',   20, "$BUS_IMG_PATH/Tn.png")
-        busList << new Ferry(i++, 'Yellow',    '39',   15, "$BUS_IMG_PATH/Yellow.png")
-        busList << new Ferry(i++, 'White',     '101',  15, "$BUS_IMG_PATH/White.png")
-        busList << new Ferry(i++, 'Van',       '269',  10, "$BUS_IMG_PATH/Van.png")
-        busList << new Ferry(i++, 'Merc',      '266',  10, "$BUS_IMG_PATH/Merc.png")
-        busList << new Ferry(i++, 'TwoFloor',  '110',  40, "$BUS_IMG_PATH/TwoFloor.png")
-        busList << new Ferry(i++, 'Green',     '130',  20, "$BUS_IMG_PATH/Green.png")
-        busList << new Ferry(i++, 'GAZ',       '243',   15, "$BUS_IMG_PATH/GAZ.png")
     }
 
     /** Возвращает рандомный автобус из списка */
