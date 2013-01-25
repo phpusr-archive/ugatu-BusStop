@@ -1,7 +1,7 @@
 package com.phpusr.busstop.util
 
 import com.phpusr.busstop.consts.BusStopConsts
-import com.phpusr.busstop.entity.Bus
+import com.phpusr.busstop.entity.Ferry
 
 import javax.imageio.ImageIO
 import java.awt.*
@@ -34,7 +34,7 @@ class DrawUtil {
     }
 
     /** Рисует Автобус */
-    void drawBus(Graphics g, Bus bus, int x, int y, ImageObserver ioServer) {
+    void drawBus(Graphics g, Ferry bus, int x, int y, ImageObserver ioServer) {
         g.drawImage(bus.image, x, y, ioServer)
     }
 

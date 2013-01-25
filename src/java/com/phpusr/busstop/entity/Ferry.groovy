@@ -14,9 +14,9 @@ import java.awt.image.BufferedImage
  */
 
 /**
- * Автобус
+ * Паром
  */
-class Bus {
+class Ferry {
     /** Порядковый № */
     int number
     /** Название */
@@ -33,7 +33,7 @@ class Bus {
     /** Кол-во зашедших и вышедших Пассажиров (для Статистики) */
     int passengerCountIn, passengerCountOut
 
-    Bus(int number, String name, String route, int seatCount, String pathToImage) {
+    Ferry(int number, String name, String route, int seatCount, String pathToImage) {
         this.number = number
         this.name = name
         this.route = route
@@ -41,12 +41,12 @@ class Bus {
         setImage(pathToImage)
     }
 
-    Bus() {
+    Ferry() {
         this(1, 'Test', '777', 10, "$BusStopConsts.BUS_IMG_PATH/Pacan.png")
     }
 
     void setImage(String path) {
-        URL url = Bus.class.getResource(path)
+        URL url = Ferry.class.getResource(path)
         image = ImageIO.read(url)
     }
 

@@ -1,7 +1,7 @@
 package com.phpusr.busstop.frame
 
 import com.phpusr.busstop.consts.BusStopConsts
-import com.phpusr.busstop.entity.Bus
+import com.phpusr.busstop.entity.Ferry
 import com.phpusr.busstop.util.BusParkUtil
 import com.phpusr.busstop.util.DrawUtil
 
@@ -38,7 +38,7 @@ class BusStopPanel extends JPanel {
     /** Утилита для рисования объектов */
     DrawUtil drawUtil
     /** Текущий Автобус */
-    Bus bus
+    Ferry bus
     /** Форма управления */
     ControlFrame controlFrame
 
