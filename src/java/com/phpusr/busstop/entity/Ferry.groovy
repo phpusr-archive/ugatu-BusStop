@@ -1,6 +1,6 @@
 package com.phpusr.busstop.entity
 
-import com.phpusr.busstop.consts.BusStopConsts
+import com.phpusr.busstop.consts.FerryWorkConsts
 
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
@@ -42,7 +42,7 @@ class Ferry {
     }
 
     Ferry() {
-        this(1, 'Test', '777', 10, "$BusStopConsts.BUS_IMG_PATH/Pacan.png")
+        this(1, 'Test', '777', 10, "$FerryWorkConsts.BUS_IMG_PATH/Pacan.png")
     }
 
     void setImage(String path) {
@@ -66,10 +66,10 @@ class Ferry {
             passengerCount++
             passengerCountIn++
 
-            if (BusStopConsts.busLog) println "\t$this"
+            if (FerryWorkConsts.busLog) println "\t$this"
             return true
         } else {
-            if (BusStopConsts.busLog) println ">>В автобусе: $name-$route больше нет места!"
+            if (FerryWorkConsts.busLog) println ">>В автобусе: $name-$route больше нет места!"
             return false
         }
     }
@@ -80,10 +80,10 @@ class Ferry {
             passengerCount--
             passengerCountOut++
 
-            if (BusStopConsts.busLog) println "\t$this"
+            if (FerryWorkConsts.busLog) println "\t$this"
             return true
         } else {
-            if (BusStopConsts.busLog) println ">>В автобусе: $name-$route больше нет пассажиров!"
+            if (FerryWorkConsts.busLog) println ">>В автобусе: $name-$route больше нет пассажиров!"
             return false
         }
     }

@@ -1,6 +1,6 @@
 package com.phpusr.busstop.util
 
-import com.phpusr.busstop.consts.BusStopConsts
+import com.phpusr.busstop.consts.FerryWorkConsts
 import com.phpusr.busstop.entity.Ferry
 
 import javax.imageio.ImageIO
@@ -28,7 +28,7 @@ class DrawUtil {
         g.setColor(Color.BLACK)
 
         //Картинка
-        URL url = DrawUtil.class.getResource("$BusStopConsts.BG_IMG_PATH/BG.png")
+        URL url = DrawUtil.class.getResource("$FerryWorkConsts.BG_IMG_PATH/BG.png")
         Image image = ImageIO.read(url)
         g.drawImage(image, 0, 0, ioServer)
     }

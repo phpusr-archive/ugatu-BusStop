@@ -1,6 +1,6 @@
 package com.phpusr.busstop.frame
 
-import com.phpusr.busstop.consts.BusStopConsts
+import com.phpusr.busstop.consts.FerryWorkConsts
 import com.phpusr.busstop.entity.Ferry
 import com.phpusr.busstop.util.DrawUtil
 import com.phpusr.busstop.util.FerryUtil
@@ -53,13 +53,13 @@ class FerryWorkPanel extends JPanel {
 
     FerryWorkPanel() {
         init()
-        setSize(BusStopConsts.WIDTH, BusStopConsts.HEIGHT)
+        setSize(FerryWorkConsts.WIDTH, FerryWorkConsts.HEIGHT)
         setVisible(true)
     }
 
     /** Инициализация переменных для Рисования */
     private void init() {
-        scrnBuf = new BufferedImage(BusStopConsts.WIDTH, BusStopConsts.HEIGHT, BufferedImage.TYPE_INT_RGB)
+        scrnBuf = new BufferedImage(FerryWorkConsts.WIDTH, FerryWorkConsts.HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
         busParkUtil = new FerryUtil()
         drawUtil = new DrawUtil()
@@ -74,20 +74,20 @@ class FerryWorkPanel extends JPanel {
     /** Функция Рисования */
     void paint(Graphics g) {
         //Рисование фона
-        drawUtil.drawBackground(scrnG, BusStopConsts.WIDTH, BusStopConsts.HEIGHT, this)
+        drawUtil.drawBackground(scrnG, FerryWorkConsts.WIDTH, FerryWorkConsts.HEIGHT, this)
         //Рисование автобуса
-        drawUtil.drawBus(scrnG, bus, xPosBus, BusStopConsts.Y_POS, this)
+        drawUtil.drawBus(scrnG, bus, xPosBus, FerryWorkConsts.Y_POS, this)
 
         //Если автобус не остановлен, то движение автобуса
         if (!stop) {
             if (revers) {
-                xPosBus -= BusStopConsts.PIXEL_INC
+                xPosBus -= FerryWorkConsts.PIXEL_INC
             } else {
-                xPosBus += BusStopConsts.PIXEL_INC
+                xPosBus += FerryWorkConsts.PIXEL_INC
             }
         }
         //Если автобус уехал за пределы
-        if (xPosBus <= 0 || xPosBus >= BusStopConsts.WIDTH-bus.width) {
+        if (xPosBus <= 0 || xPosBus >= FerryWorkConsts.WIDTH-bus.width) {
             if (!stop) { //Если зашли в это условие первый раз, то генерируем кол-во входящих пассажиров
                 revers = !revers
                 stopCount++
@@ -96,38 +96,38 @@ class FerryWorkPanel extends JPanel {
                 passengerCountIn = Math.round(Math.random() * bus.freeSeat)
                 passengerCountInConst = passengerCountIn
                 out = true
-                yPosPassenger = BusStopConsts.Y_POS + bus.height/2
+                yPosPassenger = FerryWorkConsts.Y_POS + bus.height/2
 
-                if (BusStopConsts.busLog) println '-----------------------------------------------------------------------------------'
-                if (BusStopConsts.paintLog) println "$stopCount\t Кол-во выходящих пассажиров: ${passengerCountOut}/$bus.passengerCount,\t\t Кол-во входящих пассажиров: ${passengerCountIn}/$bus.freeSeat"
-                if (BusStopConsts.busLog) println '-----------------------------------------------------------------------------------'
-                if (BusStopConsts.statBusLog && stopCount % 10 == 0) busParkUtil.printStat()
+                if (FerryWorkConsts.busLog) println '-----------------------------------------------------------------------------------'
+                if (FerryWorkConsts.paintLog) println "$stopCount\t Кол-во выходящих пассажиров: ${passengerCountOut}/$bus.passengerCount,\t\t Кол-во входящих пассажиров: ${passengerCountIn}/$bus.freeSeat"
+                if (FerryWorkConsts.busLog) println '-----------------------------------------------------------------------------------'
+                if (FerryWorkConsts.statBusLog && stopCount % 10 == 0) busParkUtil.printStat()
                 updateBusInfo()
             }
 
             if (out) { //Анимация выхода пассажиров
                 stop = true
                 if (passengerCountOut > 0) {
-                    drawUtil.drawPassenger(scrnG, (int)BusStopConsts.WIDTH/2, yPosPassenger)
-                    yPosPassenger += BusStopConsts.PIXEL_INC
-                    if (yPosPassenger > BusStopConsts.HEIGHT) { //Пассажир вышел из Автобуса
+                    drawUtil.drawPassenger(scrnG, (int)FerryWorkConsts.WIDTH/2, yPosPassenger)
+                    yPosPassenger += FerryWorkConsts.PIXEL_INC
+                    if (yPosPassenger > FerryWorkConsts.HEIGHT) { //Пассажир вышел из Автобуса
                         passengerCountOut--
                         bus.delPassenger()
-                        yPosPassenger = BusStopConsts.Y_POS + bus.height/2
+                        yPosPassenger = FerryWorkConsts.Y_POS + bus.height/2
                         updateBusInfo()
                     }
                 } else {
                     out = false
-                    yPosPassenger = BusStopConsts.HEIGHT
+                    yPosPassenger = FerryWorkConsts.HEIGHT
                 }
             } else { //Анимация входа пассажиров
                 if (passengerCountIn > 0) {
-                    drawUtil.drawPassenger(scrnG, (int)BusStopConsts.WIDTH/2, yPosPassenger)
-                    yPosPassenger -= BusStopConsts.PIXEL_INC
-                    if (yPosPassenger < BusStopConsts.Y_POS + bus.height/2) { //Пассажир сел на Автобус
+                    drawUtil.drawPassenger(scrnG, (int)FerryWorkConsts.WIDTH/2, yPosPassenger)
+                    yPosPassenger -= FerryWorkConsts.PIXEL_INC
+                    if (yPosPassenger < FerryWorkConsts.Y_POS + bus.height/2) { //Пассажир сел на Автобус
                         passengerCountIn--
                         bus.addPassenger()
-                        yPosPassenger = BusStopConsts.HEIGHT
+                        yPosPassenger = FerryWorkConsts.HEIGHT
                         updateBusInfo()
                     }
                 } else {
@@ -155,14 +155,14 @@ class FerryWorkPanel extends JPanel {
         new Thread (new Runnable() {
             @Override
             public void run() {
-                if (BusStopConsts.paintLog) println 'start'
+                if (FerryWorkConsts.paintLog) println 'start'
                 while(!pause) {
                     repaint()
                     try {
-                        Thread.sleep(BusStopConsts.PAUSE_MILIS)
+                        Thread.sleep(FerryWorkConsts.PAUSE_MILIS)
                     } catch (InterruptedException e){}
                 }
-                if (BusStopConsts.paintLog) println 'end start'
+                if (FerryWorkConsts.paintLog) println 'end start'
             }
         }).start()
     }

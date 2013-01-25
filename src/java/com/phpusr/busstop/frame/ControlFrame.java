@@ -1,6 +1,6 @@
 package com.phpusr.busstop.frame;
 
-import com.phpusr.busstop.consts.BusStopConsts;
+import com.phpusr.busstop.consts.FerryWorkConsts;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -62,13 +62,13 @@ public class ControlFrame extends JFrame {
     /** Показывать Старт или Пауза */
     private boolean showStart = true;
     /** Скорость работы */
-    private int speed = BusStopConsts.MIN_SPEED;
+    private int speed = FerryWorkConsts.MIN_SPEED;
 
     public ControlFrame(String title) {
         super(title);
         setContentPane(contentPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(BusStopConsts.CF_WIDTH, BusStopConsts.CF_HEIGHT);
+        setSize(FerryWorkConsts.CF_WIDTH, FerryWorkConsts.CF_HEIGHT);
         setVisible(true);
         setResizable(false);
 
@@ -106,13 +106,13 @@ public class ControlFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 showStart = !showStart;
                 if (showStart) {
-                    speed = BusStopConsts.MIN_SPEED;
-                    btnSpeed.setText(BusStopConsts.BTN_SPEED_NAME + speed);
+                    speed = FerryWorkConsts.MIN_SPEED;
+                    btnSpeed.setText(FerryWorkConsts.BTN_SPEED_NAME + speed);
                     btnSpeed.setEnabled(true);
-                    btnStart.setText(BusStopConsts.BTN_START_NAME);
+                    btnStart.setText(FerryWorkConsts.BTN_START_NAME);
                     ferryWorkPanel.pause();
                 } else {
-                    btnStart.setText(BusStopConsts.BTN_PAUSE_NAME);
+                    btnStart.setText(FerryWorkConsts.BTN_PAUSE_NAME);
                     ferryWorkPanel.start();
                 }
             }
@@ -120,7 +120,7 @@ public class ControlFrame extends JFrame {
         //Стоп
         btnStop.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                btnStart.setText(BusStopConsts.BTN_START_NAME);
+                btnStart.setText(FerryWorkConsts.BTN_START_NAME);
                 ferryWorkPanel.stop();
                 showStart = true;
                 ferryWorkPanel.getBusParkUtil().initTblStat(model);
@@ -130,9 +130,9 @@ public class ControlFrame extends JFrame {
         btnSpeed.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 speed *= 2;
-                btnSpeed.setText(BusStopConsts.BTN_SPEED_NAME + speed);
-                btnStart.setText(BusStopConsts.BTN_PAUSE_NAME);
-                if (speed >= BusStopConsts.MAX_SPEED) btnSpeed.setEnabled(false);
+                btnSpeed.setText(FerryWorkConsts.BTN_SPEED_NAME + speed);
+                btnStart.setText(FerryWorkConsts.BTN_PAUSE_NAME);
+                if (speed >= FerryWorkConsts.MAX_SPEED) btnSpeed.setEnabled(false);
                 ferryWorkPanel.start();
                 showStart = false;
             }

@@ -11,7 +11,7 @@ package com.phpusr.busstop.consts
 /**
  * Константы
  */
-class BusStopConsts {
+class FerryWorkConsts {
     /* Логирование */
     /** Вкл/Выкл логирование в Ferry */
     static final boolean busLog = 0

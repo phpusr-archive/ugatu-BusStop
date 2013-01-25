@@ -1,6 +1,6 @@
 package com.phpusr.busstop.util
 
-import com.phpusr.busstop.consts.BusStopConsts
+import com.phpusr.busstop.consts.FerryWorkConsts
 import com.phpusr.busstop.entity.Ferry
 import com.phpusr.busstop.frame.FerryTableModel
 
@@ -19,7 +19,7 @@ import javax.swing.*
  */
 class FerryUtil {
     /** Путь к папке с ихображениями Автобусов */
-    static final String BUS_IMG_PATH = BusStopConsts.BUS_IMG_PATH
+    static final String BUS_IMG_PATH = FerryWorkConsts.BUS_IMG_PATH
     /** Список автобусов */
     List<Ferry> busList = []
 
