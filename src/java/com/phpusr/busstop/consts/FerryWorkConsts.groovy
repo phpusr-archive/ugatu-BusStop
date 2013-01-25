@@ -31,6 +31,9 @@ class FerryWorkConsts {
     public static final int CF_WIDTH = 1200
     public static final int CF_HEIGHT = 700
 
+    /** Выделение строк в таблице Статистики */
+    public static final boolean TABLE_HIGHLIGHT = false
+
     /* FerryWorkPanel */
     /** Ширина окна */
     static final int WIDTH = 1200
