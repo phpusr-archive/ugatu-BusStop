@@ -140,7 +140,7 @@ public class ControlFrame extends JFrame {
         //Выход
         btnExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                //dispose(); //TODO не закрывает процесс
             }
         });
     }
