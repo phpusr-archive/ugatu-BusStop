@@ -1,8 +1,8 @@
 package com.phpusr.ferrywork.util
 
-import com.phpusr.busstop.frame.FerryTableModel
 import com.phpusr.ferrywork.consts.FerryWorkConsts
 import com.phpusr.ferrywork.entity.Ferry
+import com.phpusr.ferrywork.frame.FerryTableModel
 
 import javax.swing.*
 

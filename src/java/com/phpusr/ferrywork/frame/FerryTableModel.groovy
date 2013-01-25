@@ -1,4 +1,4 @@
-package com.phpusr.busstop.frame
+package com.phpusr.ferrywork.frame
 
 import javax.swing.table.DefaultTableModel
 import java.awt.*

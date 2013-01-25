@@ -1,6 +1,6 @@
 package com.phpusr.ferrywork.run
 
-import com.phpusr.busstop.frame.ControlFrame
+import com.phpusr.ferrywork.frame.ControlFrame
 
 import javax.swing.*
 

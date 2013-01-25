@@ -1,4 +1,4 @@
-package com.phpusr.busstop.frame
+package com.phpusr.ferrywork.frame
 
 import com.phpusr.ferrywork.consts.FerryWorkConsts
 import com.phpusr.ferrywork.entity.Ferry
