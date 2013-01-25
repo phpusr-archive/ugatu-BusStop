@@ -2,8 +2,8 @@ package com.phpusr.busstop.frame
 
 import com.phpusr.busstop.consts.BusStopConsts
 import com.phpusr.busstop.entity.Ferry
-import com.phpusr.busstop.util.BusParkUtil
 import com.phpusr.busstop.util.DrawUtil
+import com.phpusr.busstop.util.FerryUtil
 
 import javax.swing.*
 import java.awt.*
@@ -34,7 +34,7 @@ class FerryWorkPanel extends JPanel {
     /** Холст для рисования от Буфера */
     Graphics scrnG
     /** Утилита для работы с автобусами */
-    BusParkUtil busParkUtil
+    FerryUtil busParkUtil
     /** Утилита для рисования объектов */
     DrawUtil drawUtil
     /** Текущий Автобус */
@@ -59,7 +59,7 @@ class FerryWorkPanel extends JPanel {
     private void init() {
         scrnBuf = new BufferedImage(BusStopConsts.WIDTH, BusStopConsts.HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
-        busParkUtil = new BusParkUtil()
+        busParkUtil = new FerryUtil()
         drawUtil = new DrawUtil()
         bus = busParkUtil.randomBus
         xPosBus = -1 * bus.width

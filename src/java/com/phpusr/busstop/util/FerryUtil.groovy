@@ -17,13 +17,13 @@ import javax.swing.*
 /**
  * Утилита для работы с Автобусами
  */
-class BusParkUtil {
+class FerryUtil {
     /** Путь к папке с ихображениями Автобусов */
     static final String BUS_IMG_PATH = BusStopConsts.BUS_IMG_PATH
     /** Список автобусов */
     List<Ferry> busList = []
 
-    BusParkUtil() {
+    FerryUtil() {
         int i = 0
         busList << new Ferry(i++, 'Pacan',     '57',   20, "$BUS_IMG_PATH/Pacan.png")
         busList << new Ferry(i++, 'Boxer',     '218',  10, "$BUS_IMG_PATH/Boxer.png")
