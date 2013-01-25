@@ -28,6 +28,11 @@ public class ControlFrame extends JFrame {
     private JPanel pnlMiddle;
     /** Нижняя панель */
     private JPanel pnlBottom;
+    /** Панель для таблицы статистики */
+    private JPanel pnlTable;
+    /** Панель для Рисования */
+    private JPanel pnlPaint;
+
     /** Кнопка Старт/Пауза */
     private JButton btnStart;
     /** Кнопка увеличения скорости */
@@ -38,8 +43,6 @@ public class ControlFrame extends JFrame {
     private JButton btnExit;
     /** Таблица со Статистикой */
     private JTable tblStat;
-    /** Лейбл для изображения Автобуса */
-    private JLabel lblImg;
     /** Кол-во выходящих Пассажиров */
     private JLabel lblPassengerOut;
     /** Кол-во заходящих Пассажиров */
@@ -49,12 +52,9 @@ public class ControlFrame extends JFrame {
     /** Кол-во всего зашедших Пассажиров */
     private JLabel lblAllPassengerIn;
 
-    /** Панель для Автобусов */
-    private JPanel pnlBus;
-
     /** Модель для таблицы Статистики */
     private FerryTableModel model;
-    /** Кастомная Панель для Автобусов */
+    /** Кастомная Панель для Паромов */
     private FerryWorkPanel ferryWorkPanel;
     /** Показывать Старт или Пауза */
     private boolean showStart = true;
@@ -78,7 +78,7 @@ public class ControlFrame extends JFrame {
     /** Инициализация таблицы */
     private void initTable() {
         model = new FerryTableModel();
-        model.addColumn("Автобус");
+        model.addColumn("Паром");
         model.addColumn("Пассажиров");
         model.addColumn("Свободных мест");
         model.addColumn("Всего вышло");
@@ -143,13 +143,13 @@ public class ControlFrame extends JFrame {
     }
 
     /** Установка на форме Вышедших Пассажиров */
-    public void setPassengerCountOut(int cur, int from, int all, int allBus) {
+    public void setPassengerCountOut(int cur, int from, int all, int allFerry) {
         lblPassengerOut.setText(cur + "/" + from);
         lblAllPassengerOut.setText(Integer.toString(all));
     }
 
     /** Установка на форме Севших Пассажиров */
-    public void setPassengerCountIn(int cur, int from, int all, int allBus) {
+    public void setPassengerCountIn(int cur, int from, int all, int allFerry) {
         lblPassengerIn.setText(cur + "/" + from);
         lblAllPassengerIn.setText(Integer.toString(all));
     }
@@ -163,7 +163,7 @@ public class ControlFrame extends JFrame {
     }
 
     private void createUIComponents() {
-        pnlBus = new FerryWorkPanel();
-        ferryWorkPanel = (FerryWorkPanel) pnlBus;
+        pnlPaint = new FerryWorkPanel();
+        ferryWorkPanel = (FerryWorkPanel) pnlPaint;
     }
 }
