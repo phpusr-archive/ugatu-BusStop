@@ -21,11 +21,9 @@ class Ferry {
     int number
     /** Название */
     String name
-    /** Маршрут */
-    String route
     /** Кол-во мест */
     int seatCount
-    /** Изображение автобуса */
+    /** Изображение */
     BufferedImage image
 
     /** Кол-во Пассажиров (внутри) */
@@ -33,16 +31,15 @@ class Ferry {
     /** Кол-во зашедших и вышедших Пассажиров (для Статистики) */
     int passengerCountIn, passengerCountOut
 
-    Ferry(int number, String name, String route, int seatCount, String pathToImage) {
+    Ferry(int number, String name, int seatCount, String pathToImage) {
         this.number = number
         this.name = name
-        this.route = route
         this.seatCount = seatCount
         setImage(pathToImage)
     }
 
     Ferry() {
-        this(1, 'Test', '777', 10, "$FerryWorkConsts.FERRY_IMG_PATH/Pacan.png")
+        this(1, 'Test', 10, "$FerryWorkConsts.FERRY_IMG_PATH/Pacan.png")
     }
 
     void setImage(String path) {
@@ -50,17 +47,17 @@ class Ferry {
         image = ImageIO.read(url)
     }
 
-    /** Возвращает Длину изображения Автобуса */
+    /** Возвращает Длину изображения */
     int getWidth() {
         image.width
     }
 
-    /** Возвращает Высоту изображения Автобуса */
+    /** Возвращает Высоту изображения */
     int getHeight() {
         image.height
     }
 
-    /** Добавить пассажира в автобус */
+    /** Добавить пассажира */
     boolean addPassenger() {
         if (passengerCount < seatCount) {
             passengerCount++
@@ -69,12 +66,12 @@ class Ferry {
             if (FerryWorkConsts.ferryLog) println "\t$this"
             return true
         } else {
-            if (FerryWorkConsts.ferryLog) println ">>В автобусе: $name-$route больше нет места!"
+            if (FerryWorkConsts.ferryLog) println ">>В пароме: $name-$route больше нет места!"
             return false
         }
     }
 
-    /** Удалить пассажира из Автобуса */
+    /** Удалить пассажира из Парома */
     boolean delPassenger() {
         if (passengerCount > 0) {
             passengerCount--
@@ -83,18 +80,18 @@ class Ferry {
             if (FerryWorkConsts.ferryLog) println "\t$this"
             return true
         } else {
-            if (FerryWorkConsts.ferryLog) println ">>В автобусе: $name-$route больше нет пассажиров!"
+            if (FerryWorkConsts.ferryLog) println ">>В пароме: $name-$route больше нет пассажиров!"
             return false
         }
     }
 
-    /** Возвращает кол-во Свободных мест в Автобусе */
+    /** Возвращает кол-во Свободных мест в Пароме */
     int getFreeSeat() {
         return seatCount - passengerCount
     }
 
     @Override
     String toString() {
-        return "Автобус: $name-$route, Пассажиров: $passengerCount/$seatCount, Всего зашло: $passengerCountIn, Всего вышло: $passengerCountOut"
+        return "Паром: $name, Пассажиров: $passengerCount/$seatCount, Всего зашло: $passengerCountIn, Всего вышло: $passengerCountOut"
     }
 }
