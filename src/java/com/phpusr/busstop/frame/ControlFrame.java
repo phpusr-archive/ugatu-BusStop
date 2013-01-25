@@ -56,7 +56,7 @@ public class ControlFrame extends JFrame {
     private JPanel pnlBus;
 
     /** Модель для таблицы Статистики */
-    private BusTableModel model;
+    private FerryTableModel model;
     /** Кастомная Панель для Автобусов */
     private FerryWorkPanel ferryWorkPanel;
     /** Показывать Старт или Пауза */
@@ -80,7 +80,7 @@ public class ControlFrame extends JFrame {
 
     /** Инициализация таблицы */
     private void initTable() {
-        model = new BusTableModel();
+        model = new FerryTableModel();
         model.addColumn("Автобус");
         model.addColumn("Пассажиров");
         model.addColumn("Свободных мест");
@@ -159,7 +159,7 @@ public class ControlFrame extends JFrame {
         lblAllBusPassengerIn.setText(Integer.toString(allBus));
     }
 
-    public BusTableModel getModel() {
+    public FerryTableModel getModel() {
         return model;
     }
 

@@ -2,7 +2,7 @@ package com.phpusr.busstop.util
 
 import com.phpusr.busstop.consts.BusStopConsts
 import com.phpusr.busstop.entity.Ferry
-import com.phpusr.busstop.frame.BusTableModel
+import com.phpusr.busstop.frame.FerryTableModel
 
 import javax.swing.*
 
@@ -100,7 +100,7 @@ class BusParkUtil {
     }
 
     /** Загрузка начальных значений в таблицу */
-    void initTblStat(BusTableModel model) {
+    void initTblStat(FerryTableModel model) {
         while (model.rowCount > 0) {
             model.removeRow(0)
         }
@@ -111,7 +111,7 @@ class BusParkUtil {
     }
 
     /** Обновлении информации в Таблице Статистики */
-    void updateTblStat(JTable table, BusTableModel model, Ferry bus) {
+    void updateTblStat(JTable table, FerryTableModel model, Ferry bus) {
         int i = 0
         table.setValueAt(bus.name, bus.number, i++)
         table.setValueAt(bus.passengerCount, bus.number, i++)

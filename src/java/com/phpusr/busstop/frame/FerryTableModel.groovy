@@ -14,7 +14,7 @@ import java.awt.*
 /**
  * Кастомная модель для Выделения Максимального по перевозке и Минимального Автобусов
  */
-class BusTableModel extends DefaultTableModel {
+class FerryTableModel extends DefaultTableModel {
     /** Строка с Максимальным Автобусом */
     int maxRow
     /** Строка с Минимальным Автобусом */
