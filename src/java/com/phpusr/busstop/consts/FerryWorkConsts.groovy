@@ -37,7 +37,7 @@ class FerryWorkConsts {
     /** Высота окна */
     static final int HEIGHT = 500
     /** Y позиция для рисования движения */
-    static final int Y_POS = 100
+    static final int Y_POS = 150
     /** Кол-во увеличения пикселей для показа движения */
     static final int PIXEL_INC = 10
     /** Пауза между кадрами (мс) */
