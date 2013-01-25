@@ -15,7 +15,7 @@ class BusStopConsts {
     /* Логирование */
     /** Вкл/Выкл логирование в Ferry */
     static final boolean busLog = 0
-    /** Вкл/Выкл логирование в BusStopPanel.paint() */
+    /** Вкл/Выкл логирование в FerryWorkPanel.paint() */
     static final boolean paintLog = 1
     /** Вкл/Выкл логирование Статистики Автобусов */
     static final boolean statBusLog = 0
@@ -31,7 +31,7 @@ class BusStopConsts {
     public static final int CF_WIDTH = 1200
     public static final int CF_HEIGHT = 600
 
-    /* BusStopPanel */
+    /* FerryWorkPanel */
     /** Ширина окна */
     static final int WIDTH = 700
     /** Высота окна */

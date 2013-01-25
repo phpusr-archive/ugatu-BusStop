@@ -1,7 +1,6 @@
 package com.phpusr.busstop.frame;
 
 import com.phpusr.busstop.consts.BusStopConsts;
-import com.phpusr.busstop.util.ExitAction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -59,7 +58,7 @@ public class ControlFrame extends JFrame {
     /** Модель для таблицы Статистики */
     private BusTableModel model;
     /** Кастомная Панель для Автобусов */
-    private BusStopPanel busStopPanel;
+    private FerryWorkPanel ferryWorkPanel;
     /** Показывать Старт или Пауза */
     private boolean showStart = true;
     /** Скорость работы */
@@ -75,8 +74,8 @@ public class ControlFrame extends JFrame {
 
         initTable();
         initListeners();
-        busStopPanel.setControlFrame(this);
-        busStopPanel.getBusParkUtil().initTblStat(model);
+        ferryWorkPanel.setControlFrame(this);
+        ferryWorkPanel.getBusParkUtil().initTblStat(model);
     }
 
     /** Инициализация таблицы */
@@ -111,10 +110,10 @@ public class ControlFrame extends JFrame {
                     btnSpeed.setText(BusStopConsts.BTN_SPEED_NAME + speed);
                     btnSpeed.setEnabled(true);
                     btnStart.setText(BusStopConsts.BTN_START_NAME);
-                    busStopPanel.pause();
+                    ferryWorkPanel.pause();
                 } else {
                     btnStart.setText(BusStopConsts.BTN_PAUSE_NAME);
-                    busStopPanel.start();
+                    ferryWorkPanel.start();
                 }
             }
         });
@@ -122,9 +121,9 @@ public class ControlFrame extends JFrame {
         btnStop.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 btnStart.setText(BusStopConsts.BTN_START_NAME);
-                busStopPanel.stop();
+                ferryWorkPanel.stop();
                 showStart = true;
-                busStopPanel.getBusParkUtil().initTblStat(model);
+                ferryWorkPanel.getBusParkUtil().initTblStat(model);
             }
         });
         //Увеличение скорости в 2 раза (Запускает еще один поток, возможно это НЕ безопасно)
@@ -134,7 +133,7 @@ public class ControlFrame extends JFrame {
                 btnSpeed.setText(BusStopConsts.BTN_SPEED_NAME + speed);
                 btnStart.setText(BusStopConsts.BTN_PAUSE_NAME);
                 if (speed >= BusStopConsts.MAX_SPEED) btnSpeed.setEnabled(false);
-                busStopPanel.start();
+                ferryWorkPanel.start();
                 showStart = false;
             }
         });
@@ -169,7 +168,7 @@ public class ControlFrame extends JFrame {
     }
 
     private void createUIComponents() {
-        pnlBus = new BusStopPanel();
-        busStopPanel = (BusStopPanel) pnlBus;
+        pnlBus = new FerryWorkPanel();
+        ferryWorkPanel = (FerryWorkPanel) pnlBus;
     }
 }

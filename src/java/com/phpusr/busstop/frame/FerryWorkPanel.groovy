@@ -20,7 +20,7 @@ import java.awt.image.BufferedImage
 /**
  * Панель для отображения симуляции Автобусной остановки
  */
-class BusStopPanel extends JPanel {
+class FerryWorkPanel extends JPanel {
 
     /** Координаты рисования Пассажиров */
     int xPosBus, yPosPassenger
@@ -49,7 +49,7 @@ class BusStopPanel extends JPanel {
     /** Пауза */
     boolean pause
 
-    BusStopPanel() {
+    FerryWorkPanel() {
         init()
         setSize(BusStopConsts.WIDTH, BusStopConsts.HEIGHT)
         setVisible(true)
