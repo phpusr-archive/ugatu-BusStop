@@ -1,4 +1,4 @@
-package com.phpusr.busstop.consts
+package com.phpusr.ferrywork.consts
 
 /**
  * Created with IntelliJ IDEA.

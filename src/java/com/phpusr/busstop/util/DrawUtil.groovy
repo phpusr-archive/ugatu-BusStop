@@ -1,7 +1,7 @@
 package com.phpusr.busstop.util
 
-import com.phpusr.busstop.consts.FerryWorkConsts
 import com.phpusr.busstop.entity.Ferry
+import com.phpusr.ferrywork.consts.FerryWorkConsts
 
 import javax.imageio.ImageIO
 import java.awt.*

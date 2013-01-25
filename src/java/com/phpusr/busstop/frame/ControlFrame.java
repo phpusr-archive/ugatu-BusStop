@@ -1,6 +1,6 @@
 package com.phpusr.busstop.frame;
 
-import com.phpusr.busstop.consts.FerryWorkConsts;
+import com.phpusr.ferrywork.consts.FerryWorkConsts;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;

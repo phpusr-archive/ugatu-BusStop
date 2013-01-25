@@ -1,6 +1,6 @@
 package com.phpusr.busstop.entity
 
-import com.phpusr.busstop.consts.FerryWorkConsts
+import com.phpusr.ferrywork.consts.FerryWorkConsts
 
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
