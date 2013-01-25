@@ -136,7 +136,8 @@ public class ControlFrame extends JFrame {
         //Выход
         btnExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //dispose(); //TODO не закрывает процесс
+                ferryWorkPanel.stop();
+                dispose();
             }
         });
     }
