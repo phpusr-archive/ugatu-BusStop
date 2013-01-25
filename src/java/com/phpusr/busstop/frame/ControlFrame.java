@@ -48,10 +48,7 @@ public class ControlFrame extends JFrame {
     private JLabel lblAllPassengerOut;
     /** Кол-во всего зашедших Пассажиров */
     private JLabel lblAllPassengerIn;
-    /** Кол-во всего вышедших Пассажиров (все Автобусы) */
-    private JLabel lblAllBusPassengerOut;
-    /** Кол-во всего зашедших Пассажиров (все Автобусы) */
-    private JLabel lblAllBusPassengerIn;
+
     /** Панель для Автобусов */
     private JPanel pnlBus;
 
@@ -149,14 +146,12 @@ public class ControlFrame extends JFrame {
     public void setPassengerCountOut(int cur, int from, int all, int allBus) {
         lblPassengerOut.setText(cur + "/" + from);
         lblAllPassengerOut.setText(Integer.toString(all));
-        lblAllBusPassengerOut.setText(Integer.toString(allBus));
     }
 
     /** Установка на форме Севших Пассажиров */
     public void setPassengerCountIn(int cur, int from, int all, int allBus) {
         lblPassengerIn.setText(cur + "/" + from);
         lblAllPassengerIn.setText(Integer.toString(all));
-        lblAllBusPassengerIn.setText(Integer.toString(allBus));
     }
 
     public FerryTableModel getModel() {

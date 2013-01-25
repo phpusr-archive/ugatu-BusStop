@@ -29,7 +29,7 @@ class FerryWorkConsts {
     public static final int MIN_SPEED = 2
     public static final int MAX_SPEED = 32
     public static final int CF_WIDTH = 1200
-    public static final int CF_HEIGHT = 600
+    public static final int CF_HEIGHT = 700
 
     /* FerryWorkPanel */
     /** Ширина окна */
