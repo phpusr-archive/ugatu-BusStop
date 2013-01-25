@@ -1,4 +1,4 @@
-package com.phpusr.busstop.run
+package com.phpusr.ferrywork.run
 
 import com.phpusr.busstop.frame.ControlFrame
 

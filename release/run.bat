@@ -1,3 +1,3 @@
 java -jar BusStop.jar
-rem java -cp BusStop.jar com.phpusr.busstop.run.Run
+rem java -cp BusStop.jar com.phpusr.ferrywork.run.Run
 pause
