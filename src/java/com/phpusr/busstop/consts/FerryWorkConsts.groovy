@@ -51,7 +51,7 @@ class FerryWorkConsts {
     /** Относительный путь к папке с ихображениями */
     static final String IMG_PATH = '/com/phpusr/busstop/img'
     /** Путь к папке с ихображениями Паромов */
-    static final String FERRY_IMG_PATH = "$IMG_PATH/bus"
+    static final String FERRY_IMG_PATH = "$IMG_PATH/ferry"
     /** Путь к папке с ихображениями Фонов */
     static final String BG_IMG_PATH = "$IMG_PATH/bg"
 

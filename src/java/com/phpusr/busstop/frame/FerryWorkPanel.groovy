@@ -66,6 +66,7 @@ class FerryWorkPanel extends JPanel {
         ferry = ferryUtil.randomFerry
         xPosFerry = FerryWorkConsts.BERTH_WIDTH
 
+        pause = true
         stop = false
         out = true
         revers = false
@@ -108,7 +109,7 @@ class FerryWorkPanel extends JPanel {
             if (out) { //Анимация выхода пассажиров
                 stop = true
                 if (passengerCountOut > 0) {
-                    drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/3)
+                    drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2)
                     //Если True - значит пассажиры выходят Справа
                     xPosPassenger = revers ? xPosPassenger + FerryWorkConsts.PIXEL_INC : xPosPassenger - FerryWorkConsts.PIXEL_INC
                     if (revers && xPosPassenger > FerryWorkConsts.WIDTH || !revers && xPosPassenger < 0) { //Пассажир вышел из Парома
@@ -123,7 +124,7 @@ class FerryWorkPanel extends JPanel {
                 }
             } else { //Анимация входа пассажиров
                 if (passengerCountIn > 0) {
-                    drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/3)
+                    drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2)
                     xPosPassenger = revers ? xPosPassenger - FerryWorkConsts.PIXEL_INC : xPosPassenger + FerryWorkConsts.PIXEL_INC
                     if (revers && xPosPassenger < FerryWorkConsts.WIDTH-ferry.width/2-FerryWorkConsts.DELTA || !revers && xPosPassenger > ferry.width/2+FerryWorkConsts.DELTA) { //Пассажир сел на Паром
                         passengerCountIn--
