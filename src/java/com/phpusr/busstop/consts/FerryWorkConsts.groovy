@@ -17,7 +17,7 @@ class FerryWorkConsts {
     static final boolean ferryLog = 0
     /** Вкл/Выкл логирование в FerryWorkPanel.paint() */
     static final boolean paintLog = 1
-    /** Вкл/Выкл логирование Статистики Автобусов */
+    /** Вкл/Выкл логирование Статистики Паромов */
     static final boolean statFerryLog = 0
 
     /* Локализация */
@@ -50,7 +50,7 @@ class FerryWorkConsts {
     /* Пути */
     /** Относительный путь к папке с ихображениями */
     static final String IMG_PATH = '/com/phpusr/busstop/img'
-    /** Путь к папке с ихображениями Автобусов */
+    /** Путь к папке с ихображениями Паромов */
     static final String FERRY_IMG_PATH = "$IMG_PATH/bus"
     /** Путь к папке с ихображениями Фонов */
     static final String BG_IMG_PATH = "$IMG_PATH/bg"
