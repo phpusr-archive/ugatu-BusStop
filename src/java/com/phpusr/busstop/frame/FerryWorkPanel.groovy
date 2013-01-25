@@ -28,6 +28,8 @@ class FerryWorkPanel extends JPanel {
     int passengerCountOut, passengerCountOutConst, passengerCountIn, passengerCountInConst
     /** Кол-во остановок */
     int stopCount
+    /** Пауза между кадрами (мс) */
+    int pauseMilis
 
     /** Буфер для рисования кадра */
     Image scrnBuf
@@ -65,6 +67,7 @@ class FerryWorkPanel extends JPanel {
         drawUtil = new DrawUtil()
         ferry = ferryUtil.randomFerry
         xPosFerry = FerryWorkConsts.BERTH_WIDTH
+        pauseMilis = FerryWorkConsts.PAUSE_MILIS
 
         pause = true
         stop = false
@@ -168,7 +171,7 @@ class FerryWorkPanel extends JPanel {
                 while(!pause) {
                     repaint()
                     try {
-                        Thread.sleep(FerryWorkConsts.PAUSE_MILIS)
+                        Thread.sleep(pauseMilis)
                     } catch (InterruptedException e){}
                 }
                 if (FerryWorkConsts.paintLog) println 'end start'
@@ -186,6 +189,11 @@ class FerryWorkPanel extends JPanel {
         pause()
         init()
         repaint()
+    }
+
+    /** Увеличение скорости отрисовки */
+    void speedUp() {
+        pauseMilis /= 2
     }
 
 }

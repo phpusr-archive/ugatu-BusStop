@@ -44,7 +44,7 @@ class FerryWorkConsts {
     /** Кол-во увеличения пикселей для показа движения */
     static final int PIXEL_INC = 10
     /** Пауза между кадрами (мс) */
-    static final int PAUSE_MILIS = 20
+    static final int PAUSE_MILIS = 50
     /** Ширина причала */
     static final int BERTH_WIDTH = 100
     /** Для аниации посадки Пассажиров */

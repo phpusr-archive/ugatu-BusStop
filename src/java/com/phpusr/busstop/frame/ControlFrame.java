@@ -103,9 +103,6 @@ public class ControlFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 showStart = !showStart;
                 if (showStart) {
-                    speed = FerryWorkConsts.MIN_SPEED;
-                    btnSpeed.setText(FerryWorkConsts.BTN_SPEED_NAME + speed);
-                    btnSpeed.setEnabled(true);
                     btnStart.setText(FerryWorkConsts.BTN_START_NAME);
                     ferryWorkPanel.pause();
                 } else {
@@ -117,21 +114,23 @@ public class ControlFrame extends JFrame {
         //Стоп
         btnStop.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                speed = FerryWorkConsts.MIN_SPEED;
+                btnSpeed.setText(FerryWorkConsts.BTN_SPEED_NAME + speed);
+                btnSpeed.setEnabled(true);
+
                 btnStart.setText(FerryWorkConsts.BTN_START_NAME);
                 ferryWorkPanel.stop();
                 showStart = true;
                 ferryWorkPanel.getFerryUtil().initTblStat(model);
             }
         });
-        //Увеличение скорости в 2 раза (Запускает еще один поток, возможно это НЕ безопасно)
+        //Увеличение скорости в 2 раза (Уменьшается время между кадрами)
         btnSpeed.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 speed *= 2;
                 btnSpeed.setText(FerryWorkConsts.BTN_SPEED_NAME + speed);
-                btnStart.setText(FerryWorkConsts.BTN_PAUSE_NAME);
                 if (speed >= FerryWorkConsts.MAX_SPEED) btnSpeed.setEnabled(false);
-                ferryWorkPanel.start();
-                showStart = false;
+                ferryWorkPanel.speedUp();
             }
         });
         //Выход
