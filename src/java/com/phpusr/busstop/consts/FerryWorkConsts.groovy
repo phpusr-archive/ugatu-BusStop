@@ -14,11 +14,11 @@ package com.phpusr.busstop.consts
 class FerryWorkConsts {
     /* Логирование */
     /** Вкл/Выкл логирование в Ferry */
-    static final boolean busLog = 0
+    static final boolean ferryLog = 0
     /** Вкл/Выкл логирование в FerryWorkPanel.paint() */
     static final boolean paintLog = 1
     /** Вкл/Выкл логирование Статистики Автобусов */
-    static final boolean statBusLog = 0
+    static final boolean statFerryLog = 0
 
     /* Локализация */
     public static final String BTN_SPEED_NAME = 'x'

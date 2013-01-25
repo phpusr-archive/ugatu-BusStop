@@ -66,10 +66,10 @@ class Ferry {
             passengerCount++
             passengerCountIn++
 
-            if (FerryWorkConsts.busLog) println "\t$this"
+            if (FerryWorkConsts.ferryLog) println "\t$this"
             return true
         } else {
-            if (FerryWorkConsts.busLog) println ">>В автобусе: $name-$route больше нет места!"
+            if (FerryWorkConsts.ferryLog) println ">>В автобусе: $name-$route больше нет места!"
             return false
         }
     }
@@ -80,10 +80,10 @@ class Ferry {
             passengerCount--
             passengerCountOut++
 
-            if (FerryWorkConsts.busLog) println "\t$this"
+            if (FerryWorkConsts.ferryLog) println "\t$this"
             return true
         } else {
-            if (FerryWorkConsts.busLog) println ">>В автобусе: $name-$route больше нет пассажиров!"
+            if (FerryWorkConsts.ferryLog) println ">>В автобусе: $name-$route больше нет пассажиров!"
             return false
         }
     }

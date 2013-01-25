@@ -75,7 +75,7 @@ public class ControlFrame extends JFrame {
         initTable();
         initListeners();
         ferryWorkPanel.setControlFrame(this);
-        ferryWorkPanel.getBusParkUtil().initTblStat(model);
+        ferryWorkPanel.getFerryUtil().initTblStat(model);
     }
 
     /** Инициализация таблицы */
@@ -123,7 +123,7 @@ public class ControlFrame extends JFrame {
                 btnStart.setText(FerryWorkConsts.BTN_START_NAME);
                 ferryWorkPanel.stop();
                 showStart = true;
-                ferryWorkPanel.getBusParkUtil().initTblStat(model);
+                ferryWorkPanel.getFerryUtil().initTblStat(model);
             }
         });
         //Увеличение скорости в 2 раза (Запускает еще один поток, возможно это НЕ безопасно)

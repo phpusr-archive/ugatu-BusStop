@@ -15,7 +15,7 @@ import javax.swing.*
  */
 
 /**
- * Утилита для работы с Автобусами
+ * Утилита для работы с Паромом
  */
 class FerryUtil {
     /** Путь к папке с ихображениями Автобусов */
@@ -29,7 +29,7 @@ class FerryUtil {
     }
 
     /** Возвращает рандомный автобус из списка */
-    Ferry getRandomBus() {
+    Ferry getRandomFerry() {
         int num = Math.random() * busList.size()
         return busList.get(num)
     }

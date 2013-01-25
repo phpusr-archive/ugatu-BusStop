@@ -33,9 +33,9 @@ class DrawUtil {
         g.drawImage(image, 0, 0, ioServer)
     }
 
-    /** Рисует Автобус */
-    void drawBus(Graphics g, Ferry bus, int x, int y, ImageObserver ioServer) {
-        g.drawImage(bus.image, x, y, ioServer)
+    /** Рисует Паром */
+    void drawFerry(Graphics g, Ferry ferry, int x, int y, ImageObserver ioServer) {
+        g.drawImage(ferry.image, x, y, ioServer)
     }
 
     /** Рисует Пассажира */
