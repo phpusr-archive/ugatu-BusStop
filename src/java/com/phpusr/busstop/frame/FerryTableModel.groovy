@@ -12,12 +12,12 @@ import java.awt.*
  */
 
 /**
- * Кастомная модель для Выделения Максимального по перевозке и Минимального Автобусов
+ * Кастомная модель для Выделения Максимального по перевозке и Минимального Паромов
  */
 class FerryTableModel extends DefaultTableModel {
-    /** Строка с Максимальным Автобусом */
+    /** Строка с Максимальным Паромом */
     int maxRow
-    /** Строка с Минимальным Автобусом */
+    /** Строка с Минимальным Паромом */
     int minRow
 
     public Color getRowColor(int row) {
@@ -26,7 +26,7 @@ class FerryTableModel extends DefaultTableModel {
         return row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE
     }
 
-    /** Установка строки с Максимальным Автобусом */
+    /** Установка строки с Максимальным Паромом */
     void setMaxRow(int maxRow) {
         this.maxRow = maxRow
         if (rowCount > 0) {
@@ -34,7 +34,7 @@ class FerryTableModel extends DefaultTableModel {
         }
     }
 
-    /** Установка строки с Минимальным Автобусом */
+    /** Установка строки с Минимальным Паромом */
     void setMinRow(int minRow) {
         this.minRow = minRow
         if (rowCount > 0) {
