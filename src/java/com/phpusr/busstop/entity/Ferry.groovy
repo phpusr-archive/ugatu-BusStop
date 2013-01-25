@@ -42,7 +42,7 @@ class Ferry {
     }
 
     Ferry() {
-        this(1, 'Test', '777', 10, "$FerryWorkConsts.BUS_IMG_PATH/Pacan.png")
+        this(1, 'Test', '777', 10, "$FerryWorkConsts.FERRY_IMG_PATH/Pacan.png")
     }
 
     void setImage(String path) {

@@ -18,73 +18,73 @@ import javax.swing.*
  * Утилита для работы с Паромом
  */
 class FerryUtil {
-    /** Путь к папке с ихображениями Автобусов */
-    static final String BUS_IMG_PATH = FerryWorkConsts.BUS_IMG_PATH
-    /** Список автобусов */
-    List<Ferry> busList = []
+    /** Путь к папке с ихображениями Паромов */
+    static final String FERRY_IMG_PATH = FerryWorkConsts.FERRY_IMG_PATH
+    /** Список Паромов */
+    List<Ferry> ferryList = []
 
     FerryUtil() {
         int i = 0
-        busList << new Ferry(i++, 'Pacan',     '57',   20, "$BUS_IMG_PATH/Pacan.png")
+        ferryList << new Ferry(i++, 'Pacan',     '57',   20, "$FERRY_IMG_PATH/Pacan.png")
     }
 
-    /** Возвращает рандомный автобус из списка */
+    /** Возвращает рандомный Паром из списка */
     Ferry getRandomFerry() {
-        int num = Math.random() * busList.size()
-        return busList.get(num)
+        int num = Math.random() * ferryList.size()
+        return ferryList.get(num)
     }
 
-    /** Возвращает кол-во всех севших в Автобусы Пассажиров */
+    /** Возвращает кол-во всех севших в Паром Пассажиров */
     int getAllPassengerInCount() {
         int count = 0
-        busList.each { bus ->
-            count += bus.passengerCountIn
+        ferryList.each { ferry ->
+            count += ferry.passengerCountIn
         }
 
         return count
     }
 
-    /** Возвращает кол-во всех вышедших из Автобусов Пассажиров */
+    /** Возвращает кол-во всех вышедших из Парома Пассажиров */
     int getAllPassengerOutCount() {
         int count = 0
-        busList.each { bus ->
-            count += bus.passengerCountOut
+        ferryList.each { ferry ->
+            count += ferry.passengerCountOut
         }
 
         return count
     }
 
-    /** Возвращает Автобус, который Больше всех довез Пассажиров */
-    Ferry getMaxBus() {
-        Ferry mBus = busList.get(0)
-        busList.each { bus ->
-            if (bus.passengerCountOut > mBus.passengerCountOut) {
-                mBus = bus
+    /** Возвращает Паром, который Больше всех довез Пассажиров */
+    Ferry getMaxFerry() {
+        Ferry mFerry = ferryList.get(0)
+        ferryList.each { ferry ->
+            if (ferry.passengerCountOut > mFerry.passengerCountOut) {
+                mFerry = ferry
             }
         }
 
-        return mBus
+        return mFerry
     }
 
-    /** Возвращает Автобус, который Меньше всех довез Пассажиров */
-    Ferry getMinBus() {
-        Ferry mBus = busList.get(0)
-        busList.each { bus ->
-            if (bus.passengerCountOut < mBus.passengerCountOut) {
-                mBus = bus
+    /** Возвращает Паром, который Меньше всех довез Пассажиров */
+    Ferry getMinFerry() {
+        Ferry mFerry = ferryList.get(0)
+        ferryList.each { ferry ->
+            if (ferry.passengerCountOut < mFerry.passengerCountOut) {
+                mFerry = ferry
             }
         }
 
-        return mBus
+        return mFerry
     }
 
-    /** Вывод статистики по Пассажирам в Автобусах */
+    /** Вывод статистики по Пассажирам в Паромах */
     void printStat() {
         println '-------------------------------------------------------------------------------------------------------------------------'
-        println "Кол-во всех севших в автобусы пассажиров:       $allPassengerInCount"
-        println "Кол-во всех вышедших из автобусов пассажиров:   $allPassengerOutCount"
-        println "Автобус довезший БОЛЬШЕ всех пассажиров:        $maxBus"
-        println "Автобус довезший МЕНЬШЕ всех пассажиров:        $minBus"
+        println "Кол-во всех севших в паромы пассажиров:        $allPassengerInCount"
+        println "Кол-во всех вышедших из парома пассажиров:     $allPassengerOutCount"
+        println "Паром довезший БОЛЬШЕ всех пассажиров:         $maxFerry"
+        println "Паром довезший МЕНЬШЕ всех пассажиров:         $minFerry"
         println '-------------------------------------------------------------------------------------------------------------------------'
     }
 
@@ -93,23 +93,23 @@ class FerryUtil {
         while (model.rowCount > 0) {
             model.removeRow(0)
         }
-        busList.each { bus ->
-            def list = [bus.name, bus.passengerCount, bus.freeSeat, bus.passengerCountOut, bus.passengerCountIn]
+        ferryList.each { ferry ->
+            def list = [ferry.name, ferry.passengerCount, ferry.freeSeat, ferry.passengerCountOut, ferry.passengerCountIn]
             model.addRow(list.toArray())
         }
     }
 
     /** Обновлении информации в Таблице Статистики */
-    void updateTblStat(JTable table, FerryTableModel model, Ferry bus) {
+    void updateTblStat(JTable table, FerryTableModel model, Ferry ferry) {
         int i = 0
-        table.setValueAt(bus.name, bus.number, i++)
-        table.setValueAt(bus.passengerCount, bus.number, i++)
-        table.setValueAt(bus.freeSeat, bus.number, i++)
-        table.setValueAt(bus.passengerCountOut, bus.number, i++)
-        table.setValueAt(bus.passengerCountIn, bus.number, i++)
+        table.setValueAt(ferry.name, ferry.number, i++)
+        table.setValueAt(ferry.passengerCount, ferry.number, i++)
+        table.setValueAt(ferry.freeSeat, ferry.number, i++)
+        table.setValueAt(ferry.passengerCountOut, ferry.number, i++)
+        table.setValueAt(ferry.passengerCountIn, ferry.number, i++)
 
-        model.maxRow = maxBus.number
-        model.minRow = minBus.number
+        model.maxRow = maxFerry.number
+        model.minRow = minFerry.number
     }
 
 }
