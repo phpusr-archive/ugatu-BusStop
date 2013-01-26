@@ -26,7 +26,9 @@ class FerryWorkPanel extends JPanel {
     /** Координаты рисования Пассажиров */
     int xPosFerry, xPosPassenger
     /** Кол-во Пассажиров для Выхода и Входа */
-    int passengerCountOut, passengerCountOutConst, passengerCountIn, passengerCountInConst
+    Integer passengerCountOut, passengerCountOutConst, passengerCountIn, passengerCountInConst
+    /** Кол-во Автомобилей для Выхода и Входа */
+    Integer carCountOut, carCountOutConst, carCountIn, carCountInConst
     /** Кол-во остановок */
     int stopCount
     /** Пауза между кадрами (мс) */
@@ -100,53 +102,90 @@ class FerryWorkPanel extends JPanel {
                 revers = !revers
                 xPosPassenger = getPassengerStartOutPos()
                 stopCount++
+                //Пасажиры
                 passengerCountOut = Math.round(Math.random() * ferry.passengerCount)
                 passengerCountOutConst = passengerCountOut
                 passengerCountIn = Math.round(Math.random() * ferry.freeSeat)
                 passengerCountInConst = passengerCountIn
+                //Автомобили
+                carCountOut = Math.round(Math.random() * ferry.carCount)
+                carCountOutConst = carCountOut
+                carCountIn = Math.round(Math.random() * ferry.freeParking)
+                carCountInConst = carCountIn
                 out = true
 
                 if (FerryWorkConsts.ferryLog) println '-----------------------------------------------------------------------------------'
-                if (FerryWorkConsts.paintLog) println "$stopCount\t Кол-во выходящих пассажиров: ${passengerCountOut}/$ferry.passengerCount,\t\t Кол-во входящих пассажиров: ${passengerCountIn}/$ferry.freeSeat"
+                if (FerryWorkConsts.paintLog) println "$stopCount\t Count out passengers: ${passengerCountOut}/$ferry.passengerCount,\t\t Count in passengers: ${passengerCountIn}/$ferry.freeSeat"
+                if (FerryWorkConsts.paintLog) println "$stopCount\t Count out cars: ${carCountOut}/$ferry.carCount,\t\t Count in cars: ${carCountIn}/$ferry.freeParking"
                 if (FerryWorkConsts.ferryLog) println '-----------------------------------------------------------------------------------'
                 if (FerryWorkConsts.statFerryLog && stopCount % 10 == 0) ferryUtil.printStat()
                 updateFerryInfo()
             }
 
-            if (out) { //Анимация выхода пассажиров
-                stop = true
-                if (passengerCountOut > 0) {
-                    drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2)
-                    //Если True - значит пассажиры выходят Справа
-                    xPosPassenger = revers ? xPosPassenger + FerryWorkConsts.PIXEL_INC : xPosPassenger - FerryWorkConsts.PIXEL_INC
-                    if (revers && xPosPassenger > FerryWorkConsts.WIDTH || !revers && xPosPassenger < 0) { //Пассажир вышел из Парома
-                        passengerCountOut--
-                        ferry.delPassenger()
-                        xPosPassenger = getPassengerStartOutPos()
-                        updateFerryInfo()
-                    }
-                } else {
-                    out = false
-                    xPosPassenger = revers ? FerryWorkConsts.WIDTH : 0
-                }
-            } else { //Анимация входа пассажиров
-                if (passengerCountIn > 0) {
-                    drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2)
-                    xPosPassenger = revers ? xPosPassenger - FerryWorkConsts.PIXEL_INC : xPosPassenger + FerryWorkConsts.PIXEL_INC
-                    if (revers && xPosPassenger < FerryWorkConsts.WIDTH-ferry.width/2-FerryWorkConsts.DELTA || !revers && xPosPassenger > ferry.width/2+FerryWorkConsts.DELTA) { //Пассажир сел на Паром
-                        passengerCountIn--
-                        ferry.addPassenger()
-                        xPosPassenger = revers ? FerryWorkConsts.WIDTH : 0
-                        updateFerryInfo()
-                    }
-                } else {
-                    stop = false
-                }
+            def map
+            if (passengerCountOut > 0 || (carCountOut == 0 && passengerCountIn > 0)) {
+                map = animOutInPassenger([countOut: passengerCountOut, countIn: passengerCountIn], true)
+                passengerCountOut = map.countOut
+                passengerCountIn = map.countIn
+            } else {
+                map = animOutInPassenger([countOut: carCountOut, countIn: carCountIn], false)
+                carCountOut = map.countOut
+                carCountIn = map.countIn
             }
         }
 
         //Рисование на форме изображения из буфера
         g.drawImage(scrnBuf, 0, 0, this)
+    }
+
+    /** Анимация Выхода и Входа Пассажиров */
+    Map animOutInPassenger(Map map, boolean passenger) {
+        if (out) { //Анимация выхода пассажиров
+            stop = true
+            if (map.countOut > 0) {
+                drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2)
+                //Если True - значит пассажиры выходят Справа
+                xPosPassenger = revers ? xPosPassenger + FerryWorkConsts.PIXEL_INC : xPosPassenger - FerryWorkConsts.PIXEL_INC
+                if (revers && xPosPassenger > FerryWorkConsts.WIDTH || !revers && xPosPassenger < 0) { //Пассажир вышел из Парома
+                    map.countOut--
+                    if (passenger) {
+                        ferry.delPassenger()
+                        if (FerryWorkConsts.paintLog) println '>>Del passenger'
+                    } else {
+                        ferry.delCar()
+                        if (FerryWorkConsts.paintLog) println '>>Del car'
+                    }
+                    xPosPassenger = getPassengerStartOutPos()
+                    updateFerryInfo()
+                }
+            } else {
+                if (carCountOut == 0) {
+                    out = false
+                    xPosPassenger = revers ? FerryWorkConsts.WIDTH : 0
+                }
+            }
+        } else { //Анимация входа пассажиров
+            if (map.countIn > 0) {
+                drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2)
+                xPosPassenger = revers ? xPosPassenger - FerryWorkConsts.PIXEL_INC : xPosPassenger + FerryWorkConsts.PIXEL_INC
+                if (revers && xPosPassenger < FerryWorkConsts.WIDTH-ferry.width/2-FerryWorkConsts.DELTA || !revers && xPosPassenger > ferry.width/2+FerryWorkConsts.DELTA) { //Пассажир сел на Паром
+                    map.countIn--
+                    if (passenger) {
+                        ferry.addPassenger()
+                        if (FerryWorkConsts.paintLog) println '>>Add passenger'
+                    } else {
+                        ferry.addCar()
+                        if (FerryWorkConsts.paintLog) println '>>Add car'
+                    }
+                    xPosPassenger = revers ? FerryWorkConsts.WIDTH : 0
+                    updateFerryInfo()
+                }
+            } else {
+                if (carCountIn == 0) stop = false
+            }
+        }
+
+        return map
     }
 
     /**
