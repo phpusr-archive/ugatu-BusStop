@@ -17,9 +17,9 @@ import com.phpusr.ferrywork.entity.Passenger
  */
 class PassengerUtil {
     /** Путь к папке с ихображениями Пассажиров */
-    static final String PAS_IMG_PATH = FerryWorkConsts.FERRY_IMG_PATH
+    static final String PAS_IMG_PATH = FerryWorkConsts.PAS_IMG_PATH
     /** Путь к папке с ихображениями Автомобилей */
-    static final String CAR_IMG_PATH = FerryWorkConsts.FERRY_IMG_PATH
+    static final String CAR_IMG_PATH = FerryWorkConsts.CAR_IMG_PATH
     /** Список Пассажиров */
     List<Passenger> passengerList
     /** Список Автомобилей */
@@ -27,9 +27,9 @@ class PassengerUtil {
 
     PassengerUtil() {
         passengerList = []
-        passengerList << new Passenger('Alex', "$PAS_IMG_PATH/Ferry.png")
+        passengerList << new Passenger('Alex', "$PAS_IMG_PATH/PassengerForward.png")
         carList = []
-        carList << new Car('Toyota', "$CAR_IMG_PATH/Ferry.png")
+        carList << new Car('Toyota', "$CAR_IMG_PATH/CarForward.png")
     }
 
     /** Возвращает рандомного Пассажира из списка */

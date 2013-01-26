@@ -1,6 +1,7 @@
 package com.phpusr.ferrywork.frame
 
 import com.phpusr.ferrywork.consts.FerryWorkConsts
+import com.phpusr.ferrywork.entity.Entity
 import com.phpusr.ferrywork.entity.Ferry
 import com.phpusr.ferrywork.util.DrawUtil
 import com.phpusr.ferrywork.util.FerryUtil
@@ -46,6 +47,8 @@ class FerryWorkPanel extends JPanel {
     DrawUtil drawUtil
     /** Паром */
     Ferry ferry
+    /** Пассажир или Автомобиль */
+    Entity entity
     /** Форма управления */
     ControlFrame controlFrame
 
@@ -112,6 +115,12 @@ class FerryWorkPanel extends JPanel {
                 carCountOutConst = carCountOut
                 carCountIn = Math.round(Math.random() * ferry.freeParking)
                 carCountInConst = carCountIn
+
+                if (passengerCountOut > 0 || (carCountOut == 0 && passengerCountIn > 0)) {
+                    entity = passengerUtil.randomPassenger
+                } else {
+                    entity = passengerUtil.randomCar
+                }
                 out = true
 
                 if (FerryWorkConsts.ferryLog) println '-----------------------------------------------------------------------------------'
@@ -143,17 +152,17 @@ class FerryWorkPanel extends JPanel {
         if (out) { //Анимация выхода пассажиров
             stop = true
             if (map.countOut > 0) {
-                drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2)
+                drawUtil.drawPassenger(scrnG, entity, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2, this)
                 //Если True - значит пассажиры выходят Справа
                 xPosPassenger = revers ? xPosPassenger + FerryWorkConsts.PIXEL_INC : xPosPassenger - FerryWorkConsts.PIXEL_INC
                 if (revers && xPosPassenger > FerryWorkConsts.WIDTH || !revers && xPosPassenger < 0) { //Пассажир вышел из Парома
                     map.countOut--
                     if (passenger) {
                         ferry.delPassenger()
-                        if (FerryWorkConsts.paintLog) println '>>Del passenger'
+                        entity = passengerUtil.randomPassenger
                     } else {
                         ferry.delCar()
-                        if (FerryWorkConsts.paintLog) println '>>Del car'
+                        entity = passengerUtil.randomCar
                     }
                     xPosPassenger = getPassengerStartOutPos()
                     updateFerryInfo()
@@ -166,16 +175,16 @@ class FerryWorkPanel extends JPanel {
             }
         } else { //Анимация входа пассажиров
             if (map.countIn > 0) {
-                drawUtil.drawPassenger(scrnG, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2)
+                drawUtil.drawPassenger(scrnG, entity, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2, this)
                 xPosPassenger = revers ? xPosPassenger - FerryWorkConsts.PIXEL_INC : xPosPassenger + FerryWorkConsts.PIXEL_INC
                 if (revers && xPosPassenger < FerryWorkConsts.WIDTH-ferry.width/2-FerryWorkConsts.DELTA || !revers && xPosPassenger > ferry.width/2+FerryWorkConsts.DELTA) { //Пассажир сел на Паром
                     map.countIn--
                     if (passenger) {
                         ferry.addPassenger()
-                        if (FerryWorkConsts.paintLog) println '>>Add passenger'
+                        entity = passengerUtil.randomPassenger
                     } else {
                         ferry.addCar()
-                        if (FerryWorkConsts.paintLog) println '>>Add car'
+                        entity = passengerUtil.randomCar
                     }
                     xPosPassenger = revers ? FerryWorkConsts.WIDTH : 0
                     updateFerryInfo()

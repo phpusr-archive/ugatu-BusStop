@@ -14,7 +14,7 @@ package com.phpusr.ferrywork.consts
 class FerryWorkConsts {
     /* Логирование */
     /** Вкл/Выкл логирование в Ferry */
-    static final boolean ferryLog = 0
+    static final boolean ferryLog = 1
     /** Вкл/Выкл логирование в FerryWorkPanel.paint() */
     static final boolean paintLog = 1
     /** Вкл/Выкл логирование Статистики Паромов */
@@ -55,6 +55,10 @@ class FerryWorkConsts {
     static final String IMG_PATH = '/com/phpusr/ferrywork/img'
     /** Путь к папке с ихображениями Паромов */
     static final String FERRY_IMG_PATH = "$IMG_PATH/ferry"
+    /** Путь к папке с ихображениями Пассажиров */
+    static final String PAS_IMG_PATH = "$IMG_PATH/passenger"
+    /** Путь к папке с ихображениями Автомобилей */
+    static final String CAR_IMG_PATH = "$IMG_PATH/car"
     /** Путь к папке с ихображениями Фонов */
     static final String BG_IMG_PATH = "$IMG_PATH/bg"
 

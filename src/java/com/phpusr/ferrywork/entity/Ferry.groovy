@@ -43,7 +43,7 @@ class Ferry extends Entity {
             passengerCount++
             passengerCountIn++
 
-            if (FerryWorkConsts.ferryLog) println "\t$this"
+            if (FerryWorkConsts.ferryLog) println "\tAdd passenger: $this"
             return true
         } else {
             if (FerryWorkConsts.ferryLog) println ">>В пароме: $name больше нет мест для пассажиров!"
@@ -57,7 +57,7 @@ class Ferry extends Entity {
             carCount++
             carCountIn++
 
-            if (FerryWorkConsts.ferryLog) println "\t$this"
+            if (FerryWorkConsts.ferryLog) println "\tAdd car: $this"
             return true
         } else {
             if (FerryWorkConsts.ferryLog) println ">>В пароме: $name больше нет мест для парковки!"
@@ -65,13 +65,13 @@ class Ferry extends Entity {
         }
     }
 
-    /** Удалить Пассажира из Парома */
+    /** Удалить Пассажира */
     boolean delPassenger() {
         if (passengerCount > 0) {
             passengerCount--
             passengerCountOut++
 
-            if (FerryWorkConsts.ferryLog) println "\t$this"
+            if (FerryWorkConsts.ferryLog) println "\tDel passenger: $this"
             return true
         } else {
             if (FerryWorkConsts.ferryLog) println ">>В пароме: $name больше нет пассажиров!"
@@ -79,13 +79,13 @@ class Ferry extends Entity {
         }
     }
 
-    /** Удалить Автомобиль из Парома */
+    /** Удалить Автомобиль */
     boolean delCar() {
         if (carCount > 0) {
             carCount--
             carCountOut++
 
-            if (FerryWorkConsts.ferryLog) println "\t$this"
+            if (FerryWorkConsts.ferryLog) println "\tDel car: $this"
             return true
         } else {
             if (FerryWorkConsts.ferryLog) println ">>В пароме: $name больше нет автомобилей!"

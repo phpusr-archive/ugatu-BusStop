@@ -1,6 +1,7 @@
 package com.phpusr.ferrywork.util
 
 import com.phpusr.ferrywork.consts.FerryWorkConsts
+import com.phpusr.ferrywork.entity.Entity
 import com.phpusr.ferrywork.entity.Ferry
 
 import javax.imageio.ImageIO
@@ -39,8 +40,8 @@ class DrawUtil {
     }
 
     /** Рисует Пассажира */
-    void drawPassenger(Graphics g, int x, int y) {
-        g.fillOval(x, y, 10, 10)
+    void drawPassenger(Graphics g, Entity entity, int x, int y, ImageObserver ioServer) {
+        g.drawImage(entity.image, x, y, ioServer)
     }
 
 }
