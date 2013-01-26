@@ -19,16 +19,30 @@ abstract class Entity {
     String name
     /** Изображение */
     BufferedImage image
+    /** Изображение (инверт.) */
+    BufferedImage imageBack
 
     Entity(String name, String pathToImage) {
         this.name = name
         setImage(pathToImage)
     }
 
+    Entity(String name, String pathToImage, String pathToImageBack) {
+        this.name = name
+        setImage(pathToImage)
+        setImageBack(pathToImageBack)
+    }
+
     /** Загрузка изображения по пути к файлу */
     void setImage(String pathToImage) {
         URL url = Entity.class.getResource(pathToImage)
         image = ImageIO.read(url)
+    }
+
+    /** Загрузка изображения (инверт.) по пути к файлу */
+    void setImageBack(String pathToImage) {
+        URL url = Entity.class.getResource(pathToImage)
+        imageBack = ImageIO.read(url)
     }
 
     /** Возвращает Длину изображения */

@@ -40,8 +40,23 @@ class DrawUtil {
     }
 
     /** Рисует Пассажира */
-    void drawPassenger(Graphics g, Entity entity, int x, int y, ImageObserver ioServer) {
-        g.drawImage(entity.image, x, y, ioServer)
+    void drawPassenger(Graphics g, Entity entity, int stopCount, boolean out, int x, int y, ImageObserver ioServer) {
+        Image image
+        //Выбор какую картинку вывести Вперед или Назад
+        if (stopCount%2 == 1) {
+            if (out) {
+                image = entity.image
+            } else {
+                image = entity.imageBack
+            }
+        } else {
+            if (out) {
+                image = entity.imageBack
+            } else {
+                image = entity.image
+            }
+        }
+        g.drawImage(image, x, y, ioServer)
     }
 
 }

@@ -27,9 +27,9 @@ class PassengerUtil {
 
     PassengerUtil() {
         passengerList = []
-        passengerList << new Passenger('Alex', "$PAS_IMG_PATH/PassengerForward.png")
+        passengerList << new Passenger('Alex', "$PAS_IMG_PATH/PassengerForward.png", "$PAS_IMG_PATH/PassengerBack.png")
         carList = []
-        carList << new Car('Toyota', "$CAR_IMG_PATH/CarForward.png")
+        carList << new Car('Toyota', "$CAR_IMG_PATH/CarForward.png", "$CAR_IMG_PATH/CarBack.png")
     }
 
     /** Возвращает рандомного Пассажира из списка */

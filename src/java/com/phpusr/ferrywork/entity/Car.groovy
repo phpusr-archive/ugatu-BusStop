@@ -13,7 +13,7 @@ package com.phpusr.ferrywork.entity
  */
 class Car extends Entity {
 
-    Car(String name, String pathToImage) {
-        super(name, pathToImage)
+    Car(String name, String pathToImage, String pathToImageBack) {
+        super(name, pathToImage, pathToImageBack)
     }
 }
