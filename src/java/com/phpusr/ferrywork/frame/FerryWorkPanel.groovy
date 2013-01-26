@@ -4,6 +4,7 @@ import com.phpusr.ferrywork.consts.FerryWorkConsts
 import com.phpusr.ferrywork.entity.Ferry
 import com.phpusr.ferrywork.util.DrawUtil
 import com.phpusr.ferrywork.util.FerryUtil
+import com.phpusr.ferrywork.util.PassengerUtil
 
 import javax.swing.*
 import java.awt.*
@@ -37,6 +38,8 @@ class FerryWorkPanel extends JPanel {
     Graphics scrnG
     /** Утилита для работы с Паромом */
     FerryUtil ferryUtil
+    /** Утилита для работы с Пассажирами */
+    PassengerUtil passengerUtil
     /** Утилита для рисования объектов */
     DrawUtil drawUtil
     /** Паром */
@@ -64,6 +67,7 @@ class FerryWorkPanel extends JPanel {
         scrnBuf = new BufferedImage(FerryWorkConsts.WIDTH, FerryWorkConsts.HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
         ferryUtil = new FerryUtil()
+        passengerUtil = new PassengerUtil()
         drawUtil = new DrawUtil()
         ferry = ferryUtil.randomFerry
         xPosFerry = FerryWorkConsts.BERTH_WIDTH
