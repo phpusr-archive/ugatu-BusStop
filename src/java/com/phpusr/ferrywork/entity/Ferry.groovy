@@ -2,9 +2,6 @@ package com.phpusr.ferrywork.entity
 
 import com.phpusr.ferrywork.consts.FerryWorkConsts
 
-import javax.imageio.ImageIO
-import java.awt.image.BufferedImage
-
 /**
  * Created with IntelliJ IDEA.
  * User: phpusr
@@ -16,15 +13,11 @@ import java.awt.image.BufferedImage
 /**
  * Паром
  */
-class Ferry {
+class Ferry extends Entity {
     /** Порядковый № */
     int number
-    /** Название */
-    String name
     /** Кол-во мест */
     int seatCount
-    /** Изображение */
-    BufferedImage image
 
     /** Кол-во Пассажиров (внутри) */
     int passengerCount
@@ -32,29 +25,9 @@ class Ferry {
     int passengerCountIn, passengerCountOut
 
     Ferry(int number, String name, int seatCount, String pathToImage) {
+        super(name, pathToImage)
         this.number = number
-        this.name = name
         this.seatCount = seatCount
-        setImage(pathToImage)
-    }
-
-    Ferry() {
-        this(1, 'Test', 10, "$FerryWorkConsts.FERRY_IMG_PATH/Pacan.png")
-    }
-
-    void setImage(String path) {
-        URL url = Ferry.class.getResource(path)
-        image = ImageIO.read(url)
-    }
-
-    /** Возвращает Длину изображения */
-    int getWidth() {
-        image.width
-    }
-
-    /** Возвращает Высоту изображения */
-    int getHeight() {
-        image.height
     }
 
     /** Добавить пассажира */
