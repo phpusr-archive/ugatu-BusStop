@@ -21,10 +21,11 @@ class FerryUtil {
     /** Путь к папке с ихображениями Паромов */
     static final String FERRY_IMG_PATH = FerryWorkConsts.FERRY_IMG_PATH
     /** Список Паромов */
-    List<Ferry> ferryList = []
+    List<Ferry> ferryList
 
     FerryUtil() {
         int i = 0
+        ferryList = []
         ferryList << new Ferry(i++, 'Ferry', 20, "$FERRY_IMG_PATH/Ferry.png")
     }
 
