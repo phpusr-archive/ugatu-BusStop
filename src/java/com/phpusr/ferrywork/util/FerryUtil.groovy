@@ -26,7 +26,7 @@ class FerryUtil {
     FerryUtil() {
         int i = 0
         ferryList = []
-        ferryList << new Ferry(i++, 'Ferry', 20, "$FERRY_IMG_PATH/Ferry.png")
+        ferryList << new Ferry(i++, 'Ferry', 20, 4, "$FERRY_IMG_PATH/Ferry.png")
     }
 
     /** Возвращает рандомный Паром из списка */
