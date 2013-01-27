@@ -201,8 +201,8 @@ class FerryWorkPanel extends JPanel {
 
     /** Срабатывает при Изменении свойств в Парома */
     private updateFerryInfo() {
-        controlFrame.setPassengerCountOut(passengerCountOutConst - passengerCountOut, passengerCountOutConst, ferry.passengerCountOut, ferryUtil.allPassengerOutCount)
-        controlFrame.setPassengerCountIn(passengerCountInConst - passengerCountIn, passengerCountInConst, ferry.passengerCountIn, ferryUtil.allPassengerInCount)
+        controlFrame.setPassengerCountOut(passengerCountOut, passengerCountOutConst, carCountOut, carCountOutConst)
+        controlFrame.setPassengerCountIn(passengerCountIn, passengerCountInConst, carCountIn, carCountInConst)
         ferryUtil.updateTblStat(controlFrame.tblStat, controlFrame.model, ferry)
     }
 

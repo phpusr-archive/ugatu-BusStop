@@ -47,10 +47,10 @@ public class ControlFrame extends JFrame {
     private JLabel lblPassengerOut;
     /** Кол-во заходящих Пассажиров */
     private JLabel lblPassengerIn;
-    /** Кол-во всего вышедших Пассажиров */
-    private JLabel lblAllPassengerOut;
-    /** Кол-во всего зашедших Пассажиров */
-    private JLabel lblAllPassengerIn;
+    /** Кол-во выезжающих Автомобилей */
+    private JLabel lblCarOut;
+    /** Кол-во заезжающих Автомобилей */
+    private JLabel lblCarIn;
 
     /** Модель для таблицы Статистики */
     private FerryTableModel model;
@@ -148,15 +148,15 @@ public class ControlFrame extends JFrame {
     }
 
     /** Установка на форме Вышедших Пассажиров */
-    public void setPassengerCountOut(int cur, int from, int all, int allFerry) {
-        lblPassengerOut.setText(cur + "/" + from);
-        lblAllPassengerOut.setText(Integer.toString(all));
+    public void setPassengerCountOut(int passengerCountOut, int passengerCountOutConst, int carCountOut, int carCountOutConst) {
+        lblPassengerOut.setText(passengerCountOutConst-passengerCountOut + "/" + passengerCountOutConst);
+        lblCarOut.setText(carCountOutConst-carCountOut + "/" + carCountOutConst);
     }
 
     /** Установка на форме Севших Пассажиров */
-    public void setPassengerCountIn(int cur, int from, int all, int allFerry) {
-        lblPassengerIn.setText(cur + "/" + from);
-        lblAllPassengerIn.setText(Integer.toString(all));
+    public void setPassengerCountIn(int passengerCountIn, int passengerCountInConst, int carCountIn, int carCountInConst) {
+        lblPassengerIn.setText(passengerCountInConst-passengerCountIn + "/" + passengerCountInConst);
+        lblCarIn.setText(carCountInConst-carCountIn + "/" + carCountInConst);
     }
 
     public FerryTableModel getModel() {
