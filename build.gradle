@@ -129,3 +129,7 @@ private void compileJavac2(mainSrcDir, classpath, destDir, debug, debugLevel, de
         )
     }
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.3'
+}
