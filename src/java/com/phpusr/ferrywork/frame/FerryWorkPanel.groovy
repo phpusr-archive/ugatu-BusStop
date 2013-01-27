@@ -72,7 +72,7 @@ class FerryWorkPanel extends JPanel {
     public void init(Map params) {
         scrnBuf = new BufferedImage(FerryWorkConsts.WIDTH, FerryWorkConsts.HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
-        ferryUtil = new FerryUtil(params.seatCount, params.parkingCount)
+        ferryUtil = new FerryUtil(params.ferryName, params.seatCount, params.parkingCount)
         passengerUtil = new PassengerUtil()
         drawUtil = new DrawUtil()
         ferry = ferryUtil.randomFerry
