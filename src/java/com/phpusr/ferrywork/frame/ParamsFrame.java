@@ -35,12 +35,23 @@ public class ParamsFrame extends JFrame {
         setResizable(false);
         setVisible(true);
 
+        initListeners();
+    }
+
+    /** Инициализация слушателей */
+    private void initListeners() {
+        //OK
         OKButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                new ControlFrame("Ferry Work Simulation Control", getParams());
+            public void actionPerformed(ActionEvent event) {
+                try {
+                    new ControlFrame("Ferry Work Simulation Control", getParams());
+                } catch(NumberFormatException e) {
+                    JOptionPane.showMessageDialog(ParamsFrame.this, "Ошибка при вводе параметров", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
+        //Выход
         btnExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,6 +60,7 @@ public class ParamsFrame extends JFrame {
         });
     }
 
+    /** Собирает параметры с формы в HashMap */
     private Map getParams() {
         Map params = new HashMap();
         params.put("ferryName", txtFerryName.getText());
