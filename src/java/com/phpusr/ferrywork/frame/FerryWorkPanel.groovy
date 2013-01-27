@@ -27,9 +27,9 @@ class FerryWorkPanel extends JPanel {
     /** Координаты рисования Пассажиров */
     int xPosFerry, xPosPassenger
     /** Кол-во Пассажиров для Выхода и Входа */
-    Integer passengerCountOut, passengerCountOutConst, passengerCountIn, passengerCountInConst
+    int passengerCountOut, passengerCountOutConst, passengerCountIn, passengerCountInConst
     /** Кол-во Автомобилей для Выхода и Входа */
-    Integer carCountOut, carCountOutConst, carCountIn, carCountInConst
+    int carCountOut, carCountOutConst, carCountIn, carCountInConst
     /** Кол-во остановок */
     int stopCount
     /** Пауза между кадрами (мс) */
@@ -131,15 +131,10 @@ class FerryWorkPanel extends JPanel {
                 updateFerryInfo()
             }
 
-            def map
             if (passengerCountOut > 0 || (carCountOut == 0 && passengerCountIn > 0)) {
-                map = animOutInPassenger([countOut: passengerCountOut, countIn: passengerCountIn], true)
-                passengerCountOut = map.countOut
-                passengerCountIn = map.countIn
+                animOutInPassenger(passengerCountOut, passengerCountIn, true)
             } else {
-                map = animOutInPassenger([countOut: carCountOut, countIn: carCountIn], false)
-                carCountOut = map.countOut
-                carCountIn = map.countIn
+                animOutInPassenger(carCountOut, carCountIn, false)
             }
         }
 
@@ -148,21 +143,22 @@ class FerryWorkPanel extends JPanel {
     }
 
     /** Анимация Выхода и Входа Пассажиров */
-    Map animOutInPassenger(Map map, boolean passenger) {
+    void animOutInPassenger(int countOut, int countIn, boolean passenger) {
         if (out) { //Анимация выхода пассажиров
             stop = true
-            if (map.countOut > 0) {
+            if (countOut > 0) {
                 drawUtil.drawPassenger(scrnG, entity, stopCount, out, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2, this)
                 //Если True - значит пассажиры выходят Справа
                 xPosPassenger = revers ? xPosPassenger + FerryWorkConsts.PIXEL_INC : xPosPassenger - FerryWorkConsts.PIXEL_INC
                 if (revers && xPosPassenger > FerryWorkConsts.WIDTH || !revers && xPosPassenger < 0) { //Пассажир вышел из Парома
-                    map.countOut--
                     if (passenger) {
+                        passengerCountOut--
                         ferry.delPassenger()
-                        entity = (map.countOut>0) ? passengerUtil.randomPassenger : passengerUtil.randomCar
+                        entity = (passengerCountOut>0) ? passengerUtil.randomPassenger : passengerUtil.randomCar
                     } else {
+                        carCountOut--
                         ferry.delCar()
-                        entity = (map.countOut>0) ? passengerUtil.randomCar : passengerUtil.randomPassenger
+                        entity = (carCountOut>0) ? passengerUtil.randomCar : passengerUtil.randomPassenger
                     }
                     xPosPassenger = getPassengerStartOutPos()
                     updateFerryInfo()
@@ -174,17 +170,18 @@ class FerryWorkPanel extends JPanel {
                 }
             }
         } else { //Анимация входа пассажиров
-            if (map.countIn > 0) {
+            if (countIn > 0) {
                 drawUtil.drawPassenger(scrnG, entity, stopCount, out, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2, this)
                 xPosPassenger = revers ? xPosPassenger - FerryWorkConsts.PIXEL_INC : xPosPassenger + FerryWorkConsts.PIXEL_INC
                 if (revers && xPosPassenger < FerryWorkConsts.WIDTH-ferry.width/2-FerryWorkConsts.DELTA || !revers && xPosPassenger > ferry.width/2+FerryWorkConsts.DELTA) { //Пассажир сел на Паром
-                    map.countIn--
                     if (passenger) {
+                        passengerCountIn--
                         ferry.addPassenger()
-                        entity = (map.countIn>0) ? passengerUtil.randomPassenger : passengerUtil.randomCar
+                        entity = (passengerCountIn>0) ? passengerUtil.randomPassenger : passengerUtil.randomCar
                     } else {
+                        carCountIn--
                         ferry.addCar()
-                        entity = (map.countIn>0) ? passengerUtil.randomCar : passengerUtil.randomPassenger
+                        entity = (carCountIn>0) ? passengerUtil.randomCar : passengerUtil.randomPassenger
                     }
                     xPosPassenger = revers ? FerryWorkConsts.WIDTH : 0
                     updateFerryInfo()
@@ -193,8 +190,6 @@ class FerryWorkPanel extends JPanel {
                 if (carCountIn == 0) stop = false
             }
         }
-
-        return map
     }
 
     /**

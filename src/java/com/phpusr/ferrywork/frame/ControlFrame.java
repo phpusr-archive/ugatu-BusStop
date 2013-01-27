@@ -83,6 +83,11 @@ public class ControlFrame extends JFrame {
         model.addColumn("Свободных мест");
         model.addColumn("Всего вышло");
         model.addColumn("Всего зашло");
+
+        model.addColumn("Авто");
+        model.addColumn("Свободных авто-мест");
+        model.addColumn("Всего выехало");
+        model.addColumn("Всего заехало");
         tblStat.setModel(model);
 
         //Установка для таблицы кастомного Рисовальщика ячеек

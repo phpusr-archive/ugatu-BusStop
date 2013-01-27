@@ -26,7 +26,7 @@ class FerryUtil {
     FerryUtil() {
         int i = 0
         ferryList = []
-        ferryList << new Ferry(i++, 'Ferry', 20, 4, "$FERRY_IMG_PATH/Ferry.png")
+        ferryList << new Ferry(i++, 'Ferry', 3, 3, "$FERRY_IMG_PATH/Ferry.png")
     }
 
     /** Возвращает рандомный Паром из списка */
@@ -95,7 +95,8 @@ class FerryUtil {
             model.removeRow(0)
         }
         ferryList.each { ferry ->
-            def list = [ferry.name, ferry.passengerCount, ferry.freeSeat, ferry.passengerCountOut, ferry.passengerCountIn]
+            def list = [ferry.name, ferry.passengerCount, ferry.freeSeat, ferry.passengerCountOut, ferry.passengerCountIn,
+                                    ferry.carCount, ferry.freeParking, ferry.carCountOut, ferry.carCountIn]
             model.addRow(list.toArray())
         }
     }
@@ -108,6 +109,11 @@ class FerryUtil {
         table.setValueAt(ferry.freeSeat, ferry.number, i++)
         table.setValueAt(ferry.passengerCountOut, ferry.number, i++)
         table.setValueAt(ferry.passengerCountIn, ferry.number, i++)
+
+        table.setValueAt(ferry.carCount, ferry.number, i++)
+        table.setValueAt(ferry.freeParking, ferry.number, i++)
+        table.setValueAt(ferry.carCountOut, ferry.number, i++)
+        table.setValueAt(ferry.carCountIn, ferry.number, i++)
 
         model.maxRow = maxFerry.number
         model.minRow = minFerry.number
