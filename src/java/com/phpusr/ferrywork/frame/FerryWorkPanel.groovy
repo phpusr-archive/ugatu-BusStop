@@ -144,7 +144,7 @@ class FerryWorkPanel extends JPanel {
 
     /** Анимация Выхода и Входа Пассажиров */
     void animOutInPassenger(int countOut, int countIn, boolean passenger) {
-        if (out) { //Анимация выхода пассажиров
+        if (out) { //Анимация выхода Пассажиров и Автомобилей
             stop = true
             if (countOut > 0) {
                 drawUtil.drawPassenger(scrnG, entity, stopCount, out, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2, this)
@@ -170,7 +170,7 @@ class FerryWorkPanel extends JPanel {
                     entity = (passengerCountIn>0) ? passengerUtil.randomPassenger : passengerUtil.randomCar
                 }
             }
-        } else { //Анимация входа пассажиров
+        } else { //Анимация входа Пассажиров и Автомобилей
             if (countIn > 0) {
                 drawUtil.drawPassenger(scrnG, entity, stopCount, out, xPosPassenger, (int)FerryWorkConsts.HEIGHT/2, this)
                 xPosPassenger = revers ? xPosPassenger - FerryWorkConsts.PIXEL_INC : xPosPassenger + FerryWorkConsts.PIXEL_INC
