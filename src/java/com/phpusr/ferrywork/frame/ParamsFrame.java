@@ -20,15 +20,16 @@ import java.util.Map;
  * Форма ввода Параметров
  */
 public class ParamsFrame extends JFrame {
-    private JPanel panel1;
+    private JPanel contentPanel;
     private JTextField txtSeatCount;
     private JTextField txtParkingCount;
     private JButton OKButton;
     private JTextField txtFerryName;
+    private JButton btnExit;
 
     public ParamsFrame(String title) {
         super(title);
-        setContentPane(panel1);
+        setContentPane(contentPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(FerryWorkConsts.PF_WIDTH, FerryWorkConsts.PF_HEIGHT);
         setResizable(false);
@@ -38,6 +39,12 @@ public class ParamsFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ControlFrame("Ferry Work Simulation Control", getParams());
+            }
+        });
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
     }
