@@ -66,10 +66,10 @@ public class ControlFrame extends JFrame {
         super(title);
         System.out.println("ControlFrame()");
         setContentPane(contentPanel);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(FerryWorkConsts.CF_WIDTH, FerryWorkConsts.CF_HEIGHT);
-        setVisible(true);
         setResizable(false);
+        setVisible(true);
 
         initTable();
         initListeners();

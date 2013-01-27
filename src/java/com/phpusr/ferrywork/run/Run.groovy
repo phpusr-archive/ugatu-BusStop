@@ -1,6 +1,6 @@
 package com.phpusr.ferrywork.run
 
-import com.phpusr.ferrywork.frame.ControlFrame
+import com.phpusr.ferrywork.frame.ParamsFrame
 
 import javax.swing.*
 
@@ -22,7 +22,7 @@ class Run {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        new ControlFrame('Ferry Stop Simulation Control', [seatCount: 20, parkingCount: 4])
+        new ParamsFrame('Ferry Work Simulation Params')
     }
 }
 

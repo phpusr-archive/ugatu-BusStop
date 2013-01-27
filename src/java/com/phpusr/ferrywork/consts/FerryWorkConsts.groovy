@@ -30,6 +30,8 @@ class FerryWorkConsts {
     public static final int MAX_SPEED = 32
     public static final int CF_WIDTH = 1200
     public static final int CF_HEIGHT = 700
+    public static final int PF_WIDTH = 400
+    public static final int PF_HEIGHT = 200
 
     /** Выделение строк в таблице Статистики */
     public static final boolean TABLE_HIGHLIGHT = false
