@@ -5,14 +5,16 @@ apply plugin:'groovy'
  */
 
 /**=================================*/
-def groovyVer = '2.0.5'
-//def groovyVer = '1.8.6'
+archivesBaseName = 'FerryWork'
+version = ''
+group = 'com.phpusr.ferrywork'
+project.buildDir = 'out'
 
 def mainSrcDir = "${projectDir}/src/java"
 def resourcesDir = "${projectDir}/src/resources"
 def manifestFile = "${mainSrcDir}/META-INF/MANIFEST.MF"
-def jarDir = "${projectDir}/jar"
-project.buildDir = 'out'
+def jarDir = "${projectDir}/release"
+def groovyVer = '2.0.5' //'1.8.6'
 /**=================================*/
 
 configurations {
