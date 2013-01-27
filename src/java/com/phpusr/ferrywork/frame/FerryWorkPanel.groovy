@@ -167,6 +167,7 @@ class FerryWorkPanel extends JPanel {
                 if (carCountOut == 0) {
                     out = false
                     xPosPassenger = revers ? FerryWorkConsts.WIDTH : 0
+                    entity = (passengerCountIn>0) ? passengerUtil.randomPassenger : passengerUtil.randomCar
                 }
             }
         } else { //Анимация входа пассажиров
