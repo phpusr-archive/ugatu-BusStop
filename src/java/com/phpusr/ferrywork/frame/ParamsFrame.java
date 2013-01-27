@@ -3,6 +3,7 @@ package com.phpusr.ferrywork.frame;
 import com.phpusr.ferrywork.consts.FerryWorkConsts;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -32,10 +33,19 @@ public class ParamsFrame extends JFrame {
         setContentPane(contentPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(FerryWorkConsts.PF_WIDTH, FerryWorkConsts.PF_HEIGHT);
+        centerFrame();
         setResizable(false);
         setVisible(true);
 
         initListeners();
+    }
+
+    /** Выровнить окно по Центру */
+    private void centerFrame() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int)(screenSize.getWidth()/2 - getSize().getWidth()/2);
+        int y = (int)(screenSize.getHeight()/2 - getSize().getHeight()/2);
+        setLocation(x, y);
     }
 
     /** Инициализация слушателей */

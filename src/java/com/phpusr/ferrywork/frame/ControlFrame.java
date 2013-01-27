@@ -68,6 +68,7 @@ public class ControlFrame extends JFrame {
         setContentPane(contentPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(FerryWorkConsts.CF_WIDTH, FerryWorkConsts.CF_HEIGHT);
+        centerFrame();
         setResizable(false);
         setVisible(true);
 
@@ -76,6 +77,14 @@ public class ControlFrame extends JFrame {
         ferryWorkPanel.init(params);
         ferryWorkPanel.setControlFrame(this);
         ferryWorkPanel.getFerryUtil().initTblStat(model);
+    }
+
+    /** Выровнить окно по Центру */
+    private void centerFrame() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int)(screenSize.getWidth()/2 - getSize().getWidth()/2);
+        int y = (int)(screenSize.getHeight()/2 - getSize().getHeight()/2);
+        setLocation(x, y);
     }
 
     /** Инициализация таблицы */
