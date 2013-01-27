@@ -23,10 +23,10 @@ class FerryUtil {
     /** Список Паромов */
     List<Ferry> ferryList
 
-    FerryUtil() {
+    FerryUtil(int seatCount, int parkingCount) {
         int i = 0
         ferryList = []
-        ferryList << new Ferry(i++, 'Ferry', 3, 3, "$FERRY_IMG_PATH/Ferry.png")
+        ferryList << new Ferry(i++, 'Ferry', seatCount, parkingCount, "$FERRY_IMG_PATH/Ferry.png")
     }
 
     /** Возвращает рандомный Паром из списка */

@@ -22,7 +22,7 @@ class Run {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        new ControlFrame('Ferry Stop Simulation Control')
+        new ControlFrame('Ferry Stop Simulation Control', [seatCount: 20, parkingCount: 4])
     }
 }
 

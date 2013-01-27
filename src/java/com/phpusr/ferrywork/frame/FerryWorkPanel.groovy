@@ -51,6 +51,8 @@ class FerryWorkPanel extends JPanel {
     Entity entity
     /** Форма управления */
     ControlFrame controlFrame
+    /** Параметры инициализации */
+    Map params
 
     /** Стоит-ли Паром на причалах */
     boolean stop
@@ -62,16 +64,15 @@ class FerryWorkPanel extends JPanel {
     boolean revers
 
     FerryWorkPanel() {
-        init()
         setSize(FerryWorkConsts.WIDTH, FerryWorkConsts.HEIGHT)
         setVisible(true)
     }
 
     /** Инициализация переменных для Рисования */
-    private void init() {
+    public void init(Map params) {
         scrnBuf = new BufferedImage(FerryWorkConsts.WIDTH, FerryWorkConsts.HEIGHT, BufferedImage.TYPE_INT_RGB)
         scrnG = scrnBuf.getGraphics()
-        ferryUtil = new FerryUtil()
+        ferryUtil = new FerryUtil(params.seatCount, params.parkingCount)
         passengerUtil = new PassengerUtil()
         drawUtil = new DrawUtil()
         ferry = ferryUtil.randomFerry
@@ -82,10 +83,12 @@ class FerryWorkPanel extends JPanel {
         stop = false
         out = true
         revers = false
+        this.params = params
     }
 
     /** Функция Рисования */
     void paint(Graphics g) {
+        if (!params) return
         //Рисование фона
         drawUtil.drawBackground(scrnG, FerryWorkConsts.WIDTH, FerryWorkConsts.HEIGHT, this)
         //Рисование Парома
@@ -235,7 +238,7 @@ class FerryWorkPanel extends JPanel {
     /** Остановка Рисования */
     void stop() {
         pause()
-        init()
+        init(params)
         repaint()
     }
 

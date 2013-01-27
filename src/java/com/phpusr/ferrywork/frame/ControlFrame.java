@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -61,8 +62,9 @@ public class ControlFrame extends JFrame {
     /** Скорость работы */
     private int speed = FerryWorkConsts.MIN_SPEED;
 
-    public ControlFrame(String title) {
+    public ControlFrame(String title, Map params) {
         super(title);
+        System.out.println("ControlFrame()");
         setContentPane(contentPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(FerryWorkConsts.CF_WIDTH, FerryWorkConsts.CF_HEIGHT);
@@ -71,6 +73,7 @@ public class ControlFrame extends JFrame {
 
         initTable();
         initListeners();
+        ferryWorkPanel.init(params);
         ferryWorkPanel.setControlFrame(this);
         ferryWorkPanel.getFerryUtil().initTblStat(model);
     }
@@ -168,6 +171,7 @@ public class ControlFrame extends JFrame {
     }
 
     private void createUIComponents() {
+        System.out.println("createUIComponents()");
         pnlPaint = new FerryWorkPanel();
         ferryWorkPanel = (FerryWorkPanel) pnlPaint;
     }
